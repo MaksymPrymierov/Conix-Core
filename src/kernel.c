@@ -1,13 +1,11 @@
 #include "../headers/io.h"
 
 void main(void){
-        const char *str = "Ave Satan Ave Hell!!! Ave Connor41!!!";
-        char *vidptr = (char*)0xb8000;
-        unsigned int i = 0;
-        unsigned int j = 0;
+        const char *str = "Ave Satan Ave Hell!!!\n Ave\n Connor41!!!Hello\n ";
 
-        clearScreen(vidptr, i, j);
-        printText(str, vidptr, i, j);
+        clearScreen(0x07);
+        printText(str, 0x07);
+        printText("Zhopa", 0x07);
 
         return;
 }

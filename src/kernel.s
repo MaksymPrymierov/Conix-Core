@@ -1,6 +1,3 @@
-#define ASM_FILE
-#include "../headers/multiboot.h"
-
         .text
         .align 4
         .long 0x1BADB002
