@@ -9,10 +9,10 @@
 
 start:
         cli
-        #mov %esp,stack_space
         movl    $(stack + 0x4000), %esp
         call main
         hlt
 
 .bss
 stack:
+loop: loop jmp

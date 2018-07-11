@@ -1,4 +1,6 @@
-#include "../headers/io.h"
+#include "../headers/stddef.h"
+#include "../headers/string.h"
+#include "../headers/stdlib.h"
 
 char *vidptr = (char*)0xb8000;
 unsigned int i = 0;
@@ -14,7 +16,7 @@ void clearScreen(short color){
         i = 0;
 }
 
-void printText(const char *str, short color){
+void printText(char *str, short color){
         int buffer;
         while(str[j] != '\0'){
                 if(str[j] == '\n'){
@@ -26,7 +28,7 @@ void printText(const char *str, short color){
                                 buffer = 160 * (buffer + 1);
                                 buffer = buffer - i;
                         }
-                        i = i + buffer - 4;
+                        i = i + buffer - 2;
                 } else {
                         vidptr[i] = str[j];
                 }
@@ -35,4 +37,10 @@ void printText(const char *str, short color){
                 i = i + 2;
         }
         j = 0;
+}
+
+void printNumber(int n, short color){
+        char* s;
+        itoa(n, s);
+        printText(s, color);
 }
