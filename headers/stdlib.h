@@ -1,3 +1,4 @@
+#ifndef CONIX_STDLIB
 #define CONIX_STDLIB
 
 /*
@@ -8,3 +9,4 @@ void reverse(char *str);
  * Converts integer variables to a string
  */
 void  itoa(int n, char *s);
+#endif

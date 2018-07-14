@@ -1,3 +1,4 @@
+#ifndef CONIX_STRING
 #define CONIX_STRING
 
 /*
@@ -14,3 +15,4 @@ size_t strlen(char *str);
  * Combines two lines.
  */
 char*  strcat(char *str, char *add_str);
+#endif

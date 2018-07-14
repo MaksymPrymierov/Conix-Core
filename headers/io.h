@@ -1,3 +1,4 @@
+#ifndef CONIX_IO
 #define CONIX_IO
 
 /* ======= Examples of colors (chort color) =======
@@ -28,3 +29,4 @@ void printText(char *str, short color);
  * and outputs 0x8000 and colors the color of (shart color).
  */
 void printNumber(int n, short color);
+#endif

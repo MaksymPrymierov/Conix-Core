@@ -1,3 +1,4 @@
+#ifndef CONIX_TTY
 #define CONIX_TTY
 
 char *tty[9];
@@ -8,3 +9,4 @@ void change_tty();
 void update_tty();
 void save_buffer_tty();
 void welcome_tty();
+#endif

@@ -1,3 +1,4 @@
+#ifndef CONIX_INT
 #define CONIX_INT
 
 /*
@@ -15,3 +16,4 @@ int getMemberInt(int n, int member);
  * raised to the power (int n).
  */
 int powInt(int n, int p);
+#endif
