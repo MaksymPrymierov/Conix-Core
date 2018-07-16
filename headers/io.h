@@ -1,5 +1,5 @@
-#ifndef CONIX_IO
-#define CONIX_IO
+#ifndef CONIXCORE_IO
+#define CONIXCORE_IO
 
 /* ======= Examples of colors (chort color) =======
  * 0x00 - Example number

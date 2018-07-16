@@ -1,5 +1,5 @@
-#ifndef CONIX_STDLIB
-#define CONIX_STDLIB
+#ifndef CONIXCORE_STDLIB
+#define CONIXCORE_STDLIB
 
 /*
  * Puts the elements in a row in reverse order

@@ -1,5 +1,5 @@
-#ifndef CONIX_STRING
-#define CONIX_STRING
+#ifndef CONIXCORE_STRING
+#define CONIXCORE_STRING
 
 /*
  * Type for string variables

@@ -1,5 +1,5 @@
-#ifndef CONIX_TTY
-#define CONIX_TTY
+#ifndef CONIXCORE_TTY
+#define CONIXCORE_TTY
 
 char *tty[9];
 unsigned short current_tty = 1;

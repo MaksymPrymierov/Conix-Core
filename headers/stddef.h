@@ -1,5 +1,5 @@
-#ifndef CONIX_STDDEF
-#define CONIX_STDDEF
+#ifndef CONIXCORE_STDDEF
+#define CONIXCORE_STDDEF
 #define NULL 0
 
 /*
