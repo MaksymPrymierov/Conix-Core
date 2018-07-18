@@ -15,4 +15,5 @@ size_t strlen(char *str);
  * Combines two lines.
  */
 char*  strcat(char *str, char *add_str);
+int strcmp(char *first, char* second);
 #endif

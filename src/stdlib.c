@@ -1,45 +1,20 @@
-#include "../headers/stddef.h"
+#include <stddef.h>
 #include "../headers/int.h"
 #include "../headers/string.h"
 #include "../headers/stdlib.h"
 
-void reverse(char *str){
-  char tmp, *src, *dst;
-  size_t len;
-
-  if (str != NULL){
-    len = strlen(str);
-
-    if (len > 1){
-      src = str;
-      dst = src + len - 1;
-
-      while(src < dst){
-        tmp = *src;
-        *src++ = *dst;
-        *dst-- = tmp;
-      }
-    }
+char *itoa(int number, char *destination, int base) {
+  int count = 0;
+  do {
+    int digit = number % base;
+    destination[count++] = (digit > 9) ? digit - 10 +'A' : digit + '0';
+  } while ((number /= base) != 0);
+  destination[count] = '\0';
+  int i;
+  for (i = 0; i < count / 2; ++i) {
+    char symbol = destination[i];
+    destination[i] = destination[count - i - 1];
+    destination[count - i - 1] = symbol;
   }
-}
-
-void itoa(int n, char *s){
-  int i, sign;
-
-  if ((sign = n) < 0)
-    n = -n;
-
-  i = 0;
-
-  do{
-    s[i++] = n % 10 + '0';
-  } while ((n /= 10) > 0);
- 
-  if (sign < 0)
-    s[i++] = '-';
-
-  reverse(s);
-  s[i] = '\0';
-
-  return;
+  return destination;
 }

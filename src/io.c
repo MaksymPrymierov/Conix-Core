@@ -1,4 +1,5 @@
-#include "../headers/stddef.h"
+#include <stddef.h>
+#include "../headers/int.h"
 #include "../headers/string.h"
 #include "../headers/stdlib.h"
 
@@ -48,6 +49,6 @@ void printText(char *str, short color){
 
 void printNumber(int n, short color){
   char* s;
-  itoa(n, s);
+  itoa(n, s, 10);
   printText(s, color);
 }

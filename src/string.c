@@ -1,4 +1,5 @@
-#include "../headers/stddef.h"
+#include <stdint.h>
+#include <stddef.h>
 #include "../headers/string.h"
 
 size_t strlen(char* str){
@@ -18,4 +19,18 @@ char* strcat(char *str, char* add_str){
   str[i+j] = '\0';
 
   return str;
+}
+
+int strcmp(char *first, char *second){
+  size_t lenF, lenS;
+  lenF = strlen(first);
+  lenS = strlen(second);
+  if(lenF > lenS) return 1;
+  if(lenF < lenS) return -1;
+  
+  for(int i = 0; i < lenF; ++i){
+    if(first[i] > second[i]) return 1;
+    if(first[i] < second[i]) return -1;
+  }
+  return 0;
 }
