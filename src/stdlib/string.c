@@ -1,12 +1,12 @@
 #include <stdint.h>
-#include <stddef.h>
-#include "../headers/string.h"
+#include "../../headers/stdlib/stddef.h"
+#include "../../headers/stdlib/string.h"
 
 size_t strlen(char* str){
-  char *begine = str;
+  char *begin = str;
 
   while (*str++);
-  return str - begine - 1;
+  return str - begin - 1;
 }
 
 char* strcat(char *str, char* add_str){

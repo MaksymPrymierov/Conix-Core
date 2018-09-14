@@ -1,7 +1,4 @@
-#include <stddef.h>
-#include "../headers/int.h"
-#include "../headers/string.h"
-#include "../headers/stdlib.h"
+#include "../../headers/stdlib/stdlib.h"
 
 char *itoa(int number, char *destination, int base) {
   int count = 0;

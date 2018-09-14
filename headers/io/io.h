@@ -1,6 +1,9 @@
 #ifndef CONIXCORE_IO
 #define CONIXCORE_IO
 
+#define LINE_NUMBERS 25
+#define COLLUM_NUMBERS 160
+
 /* ======= Examples of colors (chort color) =======
  * 0x00 - Example number
  * The first byte indicates the background color.
@@ -15,6 +18,9 @@
  * ====================== END ======================
  */
 
+char screenBuffer[LINE_NUMBERS][COLLUM_NUMBERS];
+
+void initScreen(short color);
 /*
  * The function fills 0x8000 with a space character.
  */
@@ -29,4 +35,5 @@ void printText(char *str, short color);
  * and outputs 0x8000 and colors the color of (shart color).
  */
 void printNumber(int n, short color);
+void deleteSyn(short color);
 #endif

@@ -18,16 +18,17 @@ then
   mkdir -v bin
 else
   cd ..
-  rm bin/*
+  rm -rfv bin/*
 fi
 ls kernel 2>/dev/null >/dev/null
 if (( $? == 0 ))
 then
   rm kernel
 fi
+mkdir bin/{io,stdlib}
 
 cd $SRCF
-SRC=( $(ls *.c *.s) )
+SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c) )
 cd ..
 
 for ((i=0; i != ${#SRC[@]}; i++))
@@ -36,6 +37,6 @@ do
   errCheck
 done
 
-$LD link.ld -o kernel bin/*.o
+$LD link.ld -o kernel bin/*.o bin/io/*.o bin/stdlib/*.o
 errCheck
 echo "Build Complete"

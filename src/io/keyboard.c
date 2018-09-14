@@ -1,8 +1,10 @@
 #define KEY_LOG_PRINT
 #define C_KEYBOARD
 #include <stdint.h>
-#include "../headers/keyboard.h"
-#include "../headers/io.h"
+#include "../../headers/stdlib/stddef.h"
+#include "../../headers/io/keyboard.h"
+#include "../../headers/io/io.h"
+#include "../../headers/stdlib/string.h"
 
 void clearBuffer(){
   for(int i = 0; i <= bufTexNum; ++i)
@@ -178,14 +180,22 @@ void writeKey(char hex, short color){
       break;
     case 0x1D:
       printText("\n", color);
+      printText("# > ", color);
+      if(strcmp(bufTex, "satan") == 0){
+        printText("\n AVE CONNOR \n# > ", color);
+      }
       clearBuffer();
       break;
     case 0x3A:
       printText(" ", color);
       setTextBuffer(' ');
       break;
+    case 0xF:
+      deleteSyn(color);
+      break;
 #endif
     default:
+
 #ifdef KEY_LOG_NUM
       printNumber(hex, 0x07);
 #endif

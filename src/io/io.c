@@ -1,14 +1,12 @@
-#include <stddef.h>
-#include "../headers/int.h"
-#include "../headers/string.h"
-#include "../headers/stdlib.h"
+#include "../../headers/io/io.h"
+#include "../../headers/stdlib/stdlib.h"
 
 char *vidptr = (char*)0xb8000;
 unsigned int i = 0;
 unsigned int j = 0;
 
 void clearScreen(short color){
-  while(j < 80 * 25 * 2){
+  while(j < LINE_NUMBERS * COLLUM_NUMBERS){
     vidptr[j] = ' ';
     vidptr[j+1] = color;
     j = j + 2;
@@ -24,12 +22,12 @@ void printText(char *str, short color){
   while(str[j] != '\0'){
     if(str[j] == '\n'){
       buffer = 0;
-      buffer = i / 160;
+      buffer = i / COLLUM_NUMBERS;
 
       if(buffer == 0)
-        buffer = 160 - i; 
+        buffer = COLLUM_NUMBERS - i; 
       else{
-        buffer = 160 * (buffer + 1);
+        buffer = COLLUM_NUMBERS * (buffer + 1);
         buffer = buffer - i;
       }
 
@@ -45,6 +43,13 @@ void printText(char *str, short color){
   }
 
   j = 0;
+}
+
+void deleteSyn(short color) {
+  vidptr[i-2] = ' ';
+  vidptr[i-1] = color;
+
+  i = i - 2;
 }
 
 void printNumber(int n, short color){

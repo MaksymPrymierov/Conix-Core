@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "../headers/int.h"
+#include "../../headers/conixLibs/int.h"
 
 int getLengthInt(int n){
   int num = 1, i = 0;
