@@ -1,9 +1,7 @@
+#include <stdint.h>
 #include "../../headers/io/io.h"
 #include "../../headers/stdlib/stdlib.h"
-
-char *vidptr = (char*)0xb8000;
-unsigned int i = 0;
-unsigned int j = 0;
+#include "../../headers/io/screen.h"
 
 void clearScreen(short color){
   while(j < LINE_NUMBERS * COLLUM_NUMBERS){

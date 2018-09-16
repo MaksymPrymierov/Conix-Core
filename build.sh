@@ -1,7 +1,7 @@
 #!/bin/bash
 
-C="gcc -m32 -c"
-LD="ld -m elf_i386 -T"
+C="/usr/local/cross/bin/i686-elf-gcc -ffreestanding -mno-red-zone -nostdlib -lgcc -c"
+LD="/usr/local/cross/bin/i686-elf-ld -T"
 SRCF="src"
 
 errCheck(){
@@ -25,10 +25,10 @@ if (( $? == 0 ))
 then
   rm kernel
 fi
-mkdir bin/{io,stdlib}
+mkdir bin/{io,stdlib,memory}
 
 cd $SRCF
-SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c) )
+SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c memory/*.c) )
 cd ..
 
 for ((i=0; i != ${#SRC[@]}; i++))
@@ -37,6 +37,6 @@ do
   errCheck
 done
 
-$LD link.ld -o kernel bin/*.o bin/io/*.o bin/stdlib/*.o
+$LD link.ld -o kernel bin/*.o bin/io/*.o bin/stdlib/*.o bin/memory/*.o
 errCheck
 echo "Build Complete"
