@@ -25,10 +25,10 @@ if (( $? == 0 ))
 then
   rm kernel
 fi
-mkdir bin/{io,stdlib,memory}
+mkdir bin/{io,stdlib,memory,conixLibs}
 
 cd $SRCF
-SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c memory/*.c) )
+SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c memory/*.c conixLibs/*.c) )
 cd ..
 
 for ((i=0; i != ${#SRC[@]}; i++))
@@ -37,6 +37,6 @@ do
   errCheck
 done
 
-$LD link.ld -o kernel bin/*.o bin/io/*.o bin/stdlib/*.o bin/memory/*.o
+$LD link.ld -o kernel bin/*.o bin/io/*.o bin/stdlib/*.o bin/memory/*.o bin/conixLibs/*.o
 errCheck
 echo "Build Complete"

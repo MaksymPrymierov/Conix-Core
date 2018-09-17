@@ -9,6 +9,6 @@ static inline uint8_t inb(uint16_t port);
 #endif
 
 char getScancode();
-void writeKey(char hex, short color);
+void writeKey(char hex);
 
 #endif

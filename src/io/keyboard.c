@@ -4,11 +4,12 @@
 #include "../../headers/stdlib/stddef.h"
 #include "../../headers/io/keyboard.h"
 #include "../../headers/io/io.h"
+#include "../../headers/io/screen.h"
 #include "../../headers/stdlib/string.h"
 
 void clearBuffer(){
   for(int i = 0; i <= bufTexNum; ++i)
-    bufTex[i] = ' ';
+  bufTex[i] = ' ';
   bufTexNum = 0;
 }
 
@@ -31,7 +32,8 @@ char getScancode(){
 	return inb(0x60) + 1;
 }
 
-void writeKey(char hex, short color){
+void writeKey(char hex){
+  short color = screenTextColor;
   switch(hex){
 #ifdef KEY_LOG_PRINT
     case 0x11:
