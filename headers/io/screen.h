@@ -35,4 +35,7 @@ void clearTextGraphickScreen();
 void setScreenTextColor(uint8_t color);
 void textGraphickPutChar(char c);
 
+void textGraphickNewLine();
+
+
 #endif

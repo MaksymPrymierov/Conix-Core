@@ -3,15 +3,17 @@
 #include "../headers/satanicShell.h"
 #include "../headers/memory/gdt.h"
 #include "../headers/io/screen.h"
+#include "../headers/stdlib/stdio.h"
 
 void main(void){
   textGraphickInit();
-
-// /*
-  printText("Conix Core: version 0.001\n", 0x07);
-  printText("Load kernel...\n", 0x07);
-  printText("AVE SATAN, AVE CONNOR41, AVE GNU!\n", 0x04);
-	printText("----------------------------------------\n", 0x04);
+  printf("Conix Core version: 0.01\n");
+  printf("Load kernel...\n");
+	printf("/----------------------------------------\\\n");
+  setScreenTextColor(RED);
+  printf("|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
+  setScreenTextColor(LIGHT_GREY);
+	printf("\\----------------------------------------/\n");
   
   initShell(0x04);
 // */

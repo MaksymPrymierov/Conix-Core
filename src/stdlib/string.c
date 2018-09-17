@@ -2,8 +2,8 @@
 #include "../../headers/stdlib/stddef.h"
 #include "../../headers/stdlib/string.h"
 
-size_t strlen(char* str){
-  char *begin = str;
+size_t strlen(const char* str){
+  char *begin = (char*)str;
 
   while (*str++);
   return str - begin - 1;

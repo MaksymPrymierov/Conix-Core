@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "../../headers/io/screen.h"
 
+
 void textGraphickInit(){
   vidptr = (char*)VIDEO_MEM;
   i = 0;
@@ -24,10 +25,15 @@ void clearTextGraphickScreen(){
 }
 
 void textGraphickPutChar(char c){
-  vidptr[i]   = c;
-  vidptr[i+1] = screenTextColor;
-
-  i += 2;
+  switch(c){
+    case '\n':
+      textGraphickNewLine();
+      break;
+    default:
+      vidptr[i]   = c;
+      vidptr[i+1] = screenTextColor;
+      i += 2;
+  }
 }
 
 void textGraphickDeleteChar(){
@@ -35,4 +41,18 @@ void textGraphickDeleteChar(){
     vidptr[i - 2] = ' ';
     i -= 2;
   }
+}
+
+void textGraphickNewLine(){
+  int buffer = 0;
+  buffer = i / TEXT_COLLUM_NUMBERS;
+
+  if(buffer == 0)
+    buffer = TEXT_COLLUM_NUMBERS - i;
+  else{
+    buffer = TEXT_COLLUM_NUMBERS * (buffer + 1);
+    buffer = buffer - i;
+  }
+
+  i = i + buffer - 2;
 }
