@@ -54,5 +54,5 @@ void textGraphickNewLine(){
     buffer = buffer - i;
   }
 
-  i = i + buffer - 2;
+  i = i + buffer;
 }

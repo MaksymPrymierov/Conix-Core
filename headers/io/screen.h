@@ -34,6 +34,7 @@ void textGraphickInit();
 void clearTextGraphickScreen();
 void setScreenTextColor(uint8_t color);
 void textGraphickPutChar(char c);
+void textGraphickDeleteChar();
 
 void textGraphickNewLine();
 

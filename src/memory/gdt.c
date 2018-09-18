@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "../../headers/io/io.h"
+#include "../../headers/stdlib/stdio.h"
 
 void create_descriptor(uint32_t base, uint32_t limit, uint16_t flag){
     uint64_t descriptor;
@@ -17,9 +17,9 @@ void create_descriptor(uint32_t base, uint32_t limit, uint16_t flag){
     descriptor |= base  << 16;                       // set base bits 15:0
     descriptor |= limit  & 0x0000FFFF;               // set limit bits 15:0
 
-    printText("Create gdt type: ", 0x07);
-    printNumber(flag, 0x07);
-    printText("\n", 0x07);
-    printNumber(descriptor, 0x07);
-    printText("\n", 0x07);
+    printf("%s", "Create gdt type: ");
+    printf("%d", flag);
+    printf("%s", "\n");
+    printf("%d", descriptor);
+    printf("%s", "\n");
 }

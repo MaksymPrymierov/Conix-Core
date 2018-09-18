@@ -5,14 +5,13 @@
 
 void main(void){
   textGraphickInit();
-
-  printf("Conix Core version: 0.01\n");
-  printf("Load kernel...\n");
-	printf("/----------------------------------------\\\n");
+  printf("%s", "Conix Core version: 0.01\n");
+  printf("%s", "Load kernel...\n");
+	printf("%s", "/----------------------------------------\\\n");
   setScreenTextColor(RED);
-  printf("|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
+  printf("%s", "|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
   setScreenTextColor(LIGHT_GREY);
-	printf("\\----------------------------------------/\n");
+	printf("%s", "\\----------------------------------------/\n");
   
   initKernelShell();
 

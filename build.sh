@@ -1,6 +1,6 @@
 #!/bin/bash
 
-C="/usr/local/cross/bin/i686-elf-gcc -ffreestanding -mno-red-zone -nostdlib -lgcc -c"
+C="/usr/local/cross/bin/i686-elf-gcc -O2 -ffreestanding -mno-red-zone -nostdlib -lgcc -c"
 LD="/usr/local/cross/bin/i686-elf-ld -T"
 SRCF="src"
 

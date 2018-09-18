@@ -14,6 +14,6 @@ size_t strlen(const char *str);
 /*
  * Combines two lines.
  */
-char* strcat(char *str, char *add_str);
-int   strcmp(char *first, char* second);
+char* strcat(char *str, const char *add_str);
+int   strcmp(const char *first, const char* second);
 #endif

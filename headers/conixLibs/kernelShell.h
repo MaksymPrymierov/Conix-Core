@@ -3,4 +3,6 @@
 
 void initKernelShell();
 
+void initShellKeyboard(char* key);
+
 #endif

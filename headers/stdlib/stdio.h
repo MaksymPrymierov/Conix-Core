@@ -1,6 +1,6 @@
 #ifndef STDIO
 #define STDIO
 
-void printf(const char* maket, ...);
+int printf(const char* maket, ...);
 
 #endif
