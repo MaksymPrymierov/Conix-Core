@@ -20,13 +20,33 @@ void setTextBuffer(char *s){
   strcat(bufTex, s);
 }
 
+void deleteTextBuffer(){
+  bufTex[strlen(bufTex) - 1] = '\0';
+}
+
 void shellFunctionHelp(){
   printf("%s", "\nIt is help page for kernel shell");
+  printf("%s", "\n hello - print hello world");
+  printf("%s", "\n clear - clear output");
+}
+
+void shellFunctionHello(){
+  printf("%s", "\nHello World!");
+}
+
+void shellFunctionClear(){
+  clearTextGraphickScreen();
 }
 
 void checkShellFunction(){
   if(!strcmp(bufTex, "help")){
     shellFunctionHelp();
+  }
+  if(!strcmp(bufTex, "hello")){
+    shellFunctionHello();
+  }
+  if(!strcmp(bufTex, "clear")){
+    shellFunctionClear();
   }
 }
 
@@ -36,6 +56,7 @@ void handlerKeyboard(char* key){
     setTextBuffer(key);
   } else if(!strcmp(key, "backspace")){
     textGraphickDeleteChar();
+    deleteTextBuffer();
   } else if(!strcmp(key, "right_enter")){
     checkShellFunction();
     clearBuffer();

@@ -16,6 +16,7 @@ void setScreenTextColor(uint8_t color){
 }
 
 void clearTextGraphickScreen(){
+  i = 0;
   while(i < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
     textGraphickPutChar(' ');
   }
