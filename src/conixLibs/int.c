@@ -1,4 +1,5 @@
-#include "../headers/int.h"
+#include <stdint.h>
+#include "../../headers/conixLibs/int.h"
 
 int getLengthInt(int n){
   int num = 1, i = 0;
@@ -40,4 +41,19 @@ int powInt(int n, int p){
     }
 
     return n;
+}
+
+void reverseInt(int *n){
+  int src = *n;
+  uint16_t LengthInt = getLengthInt(src);
+  uint8_t temp = 1;
+  int result = 0;
+
+  for(int i = 0; i < LengthInt; ++i){
+    temp = powInt(10, LengthInt);
+    temp *= getMemberInt(src, LengthInt);
+    --LengthInt;
+    result += temp;
+  }
+  *n = result;
 }

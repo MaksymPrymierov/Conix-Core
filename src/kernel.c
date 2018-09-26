@@ -1,16 +1,19 @@
 #include <stdint.h>
-#include "../headers/stddef.h"
-#include "../headers/string.h"
-#include "../headers/io.h"
-#include "../headers/stdlib.h"
-#include "../headers/keyboard.h"
+#include "../headers/io/screen.h"
+#include "../headers/stdlib/stdio.h"
+#include "../headers/conixLibs/kernelShell.h"
 
 void main(void){
-  clearScreen(0x07);
-  printText("Conix Core: version 0.001\n", 0x07);
-  printText("Load kernel...\n", 0x07);
-  printText("AVE SATAN, AVE CONNOR41, AVE GNU!\n", 0x04);
-	while(1)
-		writeKey(getScancode(), 0x04);
+  textGraphickInit();
+  printf("%s", "Conix Core version: 0.01\n");
+  printf("%s", "Load kernel...\n");
+	printf("%s", "/----------------------------------------\\\n");
+  setScreenTextColor(RED);
+  printf("%s", "|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
+  setScreenTextColor(LIGHT_GREY);
+	printf("%s", "\\----------------------------------------/\n");
+  
+  initKernelShell();
+
   return;
 }
