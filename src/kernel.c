@@ -12,7 +12,7 @@ void main(void){
   printf("%s", "|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
   setScreenTextColor(LIGHT_GREY);
 	printf("%s", "\\----------------------------------------/\n");
-  
+  updateScreen();
   initKernelShell();
 
   return;

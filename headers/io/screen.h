@@ -23,11 +23,12 @@
 
 #define TEXT_LINE_NUMBERS   25
 #define TEXT_COLLUM_NUMBERS 160
+#define START_VIDEO_BUFFER  160
 
-char screenTextBuffer[TEXT_LINE_NUMBERS][TEXT_COLLUM_NUMBERS];
-char *vidptr;
+char screenTextBuffer[TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS * 2];
+unsigned int cursorPos;
 unsigned int i;
-unsigned int j;
+char *vidptr;
 uint8_t screenTextColor;
 
 void textGraphickInit();
@@ -35,6 +36,7 @@ void clearTextGraphickScreen();
 void setScreenTextColor(uint8_t color);
 void textGraphickPutChar(char c);
 void textGraphickDeleteChar();
+void updateScreen();
 
 void textGraphickNewLine();
 

@@ -5,7 +5,7 @@
 void textGraphickInit(){
   vidptr = (char*)VIDEO_MEM;
   i = 0;
-  j = 0;
+  cursorPos = START_VIDEO_BUFFER;
 
   setScreenTextColor(LIGHT_GREY);
   clearTextGraphickScreen();
@@ -15,14 +15,27 @@ void setScreenTextColor(uint8_t color){
   screenTextColor = color;
 }
 
-void clearTextGraphickScreen(){
-  i = 0;
-  while(i < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
-    textGraphickPutChar(' ');
+void scrollUp(){
+  unsigned int buffer = cursorPos;
+  cursorPos = 0;
+
+  while(cursorPos < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
+    screenTextBuffer[cursorPos] = screenTextBuffer[cursorPos + TEXT_COLLUM_NUMBERS];
+    ++cursorPos;
   }
 
-  j = 0;
-  i = 0;
+  cursorPos = buffer - TEXT_COLLUM_NUMBERS;
+}
+
+void clearTextGraphickScreen(){
+  cursorPos = 0;
+  while(cursorPos < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS + 160){
+    screenTextBuffer[cursorPos] = ' ';
+    screenTextBuffer[cursorPos+1] = screenTextColor;
+    cursorPos += 2;
+  }
+
+  cursorPos = START_VIDEO_BUFFER;
 }
 
 void textGraphickPutChar(char c){
@@ -31,29 +44,42 @@ void textGraphickPutChar(char c){
       textGraphickNewLine();
       break;
     default:
-      vidptr[i]   = c;
-      vidptr[i+1] = screenTextColor;
-      i += 2;
+      screenTextBuffer[cursorPos] = c;
+      screenTextBuffer[cursorPos+1] = screenTextColor;
+      cursorPos += 2;
   }
+
+  if(cursorPos > TEXT_COLLUM_NUMBERS * TEXT_LINE_NUMBERS) scrollUp();
 }
 
 void textGraphickDeleteChar(){
-  if(i > 1){
-    vidptr[i - 2] = ' ';
-    i -= 2;
+  if(cursorPos > 1){
+    screenTextBuffer[cursorPos - 2] = ' ';
+    cursorPos -= 2;
   }
 }
 
 void textGraphickNewLine(){
   int buffer = 0;
-  buffer = i / TEXT_COLLUM_NUMBERS;
+  buffer = cursorPos / TEXT_COLLUM_NUMBERS;
 
   if(buffer == 0)
-    buffer = TEXT_COLLUM_NUMBERS - i;
+    buffer = TEXT_COLLUM_NUMBERS - cursorPos;
   else{
     buffer = TEXT_COLLUM_NUMBERS * (buffer + 1);
-    buffer = buffer - i;
+    buffer = buffer - cursorPos;
   }
 
-  i = i + buffer;
+  cursorPos += buffer;
+}
+
+void updateScreen(){
+  i = 0;
+
+  while(i < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
+    vidptr[i] = screenTextBuffer[i];
+    ++i;
+  }
+
+  i = 0;
 }

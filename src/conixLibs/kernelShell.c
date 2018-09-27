@@ -70,6 +70,7 @@ void handlerKeyboard(char* key){
 void initKernelShell(){
   printf("%s", "Load kernel command shell\n# ");
   while(1){
+    updateScreen();
     handlerKeyboard(getKey());
 //    writeKey(getScancode());
   }
