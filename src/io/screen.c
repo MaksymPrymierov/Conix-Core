@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include "../../headers/io/screen.h"
 
-
 void textGraphickInit(){
   vidptr = (char*)VIDEO_MEM;
   i = 0;
@@ -9,10 +8,6 @@ void textGraphickInit(){
 
   setScreenTextColor(LIGHT_GREY);
   clearTextGraphickScreen();
-}
-
-void setScreenTextColor(uint8_t color){
-  screenTextColor = color;
 }
 
 void scrollUp(){

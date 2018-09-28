@@ -33,12 +33,13 @@ uint8_t screenTextColor;
 
 void textGraphickInit();
 void clearTextGraphickScreen();
-void setScreenTextColor(uint8_t color);
 void textGraphickPutChar(char c);
 void textGraphickDeleteChar();
 void updateScreen();
-
 void textGraphickNewLine();
 
+inline void setScreenTextColor(uint8_t color){
+  screenTextColor = color;
+}
 
 #endif

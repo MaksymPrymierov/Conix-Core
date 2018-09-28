@@ -28,6 +28,9 @@ void shellFunctionHelp(){
   printf("%s", "\nIt is help page for kernel shell");
   printf("%s", "\n hello - print hello world");
   printf("%s", "\n clear - clear output");
+  setScreenTextColor(RED);
+  printf("%s", "\n satan - AVE SATAN");
+  setScreenTextColor(LIGHT_GREY);
 }
 
 void shellFunctionHello(){
@@ -36,6 +39,12 @@ void shellFunctionHello(){
 
 void shellFunctionClear(){
   clearTextGraphickScreen();
+}
+
+void shellFunctionSatan(){
+  screenTextColor = RED;
+  printf("%s", "\nAVE SATAN!!!");
+  screenTextColor = LIGHT_GREY;
 }
 
 void checkShellFunction(){
@@ -47,6 +56,9 @@ void checkShellFunction(){
   }
   if(!strcmp(bufTex, "clear")){
     shellFunctionClear();
+  }
+  if(!strcmp(bufTex, "satan")){
+    shellFunctionSatan();
   }
 }
 
