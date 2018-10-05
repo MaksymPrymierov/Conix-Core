@@ -4,25 +4,8 @@
 #include "../../headers/io/screen.h"
 #include "../../headers/stdlib/stdio.h"
 #include "../../headers/stdlib/string.h"
-#include "../../headers/conixLibs/kernelShell.h"
-
-char *bufTex = "";
-
-void clearBuffer(){
-  size_t len = strlen(bufTex);
-  for(size_t i = 0; i < len + 1; i++){
-    bufTex[i] = ' ';
-  }
-  bufTex[0] = '\0';
-}
-
-void setTextBuffer(char *s){
-  strcat(bufTex, s);
-}
-
-void deleteTextBuffer(){
-  bufTex[strlen(bufTex) - 1] = '\0';
-}
+#include "../../headers/kernelShell/shellKeyboard.h"
+#include "../../headers/kernelShell/kernelShell.h"
 
 void shellFunctionHelp(){
   printf("%s", "\nIt is help page for kernel shell");
@@ -48,16 +31,22 @@ void shellFunctionSatan(){
 }
 
 void checkShellFunction(){
-  if(!strcmp(bufTex, "help")){
+  /*
+  char* buffer = "";
+  for(int i = 0; bufTex[i] != ' '; ++i){
+    buffer[i] = bufTex[i];
+  } */
+
+  if(!strcmp(keyboardBuffer, "help")){
     shellFunctionHelp();
   }
-  if(!strcmp(bufTex, "hello")){
+  if(!strcmp(keyboardBuffer, "hello")){
     shellFunctionHello();
   }
-  if(!strcmp(bufTex, "clear")){
+  if(!strcmp(keyboardBuffer, "clear")){
     shellFunctionClear();
   }
-  if(!strcmp(bufTex, "satan")){
+  if(!strcmp(keyboardBuffer, "satan")){
     shellFunctionSatan();
   }
 }
@@ -65,13 +54,13 @@ void checkShellFunction(){
 void handlerKeyboard(char* key){
   if(strlen(key) == 1){
     textGraphickPutChar(key[0]);
-    setTextBuffer(key);
+    setKeyboardBuffer(key);
   } else if(!strcmp(key, "backspace")){
     textGraphickDeleteChar();
-    deleteTextBuffer();
+    deleteCharKeyboardBuffer();
   } else if(!strcmp(key, "right_enter")){
     checkShellFunction();
-    clearBuffer();
+    clearKeyboardBuffer();
 
     textGraphickNewLine();
     textGraphickPutChar('#');
@@ -81,9 +70,10 @@ void handlerKeyboard(char* key){
 
 void initKernelShell(){
   printf("%s", "Load kernel command shell\n# ");
+  initKeyboardBuffer();
+
   while(1){
     updateScreen();
     handlerKeyboard(getKey());
-//    writeKey(getScancode());
   }
 }

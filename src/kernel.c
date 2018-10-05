@@ -1,10 +1,11 @@
 #include <stdint.h>
 #include "../headers/io/screen.h"
 #include "../headers/stdlib/stdio.h"
-#include "../headers/conixLibs/kernelShell.h"
+#include "../headers/kernelShell/kernelShell.h"
 
 void main(void){
   textGraphickInit();
+
   printf("%s", "Conix Core version: 0.01\n");
   printf("%s", "Load kernel...\n");
 	printf("%s", "/----------------------------------------\\\n");
@@ -13,6 +14,7 @@ void main(void){
   setScreenTextColor(LIGHT_GREY);
 	printf("%s", "\\----------------------------------------/\n");
   updateScreen();
+
   initKernelShell();
 
   return;
