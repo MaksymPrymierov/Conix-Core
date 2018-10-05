@@ -14,7 +14,7 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   enableInterrupts();
   enableA20();
 
-  printf("%s", "Conix Core version: 0.01\n");
+  printf("%s", "Conix Core version: 0.02\n");
   printf("%s", "Load kernel...\n");
 	printf("%s", "/----------------------------------------\\\n");
   setScreenTextColor(RED);

@@ -9,10 +9,11 @@
 
 void shellFunctionHelp(){
   printf("%s", "\nIt is help page for kernel shell");
-  printf("%s", "\n hello - print hello world");
-  printf("%s", "\n clear - clear output");
+  printf("%s", "\n hello  - print hello world");
+  printf("%s", "\n clear  - clear output");
+  printf("%s", "\n reboot - reboot system");
   setScreenTextColor(RED);
-  printf("%s", "\n satan - AVE SATAN");
+  printf("%s", "\n satan  - AVE SATAN");
   setScreenTextColor(LIGHT_GREY);
 }
 
@@ -30,13 +31,11 @@ void shellFunctionSatan(){
   screenTextColor = LIGHT_GREY;
 }
 
-void checkShellFunction(){
-  /*
-  char* buffer = "";
-  for(int i = 0; bufTex[i] != ' '; ++i){
-    buffer[i] = bufTex[i];
-  } */
+void shellFunctionReboot(){
+  asm("int $0x15");
+}
 
+void checkShellFunction(){
   if(!strcmp(keyboardBuffer, "help")){
     shellFunctionHelp();
   }
@@ -48,6 +47,9 @@ void checkShellFunction(){
   }
   if(!strcmp(keyboardBuffer, "satan")){
     shellFunctionSatan();
+  }
+  if(!strcmp(keyboardBuffer, "reboot")){
+    shellFunctionReboot();
   }
 }
 
