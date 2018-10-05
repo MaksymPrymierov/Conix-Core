@@ -1,5 +1,5 @@
-#ifndef CONIXCORE_INT
-#define CONIXCORE_INT
+#ifndef INT_H
+#define INT_H
 
 /*
  * The function getLengthInt() gets an integer variable (int n) 

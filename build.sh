@@ -28,7 +28,7 @@ fi
 mkdir bin/{io,stdlib,memory,conixLibs,kernelShell}
 
 cd $SRCF
-SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c memory/*.c conixLibs/*.c kernelShell/*.c) )
+SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c memory/{*.c,*.s} conixLibs/*.c kernelShell/*.c) )
 cd ..
 
 for ((i=0; i != ${#SRC[@]}; i++))

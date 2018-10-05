@@ -1,5 +1,5 @@
-#ifndef CONIXCORE_KEY
-#define CONIXCORE_KEY
+#ifndef KEYBOARD_H
+#define KEYBOARD_H
 
 uint8_t getScancode();
 char* getKey();

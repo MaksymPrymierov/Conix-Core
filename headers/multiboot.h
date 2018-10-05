@@ -1,4 +1,7 @@
-  /*  .texssion is hereby granted, free of charge, to any person obtaining a copy
+/* multiboot.h - Multiboot header file. */
+     /* Copyright (C) 1999,2003,2007,2008,2009,2010  Free Software Foundation, Inc.
+      *
+      *  Permission is hereby granted, free of charge, to any person obtaining a copy
       *  of this software and associated documentation files (the "Software"), to
       *  deal in the Software without restriction, including without limitation the
       *  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
@@ -268,21 +271,4 @@
      
      #endif /* ! ASM_FILE */
      
-     #endif /* ! MULTIBOOT_HEADER */m
-        align 4
-        dd 0x1BADB002
-        dd 0x00
-        dd - (0x1BADB002 + 0x00)
-
-global start
-extern kmain
-
-start:
-        cli
-        mov esp, stack_space
-        call main
-
-.bss
-resb 8192
-stack_space:
-
+     #endif /* ! MULTIBOOT_HEADER */

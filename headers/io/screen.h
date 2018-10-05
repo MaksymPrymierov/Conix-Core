@@ -1,5 +1,5 @@
-#ifndef CONIXCORE_SCREEN
-#define CONIXCORE_SCREEN
+#ifndef SCREEN_H
+#define SCREEN_H
 
 /* Table of color */
 #define BLACK         0x00
