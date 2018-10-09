@@ -1,6 +1,4 @@
-#include <stdint.h>
-#include "../../headers/stdlib/stddef.h"
-#include "../../headers/stdlib/string.h"
+#include "../../headers/stdlib/stdlib.h"
 
 size_t strlen(const char* str){
   char *begin = (char*)str;

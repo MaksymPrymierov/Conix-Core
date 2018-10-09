@@ -1,10 +1,5 @@
-#include <stdint.h>
-#include <stdarg.h>
-#include "../../headers/stdlib/stddef.h"
-#include "../../headers/stdlib/string.h"
-#include "../../headers/io/screen.h"
-#include "../../headers/stdlib/stdio.h"
 #include "../../headers/stdlib/stdlib.h"
+#include "../../headers/io/screen.h"
 
 void print(const char* text){
   for(int i = 0; i < strlen(text); ++i){

@@ -21,6 +21,8 @@ stack_top:
 .type _start, @function
 _start:
 	mov  $stack_top, %esp
+	push %ebx
+	push %eax
 	call main
 	cli
 1: hlt
