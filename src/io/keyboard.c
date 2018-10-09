@@ -2,8 +2,7 @@
 #define C_KEYBOARD
 #include <stdint.h>
 #include "../../headers/stdlib/stddef.h"
-#include "../../headers/io/keyboard.h"
-#include "../../headers/io/screen.h"
+#include "../../headers/io/io.h"
 #include "../../headers/stdlib/string.h"
 
 #define BEGINE_TABLE_PRESS_KEYS   0x1
@@ -48,14 +47,6 @@ char* getKey(){
   }
   return pressKeys[0];
 }
-
-static inline uint8_t inb(uint16_t port){
-	uint8_t ret;
-	asm volatile ( "inb %1, %0"
-	                  : "=a"(ret)
-	                  : "Nd"(port) );
-	return ret;
-	}
 
 uint8_t getScancode(){
 	while (!(inb(0x64) & 1));

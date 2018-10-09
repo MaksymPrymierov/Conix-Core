@@ -32,3 +32,15 @@ int strcmp(const char *first, const char *second){
   }
   return 0;
 }
+
+void *memcpy(void *dst, const void *src, size_t n){
+  for(int i = 0; i < n; ++i){
+    *((unsigned char*)dst++) = *((unsigned char*)src++);
+  }
+}
+
+void *memset(void *s, int c, size_t n){
+  for(int i = 0; i < n; ++i){
+    *((unsigned char*)s++) = c;
+  }
+}

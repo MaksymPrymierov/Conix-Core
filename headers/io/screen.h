@@ -37,6 +37,7 @@ void textGraphickPutChar(char c);
 void textGraphickDeleteChar();
 void updateScreen();
 void textGraphickNewLine();
+void moveCursor();
 
 inline void setScreenTextColor(uint8_t color){
   screenTextColor = color;

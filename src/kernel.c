@@ -13,6 +13,12 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   printf("%s", "|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
   setScreenTextColor(LIGHT_GREY);
 	printf("%s", "\\----------------------------------------/\n");
+
+  char *a = "qwerty";
+  printf("%s", a);
+  memset(a, '_', 4);
+  printf("%s", a);
+  moveCursor();
   updateScreen();
 
   initKernelShell();

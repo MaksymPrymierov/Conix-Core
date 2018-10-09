@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "../../headers/io/screen.h"
+#include "../../headers/io/io.h"
 
 void textGraphickInit(){
   vidptr = (char*)VIDEO_MEM;
@@ -20,6 +20,7 @@ void scrollUp(){
   }
 
   cursorPos = buffer - TEXT_COLLUM_NUMBERS;
+  moveCursor();
 }
 
 void clearTextGraphickScreen(){
@@ -31,6 +32,7 @@ void clearTextGraphickScreen(){
   }
 
   cursorPos = START_VIDEO_BUFFER;
+  moveCursor();
 }
 
 void textGraphickPutChar(char c){
@@ -45,12 +47,14 @@ void textGraphickPutChar(char c){
   }
 
   if(cursorPos > TEXT_COLLUM_NUMBERS * TEXT_LINE_NUMBERS) scrollUp();
+  moveCursor();
 }
 
 void textGraphickDeleteChar(){
   if(cursorPos > 1){
     screenTextBuffer[cursorPos - 2] = ' ';
     cursorPos -= 2;
+    moveCursor();
   }
 }
 
@@ -66,6 +70,7 @@ void textGraphickNewLine(){
   }
 
   cursorPos += buffer;
+  moveCursor();
 }
 
 void updateScreen(){
@@ -77,4 +82,13 @@ void updateScreen(){
   }
 
   i = 0;
+}
+
+void moveCursor(){
+  int temp = cursorPos / 2;
+
+  outb(0x3d4, 14);
+  outb(0x3d5, temp >> 8);
+  outb(0x3d4, 15);
+  outb(0x3d5, temp);
 }
