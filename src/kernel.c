@@ -2,9 +2,8 @@
 #include "../headers/multiboot.h"
 
 void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
-  textGraphickInit();
 
-  if(bootloader_inf == MULTIBOOT_BOOTLOADER_MAGIC) printf("%s", "Loaded via GRUB\n");
+  textGraphickInit();
 
   printf("%s", "Conix Core version: 0.02\n");
   printf("%s", "Load kernel...\n");
@@ -14,13 +13,7 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   setScreenTextColor(LIGHT_GREY);
 	printf("%s", "\\----------------------------------------/\n");
 
-  char *a = "qwerty";
-  printf("%s", a);
-  memset(a, '_', 4);
-  printf("%s", a);
-  moveCursor();
-  updateScreen();
-
+  gdtInit();
   initKernelShell();
 
   return;

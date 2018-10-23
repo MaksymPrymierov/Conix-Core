@@ -1,11 +1,4 @@
-#include <stdint.h>
-#include "../../headers/stdlib/stddef.h"
-#include "../../headers/io/keyboard.h"
-#include "../../headers/io/screen.h"
-#include "../../headers/stdlib/stdio.h"
-#include "../../headers/stdlib/string.h"
-#include "../../headers/kernelShell/shellKeyboard.h"
-#include "../../headers/kernelShell/kernelShell.h"
+#include "../../headers/conix.h"
 
 void shellFunctionHelp(){
   printf("%s", "\nIt is help page for kernel shell");
