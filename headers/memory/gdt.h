@@ -53,7 +53,13 @@ struct gdtEntry{
   unsigned char  baseHigh;
 } __attribute__ ((packed));
 
+struct gdtPtr{
+  unsigned short limit;
+  unsigned int   base;
+} __attribute__ ((packed));
+
 struct gdtEntry gdt[3];
+struct gdtPtr   gp;
 
 extern void gdtFlush();
 

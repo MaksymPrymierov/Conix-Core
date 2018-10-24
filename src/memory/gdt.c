@@ -14,6 +14,9 @@ void createDescriptor(int num, unsigned long base, unsigned long limit, unsigned
 }
 
 void gdtInit(){
+  gp.limit = (sizeof(struct gdtEntry) * 3) - 1;
+  gp.base  = &gdt;
+
   createDescriptor(0, 0, 0, 0, 0);
 
   createDescriptor(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);

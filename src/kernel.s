@@ -10,6 +10,11 @@
 .long FLAGS
 .long CHECKSUM
 
+#Open A20
+in  $0x92, %al
+or  $2, %al
+out %al, $0x92
+
 .section .bss
 .align 16
 stack_bottom:
@@ -31,7 +36,9 @@ _start:
 .size _start, . - _start
 
 .global gdtFlush
+.extern gp
 gdtFlush:
+  lgdt (gp)
 	movw $0x10, %ax
 	movw %ax, %ds
 	movw %ax, %es
@@ -42,3 +49,8 @@ gdtFlush:
 flush2:
 	ret
 
+.global idtLoad
+.extern idtp
+idtLoad:
+	lidt (idtp)
+	ret

@@ -7,5 +7,6 @@
 #include "kernelShell/kernelShell.h"
 #include "stdlib/stdlib.h"
 #include "memory/gdt.h"
+#include "memory/idt.h"
 
 #endif
