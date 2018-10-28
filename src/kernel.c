@@ -5,6 +5,7 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   gdtInit();
 //  idtInstall();
 //  isrsInstall();
+//  irqInstall();
 
   textGraphickInit();
 
