@@ -6,7 +6,6 @@
 #include "io/io.h"
 #include "kernelShell/kernelShell.h"
 #include "stdlib/stdlib.h"
-#include "memory/gdt.h"
-#include "memory/idt.h"
+#include "sys/sys.h"
 
 #endif

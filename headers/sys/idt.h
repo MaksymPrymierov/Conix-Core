@@ -11,14 +11,15 @@ struct idtEntry{
 
 struct idtPtr{
   unsigned short limit;
-  unsigned int   base;
+  unsigned long   base;
 } __attribute__ ((packed));
 
 struct idtEntry idt[256];
 struct idtPtr   idtp;
 
-extern void idtLoad();
+extern void idtLoad(unsigned long);
 
+void idtSetGate(unsigned char num, unsigned long base, unsigned short sel, unsigned char flags);
 void idtInstall();
 
 #endif

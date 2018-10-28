@@ -3,7 +3,8 @@
 
 void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   gdtInit();
-  idtInstall();
+//  idtInstall();
+//  isrsInstall();
 
   textGraphickInit();
 
@@ -14,6 +15,9 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   printf("%s", "|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
   setScreenTextColor(LIGHT_GREY);
 	printf("%s", "\\----------------------------------------/\n");
+
+//  int a;
+//  a = 1 / 0;
 
   initKernelShell();
 

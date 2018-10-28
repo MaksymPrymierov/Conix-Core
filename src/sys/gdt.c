@@ -1,7 +1,7 @@
 #include "../../headers/stdlib/stdlib.h"
-#include "../../headers/memory/gdt.h"
+#include "../../headers/sys/sys.h"
 
-void createDescriptor(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran){
+void gdtSetGate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran){
   gdt[num].baseLow    = (base & 0xFFFF);
   gdt[num].baseMiddle = (base >> 16) & 0xFF;
   gdt[num].baseHigh   = (base >> 24) & 0xFF;
@@ -15,13 +15,13 @@ void createDescriptor(int num, unsigned long base, unsigned long limit, unsigned
 
 void gdtInit(){
   gp.limit = (sizeof(struct gdtEntry) * 3) - 1;
-  gp.base  = &gdt;
+  gp.base  = (unsigned long)&gdt[0];
 
-  createDescriptor(0, 0, 0, 0, 0);
+  gdtSetGate(0, 0, 0, 0, 0);
+  gdtSetGate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
+  gdtSetGate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
+  
 
-  createDescriptor(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
-
-  createDescriptor(2, 0, 0xFFFFFFFF, 0x9A, 0xCF);
-
-  gdtFlush();
+//  asm("lgdt (,%0,)"::"a"(&gp));
+  gdtFlush((unsigned long)&gp);
 }
