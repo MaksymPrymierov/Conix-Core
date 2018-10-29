@@ -3,8 +3,8 @@
 C="/usr/local/cross/bin/i686-elf-gcc -O2 -ffreestanding -mno-red-zone -nostdlib -lgcc -c"
 LD="/usr/local/cross/bin/i686-elf-ld -T"
 SRCF="src"
-BIN="bin/*.o bin/io/*.o bin/stdlib/*.o bin/sys/*.o bin/conixLibs/*.o bin/kernelShell/*.o"
-SRC="*.c *.s io/*.c io/*.s stdlib/*.c sys/*.c sys/*.s conixLibs/*.c kernelShell/*.c"
+BIN="bin/*.o bin/io/*.o bin/stdlib/*.o bin/sys/*.o bin/conixLibs/*.o bin/kernelShell/*.o bin/ints/*.o"
+SRC="*.c *.s io/*.c io/*.s stdlib/*.c sys/*.c sys/*.s conixLibs/*.c kernelShell/*.c ints/*.c"
 
 errCheck(){
   if (( $? != 0 ))
@@ -27,7 +27,7 @@ if (( $? == 0 ))
 then
   rm kernel
 fi
-mkdir bin/{io,stdlib,sys,conixLibs,kernelShell}
+mkdir bin/{io,stdlib,sys,conixLibs,kernelShell,ints}
 
 cd $SRCF
 SRC=( $(ls $SRC) )

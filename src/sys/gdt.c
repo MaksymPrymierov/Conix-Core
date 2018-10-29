@@ -15,7 +15,7 @@ void gdtSetGate(int num, unsigned long base, unsigned long limit, unsigned char 
 
 void gdtInit(){
   gp.limit = (sizeof(struct gdtEntry) * 3) - 1;
-  gp.base  = (unsigned long)&gdt[0];
+  gp.base  = (unsigned long)&gdt;
 
   gdtSetGate(0, 0, 0, 0, 0);
   gdtSetGate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);

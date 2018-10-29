@@ -7,5 +7,6 @@
 #include "kernelShell/kernelShell.h"
 #include "stdlib/stdlib.h"
 #include "sys/sys.h"
+#include "ints/ints.h"
 
 #endif

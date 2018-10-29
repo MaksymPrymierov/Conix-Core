@@ -2,12 +2,15 @@
 #include "../headers/multiboot.h"
 
 void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
-  gdtInit();
-//  idtInstall();
-//  isrsInstall();
-//  irqInstall();
-
   textGraphickInit();
+  timerPhase(100);
+
+  gdtInit();
+  idtInstall();  
+  isrsInstall();
+  irqInstall();
+  timerInstall();
+
 
   printf("%s", "Conix Core version: 0.02\n");
   printf("%s", "Load kernel...\n");
@@ -16,9 +19,6 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   printf("%s", "|    AVE SATAN, AVE CONNOR41, AVE GNU!   |\n");
   setScreenTextColor(LIGHT_GREY);
 	printf("%s", "\\----------------------------------------/\n");
-
-//  int a;
-//  a = 1 / 0;
 
   initKernelShell();
 
