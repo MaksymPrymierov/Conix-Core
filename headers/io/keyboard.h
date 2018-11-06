@@ -1,7 +1,6 @@
-#ifndef KEYBOARD_H
-#define KEYBOARD_H
+#ifndef OLD_KEYBOARD_H
+#define OLD_KEYBOARD_H
 
-uint8_t getScancode();
 char* getKey();
 
 #endif

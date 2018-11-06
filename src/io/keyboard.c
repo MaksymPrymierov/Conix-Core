@@ -1,9 +1,7 @@
 #define KEY_LOG_NUM
 #define C_KEYBOARD
-#include <stdint.h>
-#include "../../headers/stdlib/stddef.h"
-#include "../../headers/io/io.h"
-#include "../../headers/stdlib/string.h"
+#include "../../headers/conix.h"
+#include "../../headers/ints/keyboard.h"
 
 #define BEGINE_TABLE_PRESS_KEYS   0x1
 #define END_TABLE_PRESS_KEYS      0x5a
@@ -48,7 +46,3 @@ char* getKey(){
   return pressKeys[0];
 }
 
-uint8_t getScancode(){
-	while (!(inb(0x64) & 1));
-	return inb(0x60);
-}
