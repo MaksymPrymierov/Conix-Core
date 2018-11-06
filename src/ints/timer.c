@@ -1,7 +1,7 @@
 #include "../../headers/sys/sys.h"
 #include "../../headers/ints/ints.h"
-#include "../../headers/io/ports.h"
 #include "../../headers/stdlib/stdlib.h"
+#include "../../headers/io/io.h"
 
 int timerTicks = 0;
 
@@ -13,10 +13,7 @@ void timerPhase(int hz){
 }
 
 void timerHandler(struct regs *r){
-  ++timerTicks;
-  if(timerTicks % 18 == 0){
-    printf("%d", "timer");
-  }
+    ++timerTicks;
 }
 
 void timerInstall(){

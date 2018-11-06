@@ -14,14 +14,14 @@ void gdtSetGate(int num, unsigned long base, unsigned long limit, unsigned char 
 }
 
 void gdtInit(){
-  gp.limit = (sizeof(struct gdtEntry) * 3) - 1;
+  gp.limit = (sizeof(struct gdtEntry) * 5) - 1;
   gp.base  = (unsigned long)&gdt;
 
   gdtSetGate(0, 0, 0, 0, 0);
   gdtSetGate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
   gdtSetGate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
+  gdtSetGate(3, 0, 0xFFFFFFFF, 0xFA, 0xCF);
+  gdtSetGate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF);
   
-
-//  asm("lgdt (,%0,)"::"a"(&gp));
-  gdtFlush((unsigned long)&gp);
+  gdtFlush();
 }

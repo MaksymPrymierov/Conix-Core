@@ -36,210 +36,211 @@ isr0:
 	cli
 	push 0
 	push 0
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Debug Exception
 isr1:
 	cli
 	push 0
 	push 1
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Non Maskable Interrupt Exception
 isr2:
 	cli
 	push 0
 	push 2
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Breakpoint Exception
 isr3:
 	cli
 	push 0
 	push 3
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Into Detected Overflow Exception
 isr4:
 	cli
 	push 0
 	push 4
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Out of Bounds Exception
 isr5:
 	cli
 	push 0
 	push 5
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Invalid Opcode Exception
 isr6:
 	cli
 	push 0
 	push 6
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # No Coprocessor Exception
 isr7:
 	cli
 	push 0
 	push 7
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Double Fault Exception
 isr8:
 	cli
 	push 8
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Coprocessor Segment Overrun Exception
 isr9:
 	cli
 	push 0
 	push 9
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Bad TSS Exception
 isr10:
 	cli
 	push 10
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Segment Not Present Exception
 isr11:
 	cli
 	push 11
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Stack Fault Exception
 isr12:
 	cli
 	push 12
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # General Protection Fault Exception
 isr13:
 	cli
 	push 13
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Page Fault Exception
 isr14:
 	cli
 	push 14
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Unknown Interrupt Exception
 isr15:
 	cli
 	push 0
 	push 15
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Coprocessor Fault Exception
 isr16:
 	cli
 	push 0
 	push 16
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Alignment Check Exception (486+)
 isr17:
 	cli
 	push 0
 	push 17
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Machine Check Exception (Pentium/586+)
 isr18:
 	cli
 	push 0
 	push 18
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 # Reserved Exceptions (isr19-31)
 isr19:
 	cli
 	push 0
 	push 19
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr20:
 	cli
 	push 0
 	push 20
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr21:
 	cli
 	push 0
 	push 21
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr22:
 	cli
 	push 0
 	push 22
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr23:
 	cli
 	push 0
 	push 23
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr24:
 	cli
 	push 0
 	push 24
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr25:
 	cli
 	push 0
 	push 25
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr26:
 	cli
 	push 0
 	push 26
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr27:
 	cli
 	push 0
 	push 27
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr28:
 	cli
 	push 0
 	push 28
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr29:
 	cli
 	push 0
 	push 29
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr30:
 	cli
 	push 0
 	push 30
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 isr31:
 	cli
 	push 0
 	push 31
-	jmp isr_common_stub
+	jmp isrCommonStub
 
 .extern faultHandler
+.type faultHandler, @function
 
-isr_common_stub:
+isrCommonStub:
 	pusha
 	push %ds
 	push %es
@@ -254,7 +255,7 @@ isr_common_stub:
 	mov %esp, %eax
 
 	push %eax
-	mov faultHandler, %eax
+	mov $faultHandler, %eax
 	call *%eax
 
 	pop %eax

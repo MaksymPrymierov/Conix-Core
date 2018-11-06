@@ -55,13 +55,13 @@ struct gdtEntry{
 
 struct gdtPtr{
   unsigned short limit;
-  unsigned long   base;
+  unsigned int   base;
 } __attribute__ ((packed));
 
-struct gdtEntry gdt[3];
+struct gdtEntry gdt[5];
 struct gdtPtr   gp;
 
-extern void gdtFlush(unsigned long);
+extern void gdtFlush();
 
 void createDescriptor(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran);
 void gdtInit();

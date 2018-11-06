@@ -128,7 +128,7 @@ irqCommonStub:
 	mov %esp, %eax
 
 	push %eax
-	mov irqHandler, %eax
+	mov $irqHandler, %eax
 	call *%eax
 
 	pop %eax

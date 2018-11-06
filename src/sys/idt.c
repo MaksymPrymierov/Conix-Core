@@ -12,9 +12,9 @@ void idtSetGate(unsigned char num, unsigned long base, unsigned short sel, unsig
 
 void idtInstall(){
   idtp.limit = (sizeof(struct idtEntry) * 256) - 1;
-  idtp.base  = (unsigned long)&idt[0];
+  idtp.base  = (unsigned int)&idt;
 
   memset(&idt, 0, sizeof(struct idtEntry) * 256);
 
-  idtLoad((unsigned long)&idtp);
+  idtLoad();
 }
