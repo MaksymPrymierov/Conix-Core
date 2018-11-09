@@ -4,7 +4,6 @@ void shellFunctionHelp(){
   printf("%s", "\nIt is help page for kernel shell");
   printf("%s", "\n hello  - print hello world");
   printf("%s", "\n clear  - clear output");
-  printf("%s", "\n reboot - reboot system");
   setScreenTextColor(RED);
   printf("%s", "\n satan  - AVE SATAN");
   setScreenTextColor(LIGHT_GREY);
@@ -24,10 +23,6 @@ void shellFunctionSatan(){
   screenTextColor = LIGHT_GREY;
 }
 
-void shellFunctionReboot(){
-  asm("int $0x15");
-}
-
 void checkShellFunction(){
   if(!strcmp(keyboardBuffer, "help")){
     shellFunctionHelp();
@@ -41,12 +36,9 @@ void checkShellFunction(){
   if(!strcmp(keyboardBuffer, "satan")){
     shellFunctionSatan();
   }
-  if(!strcmp(keyboardBuffer, "reboot")){
-    shellFunctionReboot();
-  }
 }
 
-void handlerKeyboard(char* key){
+void shellHandlerKeyboard(char* key){
   if(strlen(key) == 1){
     textGraphickPutChar(key[0]);
     setKeyboardBuffer(key);
@@ -66,9 +58,4 @@ void handlerKeyboard(char* key){
 void initKernelShell(){
   printf("%s", "Load kernel command shell\n# ");
   initKeyboardBuffer();
-
-  while(1){
-    updateScreen();
-    handlerKeyboard(getKey());
-  }
 }

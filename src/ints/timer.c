@@ -1,7 +1,4 @@
-#include "../../headers/sys/sys.h"
-#include "../../headers/ints/ints.h"
-#include "../../headers/stdlib/stdlib.h"
-#include "../../headers/io/io.h"
+#include "../../headers/conix.h"
 
 int timerTicks = 0;
 
@@ -14,6 +11,8 @@ void timerPhase(int hz){
 
 void timerHandler(struct regs *r){
     ++timerTicks;
+
+    updateScreen();
 }
 
 void timerInstall(){

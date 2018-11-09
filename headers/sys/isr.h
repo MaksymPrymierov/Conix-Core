@@ -1,6 +1,7 @@
 #ifndef ISR_H
 #define ISR_H
 
+/* Exception handlers */
 extern void isr0();
 extern void isr1();
 extern void isr2();
@@ -34,6 +35,7 @@ extern void isr29();
 extern void isr30();
 extern void isr31();
 
+/* Data structure with registries. */
 struct regs{
   unsigned int gs, fs, es, ds;
   unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;
@@ -41,7 +43,10 @@ struct regs{
   unsigned int eip, cs, eflags, useresp, ss;
 };
 
+/* Install exception handlers. */
 void isrsInstall();
+
+/* Error message with exception. */
 void faultHandler(struct regs *r);
 
 #endif

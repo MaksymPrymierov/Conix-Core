@@ -3,9 +3,6 @@
 
 void textGraphickInit(){
   vidptr = (char*)VIDEO_MEM;
-  i = 0;
-  cursorPos = START_VIDEO_BUFFER;
-
   setScreenTextColor(LIGHT_GREY);
   clearTextGraphickScreen();
 }
@@ -14,25 +11,23 @@ void scrollUp(){
   unsigned int buffer = cursorPos;
   cursorPos = 0;
 
-  while(cursorPos < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
+  while(cursorPos < OUTPUT_MAP){
     screenTextBuffer[cursorPos] = screenTextBuffer[cursorPos + TEXT_COLLUM_NUMBERS];
     ++cursorPos;
   }
 
   cursorPos = buffer - TEXT_COLLUM_NUMBERS;
-  moveCursor();
 }
 
 void clearTextGraphickScreen(){
   cursorPos = 0;
-  while(cursorPos < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS + 160){
+  while(cursorPos < OUTPUT_MAP + 160){
     screenTextBuffer[cursorPos] = ' ';
     screenTextBuffer[cursorPos+1] = screenTextColor;
     cursorPos += 2;
   }
 
   cursorPos = START_VIDEO_BUFFER;
-  moveCursor();
 }
 
 void textGraphickPutChar(char c){
@@ -46,15 +41,13 @@ void textGraphickPutChar(char c){
       cursorPos += 2;
   }
 
-  if(cursorPos > TEXT_COLLUM_NUMBERS * TEXT_LINE_NUMBERS) scrollUp();
-  moveCursor();
+  if(cursorPos > OUTPUT_MAP) scrollUp();
 }
 
 void textGraphickDeleteChar(){
   if(cursorPos > 1){
     screenTextBuffer[cursorPos - 2] = ' ';
     cursorPos -= 2;
-    moveCursor();
   }
 }
 
@@ -70,18 +63,14 @@ void textGraphickNewLine(){
   }
 
   cursorPos += buffer;
-  moveCursor();
 }
 
 void updateScreen(){
-  i = 0;
-
-  while(i < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
+  for(int i = 0; i < OUTPUT_MAP; ++i){
     vidptr[i] = screenTextBuffer[i];
-    ++i;
   }
-
-  i = 0;
+  
+  moveCursor();
 }
 
 void moveCursor(){
