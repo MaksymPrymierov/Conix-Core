@@ -3,6 +3,8 @@
 C="/usr/local/cross/bin/i686-elf-gcc -O2 -ffreestanding -mno-red-zone -nostdlib -lgcc -c"
 LD="/usr/local/cross/bin/i686-elf-ld -T"
 SRCF="src"
+BIN="bin/*.o bin/io/*.o bin/stdlib/*.o bin/sys/*.o bin/kernelShell/*.o bin/ints/*.o"
+SRC="*.c *.s io/*.c stdlib/*.c sys/*.c sys/*.s kernelShell/*.c ints/*.c"
 
 errCheck(){
   if (( $? != 0 ))
@@ -25,10 +27,10 @@ if (( $? == 0 ))
 then
   rm kernel
 fi
-mkdir bin/{io,stdlib,memory,conixLibs}
+mkdir bin/{io,stdlib,sys,kernelShell,ints}
 
 cd $SRCF
-SRC=( $(ls *.c *.s io/{*.c,*.s} stdlib/*.c memory/*.c conixLibs/*.c) )
+SRC=( $(ls $SRC) )
 cd ..
 
 for ((i=0; i != ${#SRC[@]}; i++))
@@ -37,6 +39,6 @@ do
   errCheck
 done
 
-$LD link.ld -o kernel bin/*.o bin/io/*.o bin/stdlib/*.o bin/memory/*.o bin/conixLibs/*.o
+$LD link.ld -o kernel $BIN
 errCheck
 echo "Build Complete"

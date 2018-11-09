@@ -1,28 +1,33 @@
 #include <stdint.h>
-#include "../../headers/io/screen.h"
-
+#include "../../headers/io/io.h"
 
 void textGraphickInit(){
   vidptr = (char*)VIDEO_MEM;
-  i = 0;
-  j = 0;
-
   setScreenTextColor(LIGHT_GREY);
   clearTextGraphickScreen();
 }
 
-void setScreenTextColor(uint8_t color){
-  screenTextColor = color;
+void scrollUp(){
+  unsigned int buffer = cursorPos;
+  cursorPos = 0;
+
+  while(cursorPos < OUTPUT_MAP){
+    screenTextBuffer[cursorPos] = screenTextBuffer[cursorPos + TEXT_COLLUM_NUMBERS];
+    ++cursorPos;
+  }
+
+  cursorPos = buffer - TEXT_COLLUM_NUMBERS;
 }
 
 void clearTextGraphickScreen(){
-  i = 0;
-  while(i < TEXT_LINE_NUMBERS * TEXT_COLLUM_NUMBERS){
-    textGraphickPutChar(' ');
+  cursorPos = 0;
+  while(cursorPos < OUTPUT_MAP + 160){
+    screenTextBuffer[cursorPos] = ' ';
+    screenTextBuffer[cursorPos+1] = screenTextColor;
+    cursorPos += 2;
   }
 
-  j = 0;
-  i = 0;
+  cursorPos = START_VIDEO_BUFFER;
 }
 
 void textGraphickPutChar(char c){
@@ -31,29 +36,48 @@ void textGraphickPutChar(char c){
       textGraphickNewLine();
       break;
     default:
-      vidptr[i]   = c;
-      vidptr[i+1] = screenTextColor;
-      i += 2;
+      screenTextBuffer[cursorPos] = c;
+      screenTextBuffer[cursorPos+1] = screenTextColor;
+      cursorPos += 2;
   }
+
+  if(cursorPos > OUTPUT_MAP) scrollUp();
 }
 
 void textGraphickDeleteChar(){
-  if(i > 1){
-    vidptr[i - 2] = ' ';
-    i -= 2;
+  if(cursorPos > 1){
+    screenTextBuffer[cursorPos - 2] = ' ';
+    cursorPos -= 2;
   }
 }
 
 void textGraphickNewLine(){
   int buffer = 0;
-  buffer = i / TEXT_COLLUM_NUMBERS;
+  buffer = cursorPos / TEXT_COLLUM_NUMBERS;
 
   if(buffer == 0)
-    buffer = TEXT_COLLUM_NUMBERS - i;
+    buffer = TEXT_COLLUM_NUMBERS - cursorPos;
   else{
     buffer = TEXT_COLLUM_NUMBERS * (buffer + 1);
-    buffer = buffer - i;
+    buffer = buffer - cursorPos;
   }
 
-  i = i + buffer;
+  cursorPos += buffer;
+}
+
+void updateScreen(){
+  for(int i = 0; i < OUTPUT_MAP; ++i){
+    vidptr[i] = screenTextBuffer[i];
+  }
+  
+  moveCursor();
+}
+
+void moveCursor(){
+  int temp = cursorPos / 2;
+
+  outb(0x3d4, 14);
+  outb(0x3d5, temp >> 8);
+  outb(0x3d4, 15);
+  outb(0x3d5, temp);
 }

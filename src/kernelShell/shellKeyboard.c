@@ -1,10 +1,8 @@
-#define KEY_LOG_NUM
-#define C_KEYBOARD
-#include <stdint.h>
+#include "../../headers/kernelShell/shellKeyboard.h"
 #include "../../headers/stdlib/stddef.h"
-#include "../../headers/io/keyboard.h"
-#include "../../headers/io/screen.h"
 #include "../../headers/stdlib/string.h"
+#include "../../headers/sys/sys.h"
+#include "../../headers/ints/keyboard.h"
 
 #define BEGINE_TABLE_PRESS_KEYS   0x1
 #define END_TABLE_PRESS_KEYS      0x5a
@@ -39,25 +37,25 @@ char* pressedKeys[] = {
   "p_f11", "p_f12"
 };
 
-char* getKey(){
-  int hex = getScancode();
+void initKeyboardBuffer(){
+  keyboardBuffer = "";
+}
+
+void clearKeyboardBuffer(){
+  size_t len = strlen(keyboardBuffer);
+
+  for(size_t i = 0; i < len + 1; ++i){
+    keyboardBuffer[i] = ' ';
+  }
+
+  keyboardBuffer[0] = '\0';
+}
+
+char* getKey(int hex){
   if(hex <= END_TABLE_PRESS_KEYS){
     return pressKeys[hex];
   } else if(hex >= BEGINE_TABLE_PRESSED_KEYS || hex <= END_TABLE_PRESSED_KEYS){
     return pressedKeys[hex - (BEGINE_TABLE_PRESSED_KEYS - 1)];
   }
   return pressKeys[0];
-}
-
-static inline uint8_t inb(uint16_t port){
-	uint8_t ret;
-	asm volatile ( "inb %1, %0"
-	                  : "=a"(ret)
-	                  : "Nd"(port) );
-	return ret;
-	}
-
-uint8_t getScancode(){
-	while (!(inb(0x64) & 1));
-	return inb(0x60);
 }

@@ -1,6 +1,4 @@
-#include <stdint.h>
-#include "../../headers/stdlib/stddef.h"
-#include "../../headers/stdlib/string.h"
+#include "../../headers/stdlib/stdlib.h"
 
 size_t strlen(const char* str){
   char *begin = (char*)str;
@@ -33,4 +31,16 @@ int strcmp(const char *first, const char *second){
     if(first[i] < second[i]) return -1;
   }
   return 0;
+}
+
+void *memcpy(void *dst, const void *src, size_t n){
+  for(int i = 0; i < n; ++i){
+    *((unsigned char*)dst++) = *((unsigned char*)src++);
+  }
+}
+
+void *memset(void *s, int c, size_t n){
+  for(int i = 0; i < n; ++i){
+    *((unsigned char*)s++) = c;
+  }
 }
