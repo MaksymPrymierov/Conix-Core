@@ -6,7 +6,7 @@ void main(int bootloader_inf, multiboot_info_t* loader_struct_addr){
   timerPhase(100);
 
   gdtInit();
-  idtInstall();  
+  idtInstall();
   isrsInstall();
   irqInstall();
 
