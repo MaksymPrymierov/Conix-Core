@@ -20,17 +20,17 @@ char* strcat(char *str, const char *add_str);
 /*
  * Copy one line to another.
  */
-int   strcmp(const char *first, const char* second);
+int strcmp(const char *first, const char* second);
 
 /*
  * Copies a piece of memory to another location.
  */
-void *memcpy(void *dst, const void *src, size_t n);
+void* memcpy(void *dst, const void *src, size_t n);
 
 /*
  * Sets data starting at a specific address in the memory
  * and after a certain distance from the beginning.
  */
-void *memset(void *s, int c, size_t n);
+void* memset(void *s, int c, size_t n);
 
 #endif

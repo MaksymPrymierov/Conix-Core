@@ -36,11 +36,11 @@ extern void isr30();
 extern void isr31();
 
 /* Data structure with registries. */
-struct regs{
-  unsigned int gs, fs, es, ds;
-  unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;
-  unsigned int intNo, errCode;
-  unsigned int eip, cs, eflags, useresp, ss;
+struct regs {
+ 	unsigned int gs, fs, es, ds;
+  	unsigned int edi, esi, ebp, esp, ebx, edx, ecx, eax;
+  	unsigned int intNo, errCode;
+  	unsigned int eip, cs, eflags, useresp, ss;
 };
 
 /* Install exception handlers. */

@@ -4,21 +4,22 @@
 /*
  * Data structure for gdt.
  */
-struct gdtEntry{
-  unsigned short limitLow;
-  unsigned short baseLow;
-  unsigned char  baseMiddle;
-  unsigned char  access;
-  unsigned char  granularity;
-  unsigned char  baseHigh;
+struct gdtEntry {
+        unsigned short limitLow;
+        unsigned short baseLow;
+        unsigned char  baseMiddle;
+        unsigned char  access;
+        unsigned char  granularity;
+        unsigned char  baseHigh;
 } __attribute__ ((packed));
 
 /*
  * Pointer to the structure with data for gdt.
  */
-struct gdtPtr{
-  unsigned short limit;
-  unsigned int   base;
+struct gdtPtr
+{
+        unsigned short limit;
+        unsigned int   base;
 } __attribute__ ((packed));
 
 /*
