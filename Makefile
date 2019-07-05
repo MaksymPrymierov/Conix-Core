@@ -1,7 +1,7 @@
 export ARCH=i686
 export CC=/usr/local/cross/bin/${ARCH}-elf-gcc
 export LD=/usr/local/cross/bin/${ARCH}-elf-ld
-export CC_FLAGS=-O2 -ffreestanding -mno-red-zone -nostdlib -lgcc -std=c99 -c 
+export CC_FLAGS=-O2 -mno-red-zone -nostdlib -lgcc -static-libgcc -std=c99 -Iinclude -c 
 
 all: arch/${ARCH}/kernel.bin
 

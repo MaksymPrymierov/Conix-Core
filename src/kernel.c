@@ -4,6 +4,7 @@
 void main(int bootloader_inf, multiboot_info_t* loader_struct_addr)
 {
         textGraphickInit();
+        printf("%d", sizeof(short));
         timerPhase(100);
 
         gdtInit();
