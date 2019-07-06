@@ -1,15 +1,12 @@
-define path_
-${O}arch/${ARCH}/$(file)
-endef
+KERNEL_OBJECTS += \
+	out/arch/i686/text_graphic.o \
+	out/arch/i686/kernel.o
 
-arch/${ARCH}/kernel.bin: ${path_}kernel.o ${path_}boot.o ${path_}text_graphic.o
-	${LD} -T link.ld -o ${@} ${^}
-
-arch/${ARCH}/kernel.o: ${path_}kernel.c
+out/arch/i686/kernel.o: arch/i686/kernel.c
 	${CC} ${CC_FLAGS} $^ -o ${@}
 
-arch/${ARCH}/boot.o: ${path_}boot.s
+out/arch/i686/boot.o: arch/i686/boot.s
 	${CC} ${CC_FLAGS} $^ -o ${@}
 
-arch/${ARCH}/text_graphic.o: ${path_}text_graphic.c
+out/arch/i686/text_graphic.o: arch/i686/text_graphic.c
 	${CC} ${CC_FLAGS} $^ -o ${@}

@@ -1,11 +1,21 @@
-export ARCH=i686
-export CC=/usr/local/cross/bin/${ARCH}-elf-gcc
-export LD=/usr/local/cross/bin/${ARCH}-elf-ld
-export CC_FLAGS=-O2 -mno-red-zone -nostdlib -lgcc -static-libgcc -std=c99 -Iinclude -c 
+ifndef ARCH
+	ARCH := i686
+endif
+CC := /usr/local/cross/bin/${ARCH}-elf-gcc
+LD := /usr/local/cross/bin/${ARCH}-elf-ld
+ifndef CC_FLAGS
+	CC_FLAGS := -O2 -mno-red-zone -nostdlib -lgcc -static-libgcc -std=c99 -Iinclude -c
+endif 
 
-all: arch/${ARCH}/kernel.bin
+KERNEL_OBJECTS := arch/${ARCH}/boot.o
 
+all: out/out_check out/arch/${ARCH}/kernel.bin
+
+include Check.mk
 include arch/${ARCH}/Makefile
 
+out/arch/${ARCH}/kernel.bin: out/${KERNEL_OBJECTS}
+	${LD} -T link.ld -o ${@} ${^}
+
 clean:
-	rm -rfv ${O}arch/i686/{*.bin,*.o}
+	rm -rfv ./out
