@@ -1,8 +1,8 @@
 ifndef ARCH
 	ARCH := x86
 endif
-CC := /usr/local/cross/bin/i686-elf-gcc
-LD := /usr/local/cross/bin/i686-elf-ld
+CC := gcc
+LD := ld
 ifndef CC_FLAGS
 	CC_FLAGS := -O2 -mno-red-zone -nostdlib -lgcc -static-libgcc -std=c99 -Iinclude -c
 endif 
