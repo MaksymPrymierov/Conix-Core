@@ -1,10 +1,11 @@
 ifndef ARCH
 	ARCH := x86
 endif
-CC := gcc
-LD := ld
+CC := /usr/local/cross/x86_64-elf/bin/gcc
+ASM := /usr/local/cross/x86_64-elf/bin/x86_64-elf-as
+LD := /usr/local/cross/x86_64-elf/bin/x86_64-elf-ld
 ifndef CC_FLAGS
-	CC_FLAGS := -O2 -mno-red-zone -nostdlib -lgcc -static-libgcc -std=c99 -Iinclude -c
+	CC_FLAGS := -O2 -m32 -mno-red-zone -nostdlib -lgcc -static-libgcc -std=c99 -Iinclude -c
 endif 
 
 KERNEL_OBJECTS := arch/${ARCH}/boot.o
@@ -15,7 +16,7 @@ include Check.mk
 include arch/${ARCH}/Makefile
 
 out/arch/${ARCH}/kernel.bin: out/${KERNEL_OBJECTS}
-	${LD} -T link.ld -o ${@} ${^}
+	${LD} -m elf_i386 -T link.ld -o ${@} ${^}
 
 clean:
 	rm -rfv ./out
