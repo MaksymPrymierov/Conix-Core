@@ -3,8 +3,25 @@
 
 #include <kernel/types.h>
 
-extern void s32_to_string(s32 n, char *s);
-extern void u32_to_string(u32 n, char *s);
+/* 
+ * Convert integer signed numbers to string.
+ */
+extern void snum_to_string(s64 number, u8 base, char *string);
+
+/* 
+ * Convert integer unsigned numbers to string.
+ */
+extern void unum_to_string(u64 number, u8 base, char *string);
+
+/*
+ * Get counts of integer signed numbers.
+ */
+extern size_t snum_counts(s64 number, u8 base);
+
+/*
+ * Get counts of integer unsigned numbers.
+ */
+extern size_t unum_counts(u64 number, u8 base);
 
 /* 
  * Function to determine the length of the string.
