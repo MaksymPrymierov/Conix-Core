@@ -2,7 +2,7 @@
 
 static u16 video_mem[25 * 80];
 
-void main(void)
+int main(void)
 {
 	ssize_t status;
 
@@ -13,5 +13,5 @@ void main(void)
 	printk("kernel: kernel starting...\n");
 
 end:
-        return;
+        return 0;
 }

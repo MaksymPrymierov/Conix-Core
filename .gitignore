@@ -1,4 +1,4 @@
 *.o
 *.bin
-./out
+out/
 tools/build
