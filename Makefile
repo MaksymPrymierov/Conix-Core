@@ -19,7 +19,7 @@ include arch/${ARCH}/Makefile
 include kernel/Makefile
 
 out/arch/${ARCH}/kernel.bin: out/${KERNEL_OBJECTS}
-	${LD} -m elf_i386 -T link.ld -o ${@} ${^}
+	${LD} -m elf_i386 -T arch/${ARCH}/link.ld -o ${@} ${^}
 
 clean:
 	rm -rfv ./out
