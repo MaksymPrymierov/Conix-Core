@@ -1,12 +1,22 @@
+OBJ=out/arch/${ARCH}
+
 KERNEL_OBJECTS += \
-	out/arch/${ARCH}/text_graphic.o \
-	out/arch/${ARCH}/kernel.o
+	${OBJ}/text_graphic.o \
+	${OBJ}/kernel.o \
+	${OBJ}/bios.o \
+	${OBJ}/tty.o
 
-out/arch/${ARCH}/kernel.o: arch/${ARCH}/kernel.c
+${OBJ}/kernel.o: arch/${ARCH}/kernel.c
 	${CC} ${CC_FLAGS} $^ -o ${@}
 
-out/arch/${ARCH}/boot.o: arch/${ARCH}/boot.s
+${OBJ}/boot.o: arch/${ARCH}/boot.s
 	${CC} ${CC_FLAGS} $^ -o ${@}
 
-out/arch/${ARCH}/text_graphic.o: arch/${ARCH}/text_graphic.c
+${OBJ}/text_graphic.o: arch/${ARCH}/text_graphic.c
+	${CC} ${CC_FLAGS} $^ -o ${@}
+
+${OBJ}/bios.o: arch/${ARCH}/bios.c
+	${CC} ${CC_FLAGS} $^ -o ${@}
+
+${OBJ}/tty.o: arch/${ARCH}/tty.c
 	${CC} ${CC_FLAGS} $^ -o ${@}

@@ -6,8 +6,8 @@ ASM := as
 LD := ld
 ifndef CC_FLAGS
 	CC_FLAGS := -O2 -m32 -mno-red-zone -nostdlib -lgcc -static-libgcc \
-		    -std=c99 -Iinclude -c -fno-stack-protector -Wall \
-		    -Werror
+		    -std=c99 -Iinclude -Iarch/${ARCH}/include -c -fno-stack-protector -Wall \
+		    -Werror -fno-builtin
 endif 
 
 KERNEL_OBJECTS := arch/${ARCH}/boot.o
