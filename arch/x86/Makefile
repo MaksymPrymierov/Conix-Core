@@ -5,7 +5,8 @@ KERNEL_OBJECTS += \
 	${OBJ}/kernel.o \
 	${OBJ}/bios.o \
 	${OBJ}/tty.o \
-	${OBJ}/string.o
+	${OBJ}/string.o \
+	${OBJ}/bioss.o
 
 ${OBJ}/kernel.o: arch/${ARCH}/kernel.c
 	${CC} ${CC_FLAGS} $^ -o ${@}
@@ -23,4 +24,7 @@ ${OBJ}/tty.o: arch/${ARCH}/tty.c
 	${CC} ${CC_FLAGS} $^ -o ${@}
 
 ${OBJ}/string.o: arch/${ARCH}/string.s
+	${CC} ${CC_FLAGS} $^ -o ${@}
+
+${OBJ}/bioss.o: arch/${ARCH}/bios.s
 	${CC} ${CC_FLAGS} $^ -o ${@}

@@ -1,4 +1,5 @@
 #include <arch/x86/text_graphic.h>
+#include <tty.h>
 
 static u16 video_mem[25 * 80];
 

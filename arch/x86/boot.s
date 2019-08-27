@@ -1,8 +1,9 @@
-	.set	ALIGN,		1<<0
-	.set	MEMINFO,	1<<1
-	.set	FLAGS,		ALIGN | MEMINFO
-	.set	MAGIC,		0x1BADB002
-	.set 	CHECKSUM, 	-(MAGIC + FLAGS)
+BOOTSEG		= 0x07C0 
+ALIGN		= 1 << 0
+MEMINFO		= 1 << 1
+FLAGS		= ALIGN | MEMINFO
+MAGIC		= 0x1BADB002
+CHECKSUM	= -(MAGIC + FLAGS)
 
 	.section .multiboot
 	.align	4

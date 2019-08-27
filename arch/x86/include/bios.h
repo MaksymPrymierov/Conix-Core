@@ -2,6 +2,7 @@
 #define BIOS_H
 
 #include <kernel/types.h>
+#include <string.h>
 
 struct bios_regs {
         union {
@@ -45,5 +46,27 @@ struct bios_regs {
 };
 
 extern void init_regs_bios(struct bios_regs *regs);
+extern void int_call(u8 int_num, const struct bios_regs *ireq, struct bios_regs *oreq);
+
+static inline u16 ds(void)
+{
+        u16 seg;
+        __asm__ volatile("movw %%ds,%0" : "=rm" (seg));
+        return seg;
+}
+
+static inline u16 fs(void)
+{
+        u16 seg;
+        __asm__ volatile("movw %%fs,%0" : "=rm" (seg));
+        return seg;
+}
+
+static inline u16 gs(void)
+{
+        u16 seg;
+        __asm__ volatile("movw %%gs,%0" : "=rm" (seg));
+        return seg;
+}
 
 #endif
