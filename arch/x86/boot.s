@@ -10,17 +10,11 @@
 	.long 	FLAGS
 	.long 	CHECKSUM
 
-	.section .bss
-	.align 	16
-stack_bottom:
-	.skip 	16384
-stack_top:
-
 	.section .text
 	.global _start
 	.type _start, @function
 _start:
-	mov  	$stack_top, %esp
+	mov  	$stack_start, %esp
 	push 	%ebx
 	push 	%eax
 	call 	main
@@ -28,4 +22,7 @@ _start:
 1: hlt
 	jmp 	1b
 
-.size _start, . - _start
+	.section .data
+stack_bottom:
+	.space 4096
+stack_start:
