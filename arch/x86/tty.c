@@ -1,4 +1,4 @@
-#include <arch/x86/text_graphic.h>
+#include <tty.h>
 #include <stdarg.h>
 
 static u16 *video_mem = (u16*)(u8*)TEXT_GRAPHIC_MEMORY;

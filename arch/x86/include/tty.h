@@ -1,5 +1,5 @@
-#ifndef TEXT_GRAPHIC_H
-#define TEXT_GRAPHIC_H
+#ifndef TTY_H
+#define TTY_H
 
 #include <kernel/types.h>
 
