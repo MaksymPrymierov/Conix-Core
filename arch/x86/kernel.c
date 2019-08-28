@@ -10,7 +10,7 @@ int main(void)
 	if (status) {
 		goto end;
 	}
-	printk("kernel: kernel starting...\n");
+	early_printk("kernel: kernel starting...\n");
 
 end:
         return 0;

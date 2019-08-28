@@ -21,6 +21,6 @@ extern int text_graphic_init(u16* video_buffer);
  *	int printk(const char* form, ...)
  *	Formatted output from the kernel.
  */
-extern int printk(const char* form, ...);
+extern int early_printk(const char* form, ...);
 
 #endif

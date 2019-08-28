@@ -1,5 +1,6 @@
 #include <tty.h>
 #include <stdarg.h>
+#include <kernel/kernel_lib.h>
 
 static u16 *video_mem = (u16*)(u8*)TEXT_GRAPHIC_MEMORY;
 static size_t cursor = 0;
@@ -36,7 +37,9 @@ int text_graphic_init(u16 *vid_buf)
 	video_buffer = vid_buf;
 
 	clear_screen();
-	printk("kernel: text graphic is initialized\n");
+        char *s = "Hello, world";
+	early_printk("kernel: text graphic is initialized\n");
+        early_printk("String: %s\n", s);
 
 	return 0;
 
@@ -44,30 +47,66 @@ err:
 	return ret;
 }
 
-int printk(const char* form, ...)
+static void puts(const char* message)
 {
-	va_list factor;
-	va_start(factor, form);
+        video_buffer[cursor] = TEXT_GRAPHIC_COLOR + 'A';
+        for (size_t i = 0; i < strlen(message); ++i) {
+                switch (message[i]) {
+                case '\n':
+                        cursor = (cursor / TEXT_GRAPHIC_WIDTH + 1) * TEXT_GRAPHIC_WIDTH;
+                        ++i;
+                        break;
+                default:
+                        video_buffer[cursor] = TEXT_GRAPHIC_COLOR + message[i];
+                        ++cursor;
+                }
+        }
+        update_screen();
+}
 
-	for (size_t i = 0; form[i]; ++i) {
-		if (cursor == TEXT_GRAPHIC_CAPACITY) {
-			cursor = TEXT_GRAPHIC_LAST_LINE;
-		}
+static int vfprintf(char* string, char const* fmt, va_list arg)
+{
+        char c;
+        char* tmp_string;
+        int length = 0;
 
-		if (form[i] == '\n') {
-        		cursor = (cursor / TEXT_GRAPHIC_WIDTH + 1) * TEXT_GRAPHIC_WIDTH;
-        		continue;
-		}
+        while ((c = *fmt++)) {
+                if ('%' == c) {
+                        switch (c = *fmt++) {
+                        case '%':
+                                string[length] = '%';
+                                ++length;
+                                break;
+                        case 'c':
+                                string[length] = va_arg(arg, int);
+                                ++length;
+                                break;
+                        case 's':
+                                tmp_string = va_arg(arg, char*);
+                                memcpy(string + length, tmp_string,
+                                        strlen(tmp_string));
+                                length += strlen(tmp_string);
+                                break;
+                        }
+                } else {
+                        string[length] = c;
+                        ++length;
+                }
+        }
 
-		if (form[i] != '%') {
-			video_buffer[cursor] = TEXT_GRAPHIC_COLOR + form[i];
-			++cursor;
-			continue;
-		}
-	}
+	return length;
+}
 
-	update_screen();
-	va_end(factor);
+int early_printk(char const *fmt, ...) {
+        va_list arg;
+        int length;
+        char message[1024];
+        memset(message, 0, 1024);
 
-	return 0;
+        va_start(arg, fmt);
+        length = vfprintf(message, fmt, arg);
+        va_end(arg);
+
+        puts(message);
+        return length;
 }
