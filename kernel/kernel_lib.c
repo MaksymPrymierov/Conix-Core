@@ -98,3 +98,22 @@ size_t strlen(const char *string)
         while (*eos++);
         return (size_t)(eos - string - 1);
 }
+
+void* memset(void *src, int c, size_t n)
+{
+        unsigned char* p = src;
+        while(n--) {
+                *p++ = (unsigned char)c;
+        }
+        return src;
+}
+
+void* memcpy(void *des, void *src, size_t n)
+{
+        unsigned char *p_s = src;
+        unsigned char *p_d = des;
+        while(n--) {
+                *p_d++ = *p_s++;
+        }
+        return src;
+}

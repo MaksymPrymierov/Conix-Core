@@ -28,4 +28,7 @@ extern size_t unum_counts(u64 number, u8 base);
  */
 extern size_t strlen(const char *string);
 
+extern void* memset(void *src, int c, size_t n);
+extern void* memcpy(void *des, void *src, size_t n);
+
 #endif
