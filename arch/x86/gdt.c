@@ -3,7 +3,7 @@
 static struct gdt_entry gdt[5];
 struct gdt_ptr gp;
 
-void create_descriptor(int num, u32 base, u32 limit, u8 access, u8 gran)
+static void create_descriptor(int num, u32 base, u32 limit, u8 access, u8 gran)
 {
         gdt[num].base_low    = (base & 0xFFFF);
         gdt[num].base_middle = (base >> 16) & 0xFF;

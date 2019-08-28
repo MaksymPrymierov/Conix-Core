@@ -7,7 +7,9 @@ KERNEL_OBJECTS += \
 	${OBJ}/tty.o \
 	${OBJ}/kernel.o \
 	${OBJ}/gdt.o \
-	${OBJ}/gdt.s.o
+	${OBJ}/gdt.s.o \
+	${OBJ}/idt.o \
+	${OBJ}/idt.s.o
 
 ${OBJ}/kernel.o: ${SRC}/kernel.c
 	${C_BUILD} $^ -o ${@}
@@ -22,4 +24,10 @@ ${OBJ}/gdt.o: ${SRC}/gdt.c
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/gdt.s.o: ${SRC}/gdt.s
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/idt.o: ${SRC}/idt.c
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/idt.s.o: ${SRC}/idt.s
 	${C_BUILD} $^ -o ${@}

@@ -18,7 +18,6 @@ struct gdt_ptr {
 } __attribute__ ((packed));
 
 extern void gdt_flush(void);
-extern void create_descriptor(int num, u32 base, u32 limit, u8 access, u8 gran);
 extern void gdt_init(void);
 
 #endif
