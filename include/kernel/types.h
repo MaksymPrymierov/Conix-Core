@@ -16,6 +16,9 @@
 
 #define NULL 0
 
+#define intptr_t int
+#define uintptr_t unsigned
+
 /* errors */
 #define NOMEM -1
 

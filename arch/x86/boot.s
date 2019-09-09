@@ -20,9 +20,12 @@ stack_top:
 	.global _start
 	.type _start, @function
 _start:
+	.extern heap_buttom
+	.extern heap_top
+
 	mov  	$stack_top, %esp
-	push 	%ebx
-	push 	%eax
+	push 	$heap_bottom
+	push 	$heap_top 
 	call 	main
 	cli
 1: hlt
