@@ -2,7 +2,19 @@
 #include <gdt.h>
 #include <idt.h>
 
+#include <early_shell.h>
+
 static u16 video_mem[25 * 80];
+
+static struct early_shell_data early_shell_data;
+
+static void init_shell(void)
+{
+        early_shell_data.user_name = "conix-core";
+        early_shell_data.printf = early_printk;
+
+        early_shell_init_session(early_shell_data);
+}
 
 int main(void)
 {
@@ -25,6 +37,8 @@ int main(void)
 
         irq_install();
         early_printk("kernel: irq installed\n");
+
+        init_shell();
 
 end:
         return 0;
