@@ -17,6 +17,7 @@
 #define NULL 0
 
 /* errors */
-#define NOMEM -1
+#define NOMEM 1
+#define INVAL 22
 
 #endif

@@ -1,6 +1,7 @@
 #include <tty.h>
 #include <gdt.h>
 #include <idt.h>
+#include <keyboard.h>
 
 static u16 video_mem[25 * 80];
 
@@ -25,6 +26,11 @@ int main(void)
 
         irq_install();
         early_printk("kernel: irq installed\n");
+
+        status = default_keyboard_init_driver();
+        if (status) {
+                early_printk("keyboard: install default keyboard\n");
+        }
 
 end:
         return 0;
