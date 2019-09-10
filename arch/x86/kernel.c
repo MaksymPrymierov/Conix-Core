@@ -17,7 +17,7 @@ int main(void)
         gdt_init();
         early_printk("kernel: init GDT\n");
         
-        idt_load();
+        idt_install();
         early_printk("kernel: init IDT\n");
 
         isrs_install();
@@ -25,6 +25,8 @@ int main(void)
 
         irq_install();
         early_printk("kernel: irq installed\n");
+
+        while (1);
 
 end:
         return 0;
