@@ -2,26 +2,24 @@
 #include <asm.h>
 #include <idt.h>
 #include <tty.h>
-#include <kernel/types.h>
+
 #include <kernel/kernel_lib.h>
 
-static struct keyboard_t keyboard_t;
-
-int init_keyboard(struct keyboard_t data)
+int init_keyboard(struct keyboard_t* data)
 {
         int ret = 0;
 
-        if (NULL != keyboard_t.init_keyboard) {
-                keyboard_t.init_keyboard();
+        if (NULL != data->init_keyboard) {
+                data->init_keyboard();
         }
 
-        if (NULL == keyboard_t.input_handler) {
+        if (NULL == data->input_handler) {
+                early_printk("%d", data->input_handler);
                 ret = -INVAL;
                 goto err;
         }
 
-        keyboard_t = data;
-        irq_install_handler(1, keyboard_t.input_handler);
+        irq_install_handler(1, data->input_handler);
 
         return 0;
 
@@ -31,16 +29,11 @@ err:
 
 /* Default x86 keyboard driver */
 
-static char buffer[2000];
-static size_t pos = 0;
+static struct queue_char keyboard_queue;
 
 static void default_keyboard_handler(struct regs* regs)
 {
-        buffer[pos] = inb(DEFAULT_KEYBOARD_WRITE_PORT);
-        if (pos >= 2000) {
-                pos = 1999;
-        }
-        ++pos;
+        queue_char_push(&keyboard_queue, inb(DEFAULT_KEYBOARD_WRITE_PORT));
 }
 
 static struct keyboard_t default_keyboard =
@@ -50,13 +43,22 @@ static struct keyboard_t default_keyboard =
         .author = "Maksym Prymierov",
         .device_name = "Default Keyboard",
         .license = "GPL3.0v",
-        .buffer = buffer,
+        .keyboard_queue = &keyboard_queue,
         .input_handler = default_keyboard_handler,
 };
 
 int default_keyboard_init_driver(void)
 {
-        memset(buffer, 0, strlen(buffer));
-        int ret = init_keyboard(default_keyboard);
+        int ret = init_keyboard(&default_keyboard);
+        return ret;
+}
+
+u8 default_keyboard_get_scan_code(void)
+{
+        u8 ret = 0;
+        if (!keyboard_queue.size) {
+                ret = queue_char_show(&keyboard_queue);
+                queue_char_pop(&keyboard_queue);
+        }
         return ret;
 }

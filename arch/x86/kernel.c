@@ -33,7 +33,7 @@ int main(void* heap_top, void* heap_bottom)
         early_printk("kernel: heap installed\n");
         
         status = default_keyboard_init_driver();
-        if (status) {
+        if (!status) {
                 early_printk("keyboard: install default keyboard\n");
         }
 
