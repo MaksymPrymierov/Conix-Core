@@ -10,7 +10,9 @@ KERNEL_OBJECTS += \
 	${OBJ}/gdt.s.o \
 	${OBJ}/idt.o \
 	${OBJ}/idt.s.o \
-	${OBJ}/early_shell.o
+	${OBJ}/early_shell.o \
+	${OBJ}/keyboard.o \
+	${OBJ}/heap.o
 
 ${OBJ}/kernel.o: ${SRC}/kernel.c
 	${C_BUILD} $^ -o ${@}
@@ -34,4 +36,10 @@ ${OBJ}/idt.s.o: ${SRC}/idt.s
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/early_shell.o: ${SRC}/early_shell.c
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/keyboard.o: ${SRC}/keyboard.c
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/heap.o: ${SRC}/heap.c
 	${C_BUILD} $^ -o ${@}

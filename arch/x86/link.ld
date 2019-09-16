@@ -19,4 +19,14 @@ SECTIONS
     *(COMMON)
     *(.bss)
   }
+
+  . = 0x01000000;
+  heap_bottom = .;
+  .heap         :
+  {
+    *(.heap)
+  }
+  . = ALIGN(50M);
+  heap_top = .;
+
 }
