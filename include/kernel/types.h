@@ -16,8 +16,10 @@
 
 #define NULL 0
 
-/* errors */
+#define intptr_t int
+#define uintptr_t unsigned
+
 #define NOMEM 1
-#define INVAL 22
+#define INVAL 2
 
 #endif

@@ -89,6 +89,8 @@ static int vfprintf(char* string, char const* fmt, va_list arg)
                         case 'u':
                         case 'x':
                         case 'o':
+                        case 'b':
+                                memset(tmp_number, 0, 65);
                                 if (c == 'u') {
                                         unum_to_string(va_arg(arg, int), 
                                                        10, tmp_number);
@@ -101,6 +103,9 @@ static int vfprintf(char* string, char const* fmt, va_list arg)
                                 } else if (c == 'o') {
                                         snum_to_string(va_arg(arg, int),
                                                        8, tmp_number);
+                                } else if (c == 'b') {
+                                        snum_to_string(va_arg(arg, int),
+                                                       2, tmp_number);
                                 }
                                 memcpy(string + length, tmp_number,
                                        strlen(tmp_number));
