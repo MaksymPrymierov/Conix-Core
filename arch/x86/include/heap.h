@@ -14,6 +14,8 @@ struct heap_item
 };
 
 extern void heap_init(void* heap_top, void* heap_bottom);
+extern void* sbrk(intptr_t mem);
 extern void* hkmalloc(size_t mem);
+extern void hkfree(void *mem);
 
 #endif

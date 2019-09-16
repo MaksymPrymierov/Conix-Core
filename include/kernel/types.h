@@ -20,6 +20,6 @@
 #define uintptr_t unsigned
 
 /* errors */
-#define NOMEM -1
+#define NOMEM 1
 
 #endif
