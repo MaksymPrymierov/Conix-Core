@@ -2,7 +2,6 @@
 #include <tty.h>
 #include <kernel/kernel_lib.h>
 
-#define DEBUG 0
 #define dbg early_printk 
 
 static struct heap_item* heap_t;
@@ -13,6 +12,7 @@ static struct heap_item* last_item;
 static uintptr_t heap_top_adress;
 static uintptr_t heap_bottom_adress;
 static size_t heap_size;
+static _Bool debug = 0;
 
 void heap_init(void* heap_top, void* heap_bottom)
 {
@@ -121,7 +121,7 @@ void* hkmalloc(size_t mem)
         }
 
 ret:
-        if (DEBUG) {
+        if (debug) {
                 dbg("New Memory: %u\n", ret);
         }
 

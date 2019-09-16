@@ -3,6 +3,7 @@
 #include <idt.h>
 #include <keyboard.h>
 #include <heap.h>
+#include <kernel/queue.h>
 
 static u16 video_mem[25 * 80];
 
