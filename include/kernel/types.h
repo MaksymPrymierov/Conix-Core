@@ -21,5 +21,6 @@
 
 /* errors */
 #define NOMEM 1
+#define NOINI 2
 
 #endif

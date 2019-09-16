@@ -1,5 +1,14 @@
-KERNEL_OBJECTS += \
-	out/kernel/kernel_lib.o
+OBJ := out/kernel
+SRC := kernel
+LOCAL_CC_FLAGS := -Iarch/${ARCH}/include
+C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 
-out/kernel/kernel_lib.o: kernel/kernel_lib.c
-	${CC} ${CC_FLAGS} $^ -o ${@}
+KERNEL_OBJECTS += \
+	${OBJ}/kernel_lib.o \
+	${OBJ}/queue.o
+
+${OBJ}/kernel_lib.o: ${SRC}/kernel_lib.c
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/queue.o: ${SRC}/queue.c
+	${C_BUILD} $^ -o ${@}
