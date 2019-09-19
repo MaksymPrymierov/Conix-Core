@@ -15,7 +15,7 @@ static void init_shell(void)
         early_shell_data.user_name = "conix-core";
         early_shell_data.printf = early_printk;
 
-        early_shell_init_session(early_shell_data);
+        early_shell_init_session(&early_shell_data);
 }
 
 int main(void* heap_top, void* heap_bottom)

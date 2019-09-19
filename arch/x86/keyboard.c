@@ -56,7 +56,7 @@ int default_keyboard_init_driver(void)
 u8 default_keyboard_get_scan_code(void)
 {
         u8 ret = 0;
-        if (!keyboard_queue.size) {
+        if (keyboard_queue.size) {
                 ret = queue_char_show(&keyboard_queue);
                 queue_char_pop(&keyboard_queue);
         }
