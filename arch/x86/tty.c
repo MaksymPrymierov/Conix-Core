@@ -47,13 +47,17 @@ err:
 
 static void puts(const char* message)
 {
-        video_buffer[cursor] = TEXT_GRAPHIC_COLOR + 'A';
         for (size_t i = 0; i < strlen(message); ++i) {
                 switch (message[i]) {
                 case '\n':
-                        cursor = (cursor / TEXT_GRAPHIC_WIDTH + 1) * TEXT_GRAPHIC_WIDTH;
+			cursor = (cursor / TEXT_GRAPHIC_WIDTH + 1) * TEXT_GRAPHIC_WIDTH;
                         break;
+		case '\b':
+			--cursor;
+			video_buffer[cursor] = ' ';
+			break;
                 default:
+		        video_buffer[cursor] = TEXT_GRAPHIC_COLOR + 'A';
                         video_buffer[cursor] = TEXT_GRAPHIC_COLOR + message[i];
                         ++cursor;
                 }
@@ -92,7 +96,7 @@ static int vfprintf(char* string, char const* fmt, va_list arg)
                         case 'b':
                                 memset(tmp_number, 0, 65);
                                 if (c == 'u') {
-                                        unum_to_string(va_arg(arg, int), 
+                                        unum_to_string(va_arg(arg, int),
                                                        10, tmp_number);
                                 } else if (c == 'd') {
                                         snum_to_string(va_arg(arg, int),
