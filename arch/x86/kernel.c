@@ -4,6 +4,7 @@
 #include <keyboard.h>
 #include <heap.h>
 #include <kernel/queue.h>
+#include <kernel/string.h>
 
 #include <early_shell.h>
 
@@ -49,8 +50,6 @@ int main(void* heap_top, void* heap_bottom)
         }
 
         init_shell();
-
-        while (1);
 
 end:
         return 0;

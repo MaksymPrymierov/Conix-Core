@@ -122,7 +122,7 @@ void* hkmalloc(size_t mem)
 
 ret:
         if (debug) {
-                dbg("New Memory: %u\n", ret);
+                dbg("Allote a new memory: %u\n", ret);
         }
 
         return ret;
@@ -137,5 +137,9 @@ void hkfree(void* mem)
         } else {
                 item->next->last = NULL;
                 heap_b = item->next;
+        }
+
+        if (debug) {
+                dbg("Free the memory on adress: %u\n", mem);
         }
 }

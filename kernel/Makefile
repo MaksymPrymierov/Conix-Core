@@ -5,10 +5,14 @@ C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 
 KERNEL_OBJECTS += \
 	${OBJ}/kernel_lib.o \
-	${OBJ}/queue.o
+	${OBJ}/queue.o \
+	${OBJ}/string.o
 
 ${OBJ}/kernel_lib.o: ${SRC}/kernel_lib.c
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/queue.o: ${SRC}/queue.c
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/string.o: ${SRC}/string.c
 	${C_BUILD} $^ -o ${@}
