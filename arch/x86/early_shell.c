@@ -75,6 +75,7 @@ static void processing_key_code(u8 code)
                 queue_char_pop(&character_buffer);
                 early_shell_data->printf("\b");
         } else if (code == LEFT_ENTER) {
+                queue_char_clear(&character_buffer);
                 early_shell_data->printf("\n%s # ",
                         early_shell_data->user_name);
         } else if (code == LEFT_SHIFT) {

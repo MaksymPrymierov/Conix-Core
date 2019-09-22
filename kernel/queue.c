@@ -76,3 +76,11 @@ error:
         early_printk("stack: error: stack is not initialized\n");
         return ret;
 }
+
+void queue_char_clear(struct queue_char* q)
+{
+        size_t size = q->size;
+        for (size_t i = 0; i < size; ++i) {
+                queue_char_pop(q);
+        }
+}

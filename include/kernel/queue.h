@@ -20,5 +20,6 @@ extern void queue_char_init(struct queue_char* q);
 extern int queue_char_push(struct queue_char* q, char data);
 extern void queue_char_pop(struct queue_char* q);
 extern char queue_char_show(struct queue_char* q);
+extern void queue_char_clear(struct queue_char* q);
 
 #endif
