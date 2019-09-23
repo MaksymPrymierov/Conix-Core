@@ -3,10 +3,12 @@
 #include <idt.h>
 #include <keyboard.h>
 #include <heap.h>
+#include <early_shell.h>
+#include <time.h>
+
 #include <kernel/queue.h>
 #include <kernel/string.h>
 
-#include <early_shell.h>
 
 static u16 video_mem[25 * 80];
 static struct early_shell_data early_shell_data;
@@ -48,6 +50,8 @@ int main(void* heap_top, void* heap_bottom)
         if (!status) {
                 early_printk("keyboard: install default keyboard\n");
         }
+
+        pit_install();
 
         init_shell();
 
