@@ -80,6 +80,22 @@ end:
         return ret;
 }
 
+void string_prepend(struct string *s)
+{
+        size_t size = strlen(s->data);
+        if (size) {
+                s->data[size - 1] = '\0';
+        }
+}
+
+int string_add(struct string* s, char c)
+{
+        int ret = 0;
+        char string[2] = {c, '\0'};
+        ret = string_append(s, string);
+        return ret;
+}
+
 _Bool string_cmp_native(struct string* str1, const char* str2)
 {
         _Bool ret = 1;
@@ -111,3 +127,10 @@ void string_delete(struct string* s)
         hkfree(s->data);
         s->size = 0;
 }
+
+char string_get_last(struct string* s)
+{
+        return s->data[strlen(s->data) - 1];
+}
+
+
