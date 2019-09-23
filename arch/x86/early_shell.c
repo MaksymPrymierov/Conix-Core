@@ -1,5 +1,7 @@
 #include <early_shell.h>
 #include <keyboard.h>
+#include <kernel/string.h>
+#include <kernel/kernel_lib.h>
 
 /* General simple keyboard */
 #define ESC                     0x01
@@ -37,49 +39,59 @@ static const char letters_low_case_part2[] = "asdfghjkl;'`";
 static const char letters_apper_case_part2[] = "ASDFGHJKL:\"~";
 static const char letters_low_case_part3[] = "\\zxcvbnm,./";
 static const char letters_apper_case_part3[] = "|ZXCVBNM<>?";
-static struct queue_char character_buffer;
+static struct string character_buffer;
 static _Bool lowCase = 1;
+static _Bool print = 0;
 
 static void processing_key_code(u8 code)
 {
+        print = 1;
         if ((code >= DIGIT_START && code <= DIGIT_END) ||
                 (code - RELEASE_KEY >= DIGIT_START &&
                 code - RELEASE_KEY <= DIGIT_END)) {
-                queue_char_push(&character_buffer,
+                string_add(&character_buffer,
                         lowCase ? digit_low_case[code - DIGIT_START] :
                         digit_apper_case[code - DIGIT_START]);
         } else if (code >= LETTER_START_PART1 &&
                 code <= LETTER_END_PART1) {
-                queue_char_push(&character_buffer,
+                string_add(&character_buffer,
                         lowCase ?
                         letters_low_case_part1[code - LETTER_START_PART1] :
                         letters_apper_case_part1[code -
                         LETTER_START_PART1]);
         } else if (code >= LETTER_START_PART2 &&
                 code <= LETTER_END_PART2) {
-                queue_char_push(&character_buffer,
+                string_add(&character_buffer,
                         lowCase ?
                         letters_low_case_part2[code - LETTER_START_PART2] :
                         letters_apper_case_part2[code -
                         LETTER_START_PART2]);
         } else if (code >= LETTER_START_PART3 &&
                 code <= LETTER_END_PART3) {
-                queue_char_push(&character_buffer,
+                string_add(&character_buffer,
                         lowCase ?
                         letters_low_case_part3[code - LETTER_START_PART3] :
                         letters_apper_case_part3[code -
                         LETTER_START_PART3]);
         } else if (code == SPACE) {
-                queue_char_push(&character_buffer, ' ');
+                string_add(&character_buffer, ' ');
         } else if (code == BACKSPACE) {
-                queue_char_pop(&character_buffer);
+                string_prepend(&character_buffer);
                 early_shell_data->printf("\b");
+                print = 0;
         } else if (code == LEFT_ENTER) {
-                queue_char_clear(&character_buffer);
+                if (string_cmp_native(&character_buffer, "test")) {
+                        early_shell_data->printf("\nConix-Core test is successful");
+                }
+                string_clear(&character_buffer);
                 early_shell_data->printf("\n%s # ",
                         early_shell_data->user_name);
+                print = 0;
         } else if (code == LEFT_SHIFT) {
                 lowCase = 0;
+                print = 0;
+        } else {
+                print = 0;
         }
 }
 
@@ -103,21 +115,20 @@ static void execute_session(void)
                 scan_code = default_keyboard_get_scan_code();
                 if (scan_code >= ESC && scan_code < RELEASE_KEY) {
                         processing_key_code(scan_code);
+                        if (strlen(character_buffer.data) > 0 && print) {
+                                early_shell_data->printf("%c",
+                                string_get_last(&character_buffer));
+                        }
                 } else if (scan_code >= RELEASE_KEY) {
                         releasing_key_code(scan_code);
                 }
 
-                if (character_buffer.size > 0) {
-                        early_shell_data->printf("%c",
-                                queue_char_show(&character_buffer));
-                        queue_char_pop(&character_buffer);
-                }
         }
 }
 
 void early_shell_init_session(struct early_shell_data* data)
 {
-        queue_char_init(&character_buffer);
+        string_init(&character_buffer, 256);
         early_shell_data = data;
         echo("kernel: init early shell\n");
 
