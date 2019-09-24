@@ -2,10 +2,11 @@
 #include <asm.h>
 #include <tty.h>
 #include <idt.h>
+#include <theads.h>
 
 static void pit_handler(struct regs *r)
 {
-//        early_printk("+");
+        early_printk("+");
 }
 
 void pit_install(void)

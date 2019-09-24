@@ -8,7 +8,7 @@
 
 #include <kernel/queue.h>
 #include <kernel/string.h>
-
+#include <theads.h>
 
 static u16 video_mem[25 * 80];
 static struct early_shell_data early_shell_data;
@@ -50,8 +50,11 @@ int main(void* heap_top, void* heap_bottom)
         if (!status) {
                 early_printk("keyboard: install default keyboard\n");
         }
-
+        
         pit_install();
+        thead_init(1);
+        thead_init(2);
+        thead_init(0);
 
         init_shell();
 
