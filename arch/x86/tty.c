@@ -45,6 +45,15 @@ err:
 	return ret;
 }
 
+static void scroll_down(void)
+{
+        memmove(video_buffer, video_buffer + TEXT_GRAPHIC_WIDTH,
+                        (TEXT_GRAPHIC_CAPACITY - TEXT_GRAPHIC_WIDTH) * 2);
+        memset((video_buffer + TEXT_GRAPHIC_CAPACITY)
+                - TEXT_GRAPHIC_WIDTH, 0, TEXT_GRAPHIC_WIDTH * 2);
+        cursor = (cursor / TEXT_GRAPHIC_WIDTH - 1) * TEXT_GRAPHIC_WIDTH; 
+}
+
 static void puts(const char* message)
 {
         for (size_t i = 0; i < strlen(message); ++i) {
@@ -57,7 +66,9 @@ static void puts(const char* message)
 			video_buffer[cursor] = ' ';
 			break;
                 default:
-		        video_buffer[cursor] = TEXT_GRAPHIC_COLOR + 'A';
+                        if (cursor >= TEXT_GRAPHIC_CAPACITY) {
+                                scroll_down();
+                        }
                         video_buffer[cursor] = TEXT_GRAPHIC_COLOR + message[i];
                         ++cursor;
                 }

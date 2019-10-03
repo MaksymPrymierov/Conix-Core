@@ -8,7 +8,7 @@
 
 #include <kernel/queue.h>
 #include <kernel/string.h>
-
+#include <kernel/test.h>
 
 static u16 video_mem[25 * 80];
 static struct early_shell_data early_shell_data;

@@ -1,4 +1,5 @@
 #include <kernel/kernel_lib.h>
+#include <kernel/test.h>
 
 #define num_counts(number, base) \
         size_t count = number == 0 ? 1 : 0; \
@@ -116,4 +117,22 @@ void* memcpy(void *des, void *src, size_t n)
                 *p_d++ = *p_s++;
         }
         return src;
+}
+
+void* memmove(void *dest, const void *src, size_t n)
+{
+    char* d = (char*)dest;
+    const char* s = (const char*)src;
+
+    if (s < d) {
+        s += n;
+        d += n;
+        while (n--)
+            *--d = *--s;
+    } else {
+        while (n--)
+            *d++ = *s++;
+    }
+
+    return dest;
 }
