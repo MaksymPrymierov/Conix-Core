@@ -1,4 +1,5 @@
 CONIX CORE
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8a3e9fce3c0c43bab84ea062639b8685)](https://www.codacy.com/manual/primerovmax/Conix-Core?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=connor41/Conix-Core&amp;utm_campaign=Badge_Grade)
 ==========
 
   This is the monolithic core of the operating system under the x86 architecture.
