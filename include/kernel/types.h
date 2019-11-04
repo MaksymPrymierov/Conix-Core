@@ -19,6 +19,8 @@
 #define intptr_t int
 #define uintptr_t unsigned
 
+#define mode_t u16
+
 #define NOMEM 1
 #define INVAL 2
 #define NOINI 3

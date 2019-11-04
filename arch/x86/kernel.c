@@ -5,6 +5,7 @@
 #include <heap.h>
 #include <early_shell.h>
 #include <time.h>
+#include <ramfs.h>
 
 #include <kernel/queue.h>
 #include <kernel/string.h>
@@ -52,6 +53,9 @@ int main(void* heap_top, void* heap_bottom)
         }
 
         pit_install();
+        
+        init_early_kernel_ramfs();
+        early_printk("fs: early kernel ramfs has initialized\n");
 
         init_shell();
 

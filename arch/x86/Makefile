@@ -14,7 +14,8 @@ KERNEL_OBJECTS += \
 	${OBJ}/keyboard.o \
 	${OBJ}/heap.o \
 	${OBJ}/asm.o \
-	${OBJ}/time.o
+	${OBJ}/time.o \
+	${OBJ}/ramfs.o
 
 ${OBJ}/kernel.o: ${SRC}/kernel.c
 	${C_BUILD} $^ -o ${@}
@@ -50,4 +51,7 @@ ${OBJ}/asm.o: ${SRC}/asm.c
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/time.o: ${SRC}/time.c
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/ramfs.o: ${SRC}/ramfs.c
 	${C_BUILD} $^ -o ${@}
