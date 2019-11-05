@@ -16,7 +16,7 @@ all: out/out_check out/arch/${ARCH}/kernel.bin
 
 include Check.mk
 include arch/${ARCH}/Makefile
-#include kernel/Makefile
+include kernel/Makefile
 
 out/arch/${ARCH}/kernel.bin: out/${KERNEL_OBJECTS}
 	${LD} -m elf_i386 -T arch/${ARCH}/link.ld -o ${@} ${^}
