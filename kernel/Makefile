@@ -5,8 +5,12 @@ C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 
 KERNEL_OBJECTS += \
 	${OBJ}/kernel_lib.o \
+	${OBJ}/memory.o \
 
 ${OBJ}/kernel_lib.o: ${SRC}/kernel_lib.cpp
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/memory.o: ${SRC}/memory.cpp
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/queue.o: ${SRC}/queue.c

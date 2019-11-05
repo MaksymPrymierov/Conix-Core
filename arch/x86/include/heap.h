@@ -11,5 +11,3 @@ struct heap_node
 };
 
 void heap_init(void* heap_top, void* heap_bottom);
-void* sbrk(uintptr_t mem);
-void* malloc(size_t mem);

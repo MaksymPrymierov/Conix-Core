@@ -43,7 +43,7 @@ ${OBJ}/early_shell.o: ${SRC}/early_shell.c
 ${OBJ}/keyboard.o: ${SRC}/keyboard.c
 	${C_BUILD} $^ -o ${@}
 
-${OBJ}/heap.o: ${SRC}/heap.c
+${OBJ}/heap.o: ${SRC}/heap.cpp
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/asm.o: ${SRC}/asm.c
