@@ -1,6 +1,9 @@
 #include <tty.h>
 #include <kernel/kernel_lib.h>
 
+static u16 buffer[2000];
+static size_t cursor;
+
 tty::tty()
 {
         memory = reinterpret_cast<u16*>(memory_address);

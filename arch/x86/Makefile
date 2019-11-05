@@ -8,12 +8,12 @@ KERNEL_OBJECTS += \
 	${OBJ}/kernel.o \
 	${OBJ}/gdt.o \
 	${OBJ}/gdt.s.o \
-#	${OBJ}/idt.o \
-#	${OBJ}/idt.s.o \
+	${OBJ}/idt.o \
+	${OBJ}/idt.s.o \
+	${OBJ}/asm.o \
 #	${OBJ}/early_shell.o \
 #	${OBJ}/keyboard.o \
 #	${OBJ}/heap.o \
-#	${OBJ}/asm.o \
 #	${OBJ}/time.o
 
 ${OBJ}/kernel.o: ${SRC}/kernel.cpp

@@ -31,8 +31,6 @@ public:
 
 private:
         u16 *memory; 
-        u16 buffer[capacity];
-        size_t cursor;
 
         void update();
         void scroll_down();

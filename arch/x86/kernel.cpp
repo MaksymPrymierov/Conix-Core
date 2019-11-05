@@ -1,8 +1,7 @@
 #include <tty.h>
 #include <gdt.h>
-/*
 #include <idt.h>
-#include <keyboard.h>
+/*#include <keyboard.h>
 #include <heap.h>
 #include <early_shell.h>
 #include <time.h>
@@ -29,16 +28,17 @@ int main(void* heap_top, void* heap_bottom)
 
         gdt_init();
         log << "gdt: GDT tables has been initialized.\n";
-/*        
+        
         idt_install();
-        early_printk("kernel: init IDT\n");
+        log << "idt: IDT tables has been installed.\n";
 
         isrs_install();
-        early_printk("kernel: isrs installed\n");
+        log << "idt: ISR tables has been installed.\n";
 
         irq_install();
-        early_printk("kernel: irq installed\n");
+        log << "idt: IRQ tables has been installed.\n";
 
+/*
         heap_init(heap_top, heap_bottom);
         early_printk("kernel: heap installed\n");
         

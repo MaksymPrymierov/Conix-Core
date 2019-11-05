@@ -99,8 +99,8 @@ void isrs_install()
 void fault_handler(struct regs *r)
 {
         if (r->int_no < 32) {
-                early_printk("Exception! System Halter! %s\n",
-                              exception_messages[r->int_no]);
+                tty out;
+                out << "idt: Exception! System Halter!" << exception_messages[r->int_no];
                 for (;;);
         }
 }
