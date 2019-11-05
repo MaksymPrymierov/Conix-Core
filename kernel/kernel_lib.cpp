@@ -6,3 +6,40 @@ size_t strlen(const char *string)
         while (*eos++);
         return (size_t)(eos - string - 1);
 }
+
+void* memset(void *src, int c, size_t n)
+{
+        unsigned char* p = static_cast<unsigned char*>(src);
+        while(n--) {
+                *p++ = (unsigned char)c;
+        }
+        return src;
+}
+
+void* memcpy(void *des, void *src, size_t n)
+{
+        unsigned char *p_s = static_cast<unsigned char*>(src);
+        unsigned char *p_d = static_cast<unsigned char*>(des);
+        while(n--) {
+                *p_d++ = *p_s++;
+        }
+        return src;
+}
+
+void* memmove(void *dest, const void *src, size_t n)
+{
+    char* d = (char*)dest;
+    const char* s = (const char*)src;
+
+    if (s < d) {
+        s += n;
+        d += n;
+        while (n--)
+            *--d = *--s;
+    } else {
+        while (n--)
+            *d++ = *s++;
+    }
+
+    return dest;
+}

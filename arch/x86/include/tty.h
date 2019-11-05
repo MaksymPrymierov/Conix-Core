@@ -4,6 +4,18 @@
 
 class tty
 {
+private:
+        class stream
+        {
+        public:
+                stream(tty *t);
+
+                stream operator<<(const char* string);
+
+        private:
+                tty *tt;
+        };
+
 public:
         static const constexpr u16 height = 25;
         static const constexpr u16 width = 80;
@@ -14,11 +26,15 @@ public:
 
         tty();
         void clear();
+        
+        stream operator<<(const char* string);
 
 private:
         u16 *memory; 
         u16 buffer[capacity];
+        size_t cursor;
 
         void update();
-        void print_string(const char *string);
+        void scroll_down();
+        void print_string(const char *string); 
 };

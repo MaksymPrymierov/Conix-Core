@@ -1,4 +1,5 @@
 #include <tty.h>
+
 /*#include <gdt.h>
 #include <idt.h>
 #include <keyboard.h>
@@ -24,6 +25,7 @@ static void init_shell(void)
 int main(void* heap_top, void* heap_bottom)
 {
         tty log;
+        log << "tty: Text graphics has initialized.\n";
 
 /*	ssize_t status;
 

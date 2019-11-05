@@ -1,4 +1,5 @@
 #include <tty.h>
+#include <kernel/kernel_lib.h>
 
 tty::tty()
 {
@@ -22,23 +23,47 @@ void tty::update()
 	}
 }
 
+void tty::scroll_down()
+{
+        memmove(buffer, buffer + width, (capacity - width) * 2);
+        memset((buffer + capacity) - width, 0, width * 2);
+        cursor = (cursor / width - 1) * width; 
+}
+
 void tty::print_string(const char *string)
 {
-      /*  for (size_t i = 0; i < strlen(message); ++i) {
-                switch (message[i]) {
+        for (size_t i = 0; i < strlen(string); ++i) {
+                switch (string[i]) {
                 case '\n':
-			cursor = (cursor / TEXT_GRAPHIC_WIDTH + 1) * TEXT_GRAPHIC_WIDTH;
+			cursor = (cursor / width + 1) * width;
                         break;
 		case '\b':
 			--cursor;
-			video_buffer[cursor] = ' ';
+			buffer[cursor] = ' ';
 			break;
                 default:
-                        if (cursor >= TEXT_GRAPHIC_CAPACITY) {
+                        if (cursor >= capacity) {
                                 scroll_down();
                         }
-                        video_buffer[cursor] = TEXT_GRAPHIC_COLOR + message[i];
+                        buffer[cursor] = color + string[i];
                         ++cursor;
                 }
-        } */
+        }
+        update();
+}
+
+tty::stream tty::operator<<(const char* string)
+{
+        print_string(string);
+        return stream(this);
+}
+
+tty::stream::stream(tty *t) :
+        tt(t)
+{  }
+
+tty::stream tty::stream::operator<<(const char* string)
+{
+        tt->print_string(string);
+        return stream(tt);
 }
