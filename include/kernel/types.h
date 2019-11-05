@@ -20,7 +20,7 @@
 #define uintptr_t unsigned
 #define _Bool bool
 
-#define NOMEM 1
+#define ENOMEM 1
 #define INVAL 2
 #define NOINI 3
 

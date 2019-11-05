@@ -1,8 +1,8 @@
 #include <tty.h>
 #include <gdt.h>
 #include <idt.h>
-/*#include <keyboard.h>
 #include <heap.h>
+/*#include <keyboard.h>
 #include <early_shell.h>
 #include <time.h>
 
@@ -38,10 +38,10 @@ int main(void* heap_top, void* heap_bottom)
         irq_install();
         log << "idt: IRQ tables has been installed.\n";
 
-/*
         heap_init(heap_top, heap_bottom);
-        early_printk("kernel: heap installed\n");
-        
+        log << "memory: Heap has been initialized.\n";
+
+     /*   
         status = default_keyboard_init_driver();
         if (!status) {
                 early_printk("keyboard: install default keyboard\n");

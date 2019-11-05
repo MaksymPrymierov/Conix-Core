@@ -11,9 +11,9 @@ KERNEL_OBJECTS += \
 	${OBJ}/idt.o \
 	${OBJ}/idt.s.o \
 	${OBJ}/asm.o \
+	${OBJ}/heap.o \
 #	${OBJ}/early_shell.o \
 #	${OBJ}/keyboard.o \
-#	${OBJ}/heap.o \
 #	${OBJ}/time.o
 
 ${OBJ}/kernel.o: ${SRC}/kernel.cpp
