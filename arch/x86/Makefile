@@ -6,8 +6,8 @@ C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 KERNEL_OBJECTS += \
 	${OBJ}/tty.o \
 	${OBJ}/kernel.o \
-#	${OBJ}/gdt.o \
-#	${OBJ}/gdt.s.o \
+	${OBJ}/gdt.o \
+	${OBJ}/gdt.s.o \
 #	${OBJ}/idt.o \
 #	${OBJ}/idt.s.o \
 #	${OBJ}/early_shell.o \

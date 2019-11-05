@@ -1,6 +1,6 @@
 #include <tty.h>
-
-/*#include <gdt.h>
+#include <gdt.h>
+/*
 #include <idt.h>
 #include <keyboard.h>
 #include <heap.h>
@@ -25,19 +25,11 @@ static void init_shell(void)
 int main(void* heap_top, void* heap_bottom)
 {
         tty log;
-        log << "tty: Text graphics has initialized.\n";
+        log << "tty: Text graphics has been initialized.\n";
 
-/*	ssize_t status;
-
-	status = text_graphic_init(video_mem);
-	if (status) {
-		goto end;
-	}
-	early_printk("kernel: kernel starting...\n");
-        
         gdt_init();
-        early_printk("kernel: init GDT\n");
-        
+        log << "gdt: GDT tables has been initialized.\n";
+/*        
         idt_install();
         early_printk("kernel: init IDT\n");
 
