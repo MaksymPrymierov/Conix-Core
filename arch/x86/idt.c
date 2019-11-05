@@ -112,7 +112,7 @@ static void *irq_routines[16] = {
 
 void irq_install_handler(u32 irq, void (*handler) (struct regs *r))
 {
-        irq_routines[irq] = handler;
+        irq_routines[irq] = (void*)handler;
 }
 
 void irq_unintall_handler(u32 irq)
@@ -166,7 +166,7 @@ void irq_handler(struct regs *r)
 {
         void (*handler) (struct regs *r);
 
-        handler = irq_routines[r->int_no - 32];
+        handler = (void (*)(regs*))irq_routines[r->int_no - 32];
         if (handler) {
                 handler(r);
         }

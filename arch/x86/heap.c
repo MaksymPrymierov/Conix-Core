@@ -12,12 +12,12 @@ static struct heap_item* last_item;
 static uintptr_t heap_top_adress;
 static uintptr_t heap_bottom_adress;
 static size_t heap_size;
-static _Bool debug = 0;
+static bool debug = 0;
 
 void heap_init(void* heap_top, void* heap_bottom)
 {
-        heap_t = heap_top;
-        heap_b = heap_bottom;
+        heap_t = (heap_item*)heap_top;
+        heap_b = (heap_item*)heap_bottom;
         last_item = heap_b;
 
         heap_top_adress = (uintptr_t)heap_top;
@@ -55,7 +55,7 @@ void* sbrk(intptr_t mem)
                         goto ret;
                 } else {
                         if ((void*)ret != last_item) {
-                                ret = (intptr_t)(((struct heap_item*)ret)
+                                ret = (uintptr_t)(((struct heap_item*)ret)
                                       ->next);
                                 continue;
                         }

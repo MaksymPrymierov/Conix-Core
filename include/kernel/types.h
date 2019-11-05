@@ -18,6 +18,7 @@
 
 #define intptr_t int
 #define uintptr_t unsigned
+#define _Bool bool
 
 #define NOMEM 1
 #define INVAL 2

@@ -17,7 +17,7 @@ struct gdt_ptr {
         u32 base;
 } __attribute__ ((packed));
 
-extern void gdt_flush(void);
+extern "C" void gdt_flush(void);
 extern void gdt_init(void);
 
 #endif

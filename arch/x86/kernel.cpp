@@ -1,5 +1,5 @@
 #include <tty.h>
-#include <gdt.h>
+/*#include <gdt.h>
 #include <idt.h>
 #include <keyboard.h>
 #include <heap.h>
@@ -8,9 +8,9 @@
 
 #include <kernel/queue.h>
 #include <kernel/string.h>
-#include <kernel/test.h>
+#include <kernel/test.h> */
 
-static u16 video_mem[25 * 80];
+/*static u16 video_mem[25 * 80];
 static struct early_shell_data early_shell_data;
 
 static void init_shell(void)
@@ -19,11 +19,13 @@ static void init_shell(void)
         early_shell_data.printf = early_printk;
 
         early_shell_init_session(&early_shell_data);
-}
+} */
 
 int main(void* heap_top, void* heap_bottom)
 {
-	ssize_t status;
+        tty log;
+
+/*	ssize_t status;
 
 	status = text_graphic_init(video_mem);
 	if (status) {
@@ -53,8 +55,7 @@ int main(void* heap_top, void* heap_bottom)
 
         pit_install();
 
-        init_shell();
+        init_shell(); */
 
-end:
         return 0;
 }

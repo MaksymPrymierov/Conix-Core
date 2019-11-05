@@ -40,8 +40,8 @@ static const char letters_apper_case_part2[] = "ASDFGHJKL:\"~";
 static const char letters_low_case_part3[] = "\\zxcvbnm,./";
 static const char letters_apper_case_part3[] = "|ZXCVBNM<>?";
 static struct string character_buffer;
-static _Bool lowCase = 1;
-static _Bool print = 0;
+static bool lowCase = 1;
+static bool print = 0;
 
 static void processing_key_code(u8 code)
 {

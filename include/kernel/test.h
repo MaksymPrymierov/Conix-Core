@@ -11,7 +11,7 @@
                 early_printk("OK: file %s, line %d, function %s\n", __FILE__, __LINE__, __FUNCTION__); \
         }
 
-extern _Bool ASSERT_OK(int n);
+extern bool ASSERT_OK(int n);
 
 extern void run_string_test(void);
 extern void run_queue_test(void);

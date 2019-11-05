@@ -6,23 +6,23 @@ C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 KERNEL_OBJECTS += \
 	${OBJ}/tty.o \
 	${OBJ}/kernel.o \
-	${OBJ}/gdt.o \
-	${OBJ}/gdt.s.o \
-	${OBJ}/idt.o \
-	${OBJ}/idt.s.o \
-	${OBJ}/early_shell.o \
-	${OBJ}/keyboard.o \
-	${OBJ}/heap.o \
-	${OBJ}/asm.o \
-	${OBJ}/time.o
+#	${OBJ}/gdt.o \
+#	${OBJ}/gdt.s.o \
+#	${OBJ}/idt.o \
+#	${OBJ}/idt.s.o \
+#	${OBJ}/early_shell.o \
+#	${OBJ}/keyboard.o \
+#	${OBJ}/heap.o \
+#	${OBJ}/asm.o \
+#	${OBJ}/time.o
 
-${OBJ}/kernel.o: ${SRC}/kernel.c
+${OBJ}/kernel.o: ${SRC}/kernel.cpp
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/boot.o: ${SRC}/boot.s
 	${C_BUILD} $^ -o ${@}
 
-${OBJ}/tty.o: ${SRC}/tty.c
+${OBJ}/tty.o: ${SRC}/tty.cpp
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/gdt.o: ${SRC}/gdt.c

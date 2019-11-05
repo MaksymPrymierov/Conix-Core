@@ -1,26 +1,24 @@
-#ifndef TTY_H
-#define TTY_H
+#pragma once
 
 #include <kernel/types.h>
 
-#define TEXT_GRAPHIC_MEMORY 	0xB8000
-#define TEXT_GRAPHIC_HEIGHT 	25
-#define TEXT_GRAPHIC_WIDTH 	80
-#define TEXT_GRAPHIC_CAPACITY 	2000
-#define TEXT_GRAPHIC_LAST_LINE 	1920
-#define TEXT_GRAPHIC_COLOR    	0x0700
+class tty
+{
+public:
+        static const constexpr u16 height = 25;
+        static const constexpr u16 width = 80;
+        static const constexpr u16 capacity = 2000;
+        static const constexpr u16 last_line = 1920;
+        static const constexpr u16 color = 0x0700;
+        static const constexpr u32 memory_address = 0xb8000;
 
-/* 
- *	int text_graphic_init(u16* video_buffer)
- *	Initializing text graphics for kernel output.
- *	The function takes a point on the video buffer array.
- */
-extern int text_graphic_init(u16* video_buffer);
+        tty();
+        void clear();
 
-/*	
- *	int printk(const char* form, ...)
- *	Formatted output from the kernel.
- */
-extern int early_printk(const char* form, ...);
+private:
+        u16 *memory; 
+        u16 buffer[capacity];
 
-#endif
+        void update();
+        void print_string(const char *string);
+};
