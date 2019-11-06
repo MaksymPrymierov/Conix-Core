@@ -12,12 +12,3 @@ ${OBJ}/kernel_lib.o: ${SRC}/kernel_lib.cpp
 
 ${OBJ}/memory.o: ${SRC}/memory.cpp
 	${C_BUILD} $^ -o ${@}
-
-${OBJ}/queue.o: ${SRC}/queue.c
-	${C_BUILD} $^ -o ${@}
-
-${OBJ}/string.o: ${SRC}/string.c
-	${C_BUILD} $^ -o ${@}
-
-${OBJ}/test.o: ${SRC}/test.c
-	${C_BUILD} $^ -o ${@}

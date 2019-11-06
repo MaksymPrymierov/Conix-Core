@@ -16,3 +16,13 @@ void free(void* mem)
 {
         mallocator.free(mem);
 }
+
+void* operator new(unsigned int size)
+{
+        return mallocator.malloc(size);
+}
+
+void operator delete(void* p, unsigned int size)
+{
+        mallocator.free(p);
+}

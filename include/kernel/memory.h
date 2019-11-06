@@ -1,7 +1,5 @@
 #pragma once
 #include <kernel/types.h>
-#define new(x) static_cast< x *>(malloc(sizeof(x)));
-#define delete(x) free(static_cast<void*>(x));
 
 struct memory_allocator
 {
@@ -11,5 +9,8 @@ struct memory_allocator
 
 void* malloc(size_t size);
 void free(void* mem);
+
+void* operator new(unsigned int size);
+void operator delete(void* p, unsigned int size);
 
 void set_allocator(memory_allocator &allocator);
