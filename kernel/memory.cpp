@@ -26,3 +26,13 @@ void operator delete(void* p, unsigned int size)
 {
         mallocator.free(p);
 }
+
+void* operator new[](unsigned int size)
+{
+        return mallocator.malloc(size);
+}
+
+void operator delete[](void* p, unsigned int size)
+{
+        mallocator.free(p);
+}

@@ -13,4 +13,7 @@ void free(void* mem);
 void* operator new(unsigned int size);
 void operator delete(void* p, unsigned int size);
 
+void* operator new[](unsigned int size);
+void operator delete[](void* p, unsigned int size);
+
 void set_allocator(memory_allocator &allocator);
