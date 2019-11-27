@@ -7,7 +7,8 @@ LD := ld
 ifndef CC_FLAGS
 	CC_FLAGS := -O2 -m32 -mno-red-zone -nostdlib -lgcc -static-libgcc \
 		    -Iinclude -c -fno-stack-protector -Wall \
-		    -Werror -fno-builtin -Wno-main -fno-pic -g  -std=c++17
+		    -Werror -fno-builtin -Wno-main -fno-pic -g -std=c++17 \
+		    -fno-exceptions
 endif 
 
 KERNEL_OBJECTS := arch/${ARCH}/boot.o
