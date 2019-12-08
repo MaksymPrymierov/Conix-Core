@@ -11,6 +11,7 @@ private:
                 stream(tty *t);
 
                 stream operator<<(const char* string);
+                stream operator<<(int number);
 
         private:
                 tty *tt;
@@ -28,11 +29,16 @@ public:
         void clear();
         
         stream operator<<(const char* string);
+        stream operator<<(int number);
 
 private:
-        u16 *memory; 
+        u16 *memory;
+        u16 buffer[2000];
+        size_t cursor;
+        char tmp_number[256];
 
         void update();
         void scroll_down();
-        void print_string(const char *string); 
+        void print_string(const char *string);
+        void print_number(int number);
 };

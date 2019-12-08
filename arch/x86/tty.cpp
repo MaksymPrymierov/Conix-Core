@@ -1,9 +1,6 @@
 #include <tty.h>
 #include <kernel/kernel_lib.h>
 
-static u16 buffer[2000];
-static size_t cursor;
-
 tty::tty()
 {
         memory = reinterpret_cast<u16*>(memory_address);
@@ -55,9 +52,21 @@ void tty::print_string(const char *string)
         update();
 }
 
+void tty::print_number(int number)
+{
+        num_to_str<int>(number, tmp_number, 10);
+        print_string(tmp_number);
+}
+
 tty::stream tty::operator<<(const char* string)
 {
         print_string(string);
+        return stream(this);
+}
+
+tty::stream tty::operator<<(int number)
+{
+        print_number(number);
         return stream(this);
 }
 
@@ -68,5 +77,11 @@ tty::stream::stream(tty *t) :
 tty::stream tty::stream::operator<<(const char* string)
 {
         tt->print_string(string);
+        return stream(tt);
+}
+
+tty::stream tty::stream::operator<<(int number)
+{
+        tt->print_number(number);
         return stream(tt);
 }
