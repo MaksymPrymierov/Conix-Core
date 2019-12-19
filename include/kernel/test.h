@@ -1,19 +1,80 @@
-#ifndef TEST_H
-#define TEST_H
-
+#pragma once
 #include <tty.h>
 
-#define ASSERT_EQ(expected, actual) \
-        if (expected != actual) { \
-                early_printk("ERROR: expected %d, actual %d\n", expected, actual); \
-                early_printk("ERROR: file %s, line %d, function %s\n", __FILE__, __LINE__, __FUNCTION__); \
-        } else { \
-                early_printk("OK: file %s, line %d, function %s\n", __FILE__, __LINE__, __FUNCTION__); \
+class test {
+        size_t tests_failed;
+        size_t tests_passed;
+        size_t test_count;
+
+protected:
+        tty log;
+        const char* name;
+
+        auto message()
+        {
+                return log << "\tTest[" << name << "]:[" << test_count
+                        << "] ";
         }
 
-extern bool ASSERT_OK(int n);
+        void fail()
+        {
+                message() << "is FAIL\n"; 
+                ++tests_failed;
+        }
 
-extern void run_string_test(void);
-extern void run_queue_test(void);
+        void pass()
+       {
+                message() << "is PASS\n";
+                ++tests_passed;
+        }
 
-#endif /* TEST_H */
+        void add_test()
+        {
+                ++test_count;
+        }
+
+public:
+        test(const char* _name) :
+                tests_failed(0),
+                tests_passed(0),
+                test_count(0),
+                name(_name) 
+        {  }
+
+        virtual void start() {  }
+        
+        template <typename T>
+        bool assert_eq(T actual, T expected)
+        {
+                if (actual != expected) {
+                        return false;
+                } else {
+                        return true;
+                }
+        }
+
+        template <typename T>
+        bool assert_memory_ok(T* memory)
+        {
+                if (memory != reinterpret_cast<T*>(ENOMEM)) {
+                        return true;
+                }
+                return false;
+        }
+
+
+        void stat()
+        {
+                log << "\tTest [" << name << "] has been";
+                if (tests_passed != test_count) {
+                        log << " failures";        
+                } else {
+                        log << " successful";
+                }
+                log << " finished.\n";
+
+                log << "\t" << "Total tests: " << test_count << 
+                        " Tests passed: " << tests_passed <<
+                        " Tests failed: " << tests_failed << ".\n";
+        }
+};

@@ -2,6 +2,7 @@
 #include <gdt.h>
 #include <idt.h>
 #include <heap.h>
+#include <kernel/tests/vector.h>
 
 int main(void* heap_top, void* heap_bottom)
 {
@@ -22,6 +23,9 @@ int main(void* heap_top, void* heap_bottom)
 
         heap_init(heap_top, heap_bottom);
         log << "memory: Heap has been initialized.\n";
+
+        test_vector test_v;
+        test_v.start();
 
         return 0;
 }

@@ -41,15 +41,17 @@ public:
                 mmemory_size(size)
         {
                 mdata = new T[msize];
-                memset(mdata, data, sizeof(T));
+                for (size_t i = 0; i < msize; ++i) {
+                        mdata[i] = data;
+                }
         }
 
-        vector(size_t size, const T* data) :
+        vector(size_t size, T* data) :
                 msize(size),
                 mmemory_size(size)
         {
                 mdata = new T[msize];
-                memcpy(mdata, data, msize);
+                memcpy(mdata, data, msize * sizeof(T));
         }
 
         vector(const vector &_vector) :
@@ -57,7 +59,7 @@ public:
                 mmemory_size(_vector.mmemory_size)
         {
                 mdata = new T[mmemory_size];
-                memcpy(mdata, _vector.data, msize);
+                memcpy(mdata, _vector.mdata, msize * sizeof(T));
         }
 
         ~vector()

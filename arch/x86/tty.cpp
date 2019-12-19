@@ -41,6 +41,9 @@ void tty::print_string(const char *string)
 			--cursor;
 			buffer[cursor] = ' ';
 			break;
+                case '\t':
+                        print_string("    ");
+                        break;
                 default:
                         if (cursor >= capacity) {
                                 scroll_down();
