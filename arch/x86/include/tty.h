@@ -33,8 +33,6 @@ public:
 
 private:
         u16 *memory;
-        u16 buffer[2000];
-        size_t cursor;
         char tmp_number[256];
 
         void update();

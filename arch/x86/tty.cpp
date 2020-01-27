@@ -1,10 +1,12 @@
 #include <tty.h>
 #include <kernel/kernel_lib.h>
 
+static size_t cursor = 0;
+static u16 buffer[2000];
+
 tty::tty()
 {
         memory = reinterpret_cast<u16*>(memory_address);
-        clear();
 }
 
 void tty::clear()

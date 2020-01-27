@@ -7,6 +7,9 @@
 int main(void* heap_top, void* heap_bottom)
 {
         tty log;
+
+        log.clear();
+
         log << "tty: Text graphics has been initialized.\n";
 
         gdt_init();
