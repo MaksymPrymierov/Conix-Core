@@ -108,19 +108,21 @@ public:
 
         class iterator : public base_container<T>::iterator
         {
+        private:
+                size_t current_index;
         protected:
                 iterator(T* data) : base_container<T>::iterator(data) {  }
         public:
-                iterator(const iterator& iter) : iterator(iter.data) {  }
-
                 iterator& operator++()
                 {
+                        ++current_index;
                         ++this->data;
                         return *this;
                 }
 
                 iterator& operator--()
                 {
+                        --current_index;
                         --this->data;
                         return *this;
                 }
@@ -138,13 +140,27 @@ public:
                 friend class vector;
         };
 
-        typename base_container<T>::iterator begin()
+        iterator begin()
         {
-                return iterator(mdata);
+                iterator iter(mdata);
+                iter.current_index = 0;
+                return iter;
         }
 
-        typename base_container<T>::iterator end()
+        iterator end()
         {
-                return iterator(mdata + this->msize + 1);
+                iterator iter(mdata + this->msize);
+                iter.current_index = this->msize - 1;
+                return iter;
+        }
+
+        void insert(const iterator& iter, const T& item)
+        {
+                insert(iter.current_index, item);
+        }
+
+        void remove(const iterator& iter)
+        {
+                remove(iter.current_index);
         }
 };

@@ -130,11 +130,10 @@ private:
                 add_test();
                 message() << "insert(size_t, const T&) starting...\n";
 
-                vector<int> vec;
-                int data[6] = {0, 1, 2, 3, 4, 5};
+                vector<size_t> vec;
 
                 for (size_t i = 0; i < 6; ++i) {
-                        vec.insert(i, data[i]);
+                        vec.insert(i, i);
                 }
 
                 if (!assert_eq<size_t>(vec.size(), 6)) {
@@ -143,7 +142,7 @@ private:
                 }
 
                 for (size_t i = 0; i < vec.size(); ++i) {
-                        if (!assert_eq(vec[i], data[i])) {
+                        if (!assert_eq(vec[i], i)) {
                                 fail();
                                 return;
                         }
@@ -198,6 +197,59 @@ private:
                 }
                 pass();
         };
+
+        void iterator_insert_test()
+        {
+                add_test();
+                message() << "insert(const iterator&, const T&) starting...\n";
+
+                vector<size_t> vec;
+                vector<size_t>::iterator iter = vec.begin();
+
+                for (int i = 0; i < 6; ++i) {
+                        vec.insert(iter, i);
+                        ++iter;
+                }
+
+                if (!assert_eq<size_t>(vec.size(), 6)) {
+                        fail();
+                        return;
+                }
+
+                for (size_t i = 0; i < vec.size(); ++i) {
+                        if (!assert_eq(vec[i], i)) {
+                                fail();
+                                return;
+                        }
+                }
+                pass();
+        }
+
+        void iterator_remove_test()
+        {
+                add_test();
+                message() << "remove(const iterator&) starting...\n";
+
+                int data0[6] = {0, 1, 2, 3, 4, 5};
+                int data1[4] = {1, 2, 3, 4};
+                vector<int> vec(6, data0);
+
+                vec.remove(vec.begin());
+                vec.remove(vec.end());
+
+                if (!assert_eq<size_t>(vec.size(), 4)) {
+                        fail();
+                        return;
+                }
+
+                for (size_t i = 0; i < vec.size(); ++i) {
+                        if (!assert_eq<int>(vec[i], data1[i])) {
+                                fail();
+                                return;
+                        }
+                }
+                pass();
+        }
 public:
         test_vector() :
                 test("Kernel Vector")
@@ -216,6 +268,8 @@ public:
                 insert_test();
                 remove_test();
                 iterator_test();
+                iterator_insert_test();
+                iterator_remove_test();
 
                 stat();
         }

@@ -3,6 +3,7 @@
 #include <idt.h>
 #include <heap.h>
 #include <kernel/tests/vector.h>
+#include <kernel/vector.h>
 
 int main(void* heap_top, void* heap_bottom)
 {
