@@ -39,8 +39,7 @@ void num_to_str(T num, char* str, u8 base)
                         return;
                 }
                 str[i] = numbers[num];
-                --i;
-                str[num_counts(num, base) + 1] = '\0';
+                str[i + 1] = '\0';
         } else {
                 if (minus) {
                         str[0] = '-';
@@ -49,6 +48,5 @@ void num_to_str(T num, char* str, u8 base)
 
                 num_to_str<T>(num / base, str, base);
                 str[i] = numbers[num % base];
-                --i;
         }
 }
