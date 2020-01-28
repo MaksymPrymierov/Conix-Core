@@ -45,4 +45,22 @@ public:
         virtual void append(const T& item) {  }
         virtual void insert(size_t index, const T& item) {  }
         virtual void remove(size_t index) {  }
+
+        class iterator
+        {
+        protected:
+                T* data;
+                iterator(T* _data) : data(_data) {  }
+        public:
+                virtual iterator& operator++() { return *this; }
+                virtual iterator& operator--() { return *this; }
+                virtual T& operator*() { return *data; }
+                virtual bool operator!=(const iterator& iter) { return false; }
+                virtual bool operator==(const iterator& iter) { return false; }
+
+                friend class base_container;
+        };
+
+        virtual iterator begin();
+        virtual iterator end();
 };

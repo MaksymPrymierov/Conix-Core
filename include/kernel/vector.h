@@ -105,4 +105,46 @@ public:
                 }
                 --this->msize;
         }
+
+        class iterator : public base_container<T>::iterator
+        {
+        protected:
+                iterator(T* data) : base_container<T>::iterator(data) {  }
+        public:
+                iterator(const iterator& iter) : iterator(iter.data) {  }
+
+                iterator& operator++()
+                {
+                        ++this->data;
+                        return *this;
+                }
+
+                iterator& operator--()
+                {
+                        --this->data;
+                        return *this;
+                }
+
+                bool operator!=(const iterator& iter)
+                {
+                        return this->data != iter.data;
+                }
+
+                bool operator==(const iterator& iter)
+                {
+                        return this->data == iter.data;
+                }
+
+                friend class vector;
+        };
+
+        typename base_container<T>::iterator begin()
+        {
+                return iterator(mdata);
+        }
+
+        typename base_container<T>::iterator end()
+        {
+                return iterator(mdata + this->msize + 1);
+        }
 };

@@ -160,11 +160,6 @@ private:
                 int data1[3] = {1, 2, 4};
                 vector<int> vec(6, data0);
 
-                if (!assert_eq<size_t>(vec.size(), 6)) {
-                        fail();
-                        return;
-                }
-
                 vec.remove(5);
                 vec.remove(0);
                 vec.remove(2);
@@ -183,6 +178,26 @@ private:
                 pass();
         }
 
+        void iterator_test()
+        {
+                add_test();
+                message() << "iterator starting...\n";
+
+                int data[6] = {0, 1, 2, 3, 4, 5};
+                vector<int> vec(6, data);
+                
+                size_t i = 0;
+                for (auto iter = vec.begin(); iter != vec.end(); ++iter) {
+                        if (!assert_eq(*iter, data[i])) {
+                                fail();
+                                return;
+                        }
+                        if (i < 6) {
+                                ++i;
+                        }
+                }
+                pass();
+        };
 public:
         test_vector() :
                 test("Kernel Vector")
@@ -200,6 +215,7 @@ public:
                 append_test();
                 insert_test();
                 remove_test();
+                iterator_test();
 
                 stat();
         }
