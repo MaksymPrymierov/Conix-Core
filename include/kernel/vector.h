@@ -2,70 +2,64 @@
 #include <kernel/types.h>
 #include <kernel/memory.h>
 #include <kernel/kernel_lib.h>
+#include <kernel/base_container.h>
 
 template <typename T>
-class vector
+class vector : public base_container<T>
 {
 private:
         T* mdata;
-        size_t msize;
-        size_t mmemory_size;
 
         void check_memory()
         {
-                if (mmemory_size < msize + 1) {
-                        T* tmp = new T[mmemory_size * 2];
-                        memcpy(tmp, mdata, msize * sizeof(T));
+                if (this->mmemory_size < this->msize + 1) {
+                        T* tmp = new T[this->mmemory_size * 2];
+                        memcpy(tmp, mdata, this->msize * sizeof(T));
                         delete mdata;
                         mdata = tmp;
-                        mmemory_size *= 2;
+                        this->mmemory_size *= 2;
                 }
         }
 
 public:
         vector() :
-                mdata(nullptr),
-                msize(0),
-                mmemory_size(0)
+                base_container<T>(),
+                mdata(nullptr)
         {  }
 
         vector(size_t size) :
-                msize(0),
-                mmemory_size(size)
+                base_container<T>(size)
         {
-                mdata = new T[msize];
+                mdata = new T[size];
         }
 
         vector(size_t size, const T &data) :
-                msize(size),
-                mmemory_size(size)
+                base_container<T>(size, data)
         {
-                mdata = new T[msize];
-                for (size_t i = 0; i < msize; ++i) {
+                mdata = new T[size];
+                for (size_t i = 0; i < size; ++i) {
                         mdata[i] = data;
                 }
         }
 
         vector(size_t size, T* data) :
-                msize(size),
-                mmemory_size(size)
+                base_container<T>(size, data)
         {
-                mdata = new T[msize];
-                memcpy(mdata, data, msize * sizeof(T));
+                mdata = new T[size];
+                memcpy(mdata, data, size * sizeof(T));
         }
 
         vector(const vector &_vector) :
-                msize(_vector.msize),
-                mmemory_size(_vector.mmemory_size)
+                base_container<T>(_vector)
         {
-                mdata = new T[mmemory_size];
-                memcpy(mdata, _vector.mdata, msize * sizeof(T));
+                mdata = new T[this->mmemory_size];
+                memcpy(mdata, _vector.mdata, this->msize * sizeof(T));
         }
 
         ~vector()
         {
                 mdata = 0;
-                mmemory_size = 0;
+                this->mmemory_size = 0;
                 delete mdata;
         }
 
@@ -82,29 +76,33 @@ public:
         void append(const T& item)
         {
                 check_memory();
-                mdata[msize] = item;
-                ++msize;
+                mdata[this->msize] = item;
+                ++this->msize;
         }
 
         void insert(size_t index, const T& item)
         {
                 check_memory();
-                T* tmp = new T[msize - index];
+                T* tmp = new T[this->msize - index];
                 if (tmp != nullptr) {
-                        memcpy(tmp, mdata + index, (msize - index) * 
+                        memcpy(tmp, mdata + index, (this->msize - index) * 
                                 sizeof(T));
                         mdata[index] = item;
-                        memcpy(mdata + index + 1, tmp, (msize - index) *
+                        memcpy(mdata + index + 1, tmp, (this->msize - index) *
                                 sizeof(T));
                         delete tmp;
                 } else {
                         mdata[index] = item;
                 }
-                ++msize;
+                ++this->msize;
         }
 
-        size_t size() const
+        void remove(size_t index)
         {
-                return msize;
+                if (index < this->msize - 1) {
+                        memmove(mdata + index, mdata + index + 1,
+                                (this->msize - index - 1) * sizeof(T));
+                }
+                --this->msize;
         }
 };

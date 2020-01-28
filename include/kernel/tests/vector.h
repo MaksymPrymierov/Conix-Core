@@ -151,6 +151,38 @@ private:
                 pass();
         }
 
+        void remove_test()
+        {
+                add_test();
+                message() << "remove(size_t) starting...\n";
+
+                int data0[6] = {0, 1, 2, 3, 4, 5};
+                int data1[3] = {1, 2, 4};
+                vector<int> vec(6, data0);
+
+                if (!assert_eq<size_t>(vec.size(), 6)) {
+                        fail();
+                        return;
+                }
+
+                vec.remove(5);
+                vec.remove(0);
+                vec.remove(2);
+
+                if (!assert_eq<size_t>(vec.size(), 3)) {
+                        fail();
+                        return;
+                }
+
+                for (size_t i = 0; i < vec.size(); ++i) {
+                        if (!assert_eq<int>(vec[i], data1[i])) {
+                                fail();
+                                return;
+                        }
+                }
+                pass();
+        }
+
 public:
         test_vector() :
                 test("Kernel Vector")
@@ -167,6 +199,7 @@ public:
                 vector_vector_test();
                 append_test();
                 insert_test();
+                remove_test();
 
                 stat();
         }
