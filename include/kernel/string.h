@@ -1,24 +1,26 @@
-#ifndef STRING_H
-#define STRING_H
+#pragma once
+#include <kernel/vector.h>
 
-#include <kernel/types.h>
-
-struct string
+class string : public vector<char>
 {
-        char* data;
-        size_t size;
+public:
+        string() :
+                vector<char>()
+        {  }
+
+        string(size_t size) :
+                vector<char>(size)
+        {  }
+
+        string(size_t size, char c) :
+                vector<char>(size, c)
+        {  }
+
+        string(const char* str) :
+                vector<char>(strlen(str), data)
+        {  }
+
+        string(const string& str) :
+                vector<char>(str)
+        {  }
 };
-
-extern int string_init(struct string* s, size_t size);
-extern int string_set(struct string* s, const char* string);
-extern void string_clear(struct string* s);
-extern int string_append(struct string* s, const char* str);
-extern int string_add(struct string* s, char c);
-extern bool string_cmp(struct string* str1, struct string* str2);
-extern bool string_cmp_native(struct string* str1, const char* str2);
-extern int string_add_memory(struct string* s, size_t size);
-extern void string_delete(struct string* s);
-extern char string_get_last(struct string* s);
-extern void string_prepend(struct string *s);
-
-#endif
