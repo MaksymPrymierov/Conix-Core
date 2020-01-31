@@ -42,7 +42,7 @@ public:
                 }
         }
 
-        vector(size_t size, T* data) :
+        vector(size_t size, const T* data) :
                 base_container<T>(size, data)
         {
                 mdata = new T[size];

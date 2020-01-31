@@ -4,7 +4,7 @@
 
 class test_vector : public test
 {
-private:
+protected:
         void vector_entity_test()
         {
                 add_test();

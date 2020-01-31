@@ -3,7 +3,7 @@
 #include <idt.h>
 #include <heap.h>
 #include <kernel/tests/vector.h>
-#include <kernel/vector.h>
+#include <kernel/tests/string.h>
 
 int main(void* heap_top, void* heap_bottom)
 {
@@ -29,7 +29,10 @@ int main(void* heap_top, void* heap_bottom)
         log << "memory: Heap has been initialized.\n";
 
         test_vector test_v;
+        test_string test_s;
+
         test_v.start();
+        test_s.start();
 
         return 0;
 }

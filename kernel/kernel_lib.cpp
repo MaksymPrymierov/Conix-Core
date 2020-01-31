@@ -16,9 +16,9 @@ void* memset(void *src, int c, size_t n)
         return src;
 }
 
-void* memcpy(void *des, void *src, size_t n)
+const void* memcpy(void *des, const void *src, size_t n)
 {
-        unsigned char *p_s = static_cast<unsigned char*>(src);
+        const unsigned char *p_s = static_cast<const unsigned char*>(src);
         unsigned char *p_d = static_cast<unsigned char*>(des);
         while(n--) {
                 *p_d++ = *p_s++;

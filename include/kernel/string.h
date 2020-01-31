@@ -17,7 +17,7 @@ public:
         {  }
 
         string(const char* str) :
-                vector<char>(strlen(str), data)
+                vector<char>(strlen(str), str)
         {  }
 
         string(const string& str) :

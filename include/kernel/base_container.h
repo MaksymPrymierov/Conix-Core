@@ -24,7 +24,7 @@ public:
                 mmemory_size(size)
         {  }
 
-        base_container(size_t size, T* data) :
+        base_container(size_t size, const T* data) :
                 msize(size),
                 mmemory_size(size)
         {  }
