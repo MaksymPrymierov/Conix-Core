@@ -57,7 +57,7 @@ protected:
         void vector_size_data_array_test()
         {
                 add_test();
-                message() << "vector(size_t, T* data) starting...\n";
+                message() << "vector(size_t, const T* data) starting...\n";
                 
                 int tmp[6] = {0, 1, 2, 3, 4, 5};
                 vector<int> vec(6, tmp);
@@ -250,6 +250,12 @@ protected:
                 }
                 pass();
         }
+
+protected:
+        test_vector(const char* str) :
+                test(str)
+        {  }
+
 public:
         test_vector() :
                 test("Kernel Vector")

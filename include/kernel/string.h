@@ -8,10 +8,6 @@ public:
                 vector<char>()
         {  }
 
-        string(size_t size) :
-                vector<char>(size)
-        {  }
-
         string(size_t size, char c) :
                 vector<char>(size, c)
         {  }
