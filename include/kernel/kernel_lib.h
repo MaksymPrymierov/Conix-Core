@@ -3,6 +3,7 @@
 #include <kernel/types.h>
 
 size_t strlen(const char* string);
+int strcmp(const char* str0, const char* str1);
 
 extern void* memset(void *src, int c, size_t n);
 const extern void* memcpy(void *des, const void *src, size_t n);

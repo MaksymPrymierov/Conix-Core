@@ -7,7 +7,7 @@
 template <typename T>
 class vector : public base_container<T>
 {
-private:
+protected:
         T* mdata;
 
         void check_memory()

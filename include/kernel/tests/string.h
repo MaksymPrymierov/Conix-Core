@@ -85,6 +85,20 @@ protected:
                 pass();
         }
 
+        void string_logic_test()
+        {
+                add_test();
+                message() << "logic operations test starting...\n";
+
+                string test = "Test";
+
+                if (!(test == "Test") && test != "test") {
+                        fail();
+                        return;
+                }
+                pass();
+        }
+
 public:
         test_string() :
                 test_vector("Kernel String")
@@ -104,6 +118,7 @@ public:
                 iterator_test();
                 iterator_insert_test();
                 iterator_remove_test();
+                string_logic_test();
 
                 stat();
         }

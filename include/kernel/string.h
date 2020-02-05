@@ -1,5 +1,6 @@
 #pragma once
 #include <kernel/vector.h>
+#include <kernel/kernel_lib.h>
 
 class string : public vector<char>
 {
@@ -19,4 +20,24 @@ public:
         string(const string& str) :
                 vector<char>(str)
         {  }
+
+        bool operator==(const string& str)
+        {
+                return !strcmp(this->mdata, str.mdata);
+        }
+
+        bool operator==(const char* str)
+        {
+                return !strcmp(this->mdata, str);
+        }
+
+        bool operator!=(const string& str)
+        {
+                return strcmp(this->mdata, str.mdata);
+        }
+
+        bool operator!=(const char* str)
+        {
+                return strcmp(this->mdata, str);
+        }
 };

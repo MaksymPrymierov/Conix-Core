@@ -62,7 +62,6 @@ public:
                 return false;
         }
 
-
         void stat()
         {
                 log << "\tTest [" << name << "] has been";

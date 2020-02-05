@@ -7,6 +7,21 @@ size_t strlen(const char *string)
         return (size_t)(eos - string - 1);
 }
 
+int strcmp(const char *str0, const char *str1)
+{
+        while (*str0) {
+                if (*str0 != *str1) {
+                        break;
+                }
+
+                ++str0;
+                ++str1;
+        }
+
+        return *reinterpret_cast<const unsigned char*>(str0) -
+                *reinterpret_cast<const unsigned char*>(str1);
+}
+
 void* memset(void *src, int c, size_t n)
 {
         unsigned char* p = static_cast<unsigned char*>(src);
