@@ -99,7 +99,7 @@ void isrs_install()
 void fault_handler(struct regs *r)
 {
         if (r->int_no < 32) {
-                tty out;
+                conix::kernel::io::tty out;
                 out << "idt: Exception! System Halter!" << exception_messages[r->int_no];
                 for (;;);
         }

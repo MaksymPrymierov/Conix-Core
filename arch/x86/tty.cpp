@@ -1,6 +1,10 @@
 #include <tty.h>
 #include <kernel/kernel_lib.h>
 
+namespace conix {
+namespace kernel {
+namespace io {
+
 static size_t cursor = 0;
 static size_t offset = 0;
 static u16 buffer[10000];
@@ -94,3 +98,7 @@ tty::stream tty::stream::operator<<(int number)
         tt->print_number(number);
         return stream(tt);
 }
+
+}; // io
+}; // kernel
+}; // conix

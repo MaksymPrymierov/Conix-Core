@@ -7,7 +7,7 @@
 
 int main(void* heap_top, void* heap_bottom)
 {
-        tty log;
+        conix::kernel::io::tty log;
 
         log.clear();
 

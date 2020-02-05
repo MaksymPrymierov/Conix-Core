@@ -11,7 +11,7 @@ class test {
         size_t test_count;
 
 protected:
-        tty log;
+        io::tty log;
         const char* name;
 
         auto message()

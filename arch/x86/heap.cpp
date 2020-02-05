@@ -1,7 +1,6 @@
 #include <heap.h>
 #include <kernel/kernel_lib.h>
 #include <kernel/memory.h>
-#include <tty.h>
 
 static struct heap_node* heap_t;
 static struct heap_node* heap_b;
@@ -10,7 +9,6 @@ static struct heap_node* last_item;
 static uintptr_t heap_top_adress;
 static uintptr_t heap_bottom_adress;
 static size_t heap_size;
-static tty log;
 
 static void* sbrk(uintptr_t mem)
 {

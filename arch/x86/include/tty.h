@@ -2,6 +2,10 @@
 
 #include <kernel/types.h>
 
+namespace conix {
+namespace kernel {
+namespace io {
+
 class tty
 {
 private:
@@ -41,3 +45,7 @@ private:
         void print_string(const char *string);
         void print_number(int number);
 };
+
+}; // io
+}; // kernel
+}; // conix
