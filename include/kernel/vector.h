@@ -167,6 +167,11 @@ public:
         {
                 remove(iter.current_index);
         }
+
+        T* data() const
+        {
+                return mdata;
+        }
 };
 
 }; // std
