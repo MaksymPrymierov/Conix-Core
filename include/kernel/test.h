@@ -1,6 +1,10 @@
 #pragma once
 #include <tty.h>
 
+namespace conix {
+namespace kernel {
+namespace tests {
+
 class test {
         size_t tests_failed;
         size_t tests_passed;
@@ -77,3 +81,7 @@ public:
                         " Tests failed: " << tests_failed << ".\n";
         }
 };
+
+}; // tests
+}; // kernel
+}; // conix

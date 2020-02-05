@@ -28,8 +28,8 @@ int main(void* heap_top, void* heap_bottom)
         heap_init(heap_top, heap_bottom);
         log << "memory: Heap has been initialized.\n";
 
-        test_vector test_v;
-        test_string test_s;
+        conix::kernel::tests::test_vector test_v;
+        conix::kernel::tests::test_string test_s;
 
         test_v.start();
         test_s.start();

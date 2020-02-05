@@ -2,7 +2,11 @@
 #include <kernel/vector.h>
 #include <kernel/kernel_lib.h>
 
-class string : public vector<char>
+namespace conix {
+namespace kernel {
+namespace std {
+
+class string : public conix::kernel::std::vector<char>
 {
 public:
         string() :
@@ -41,3 +45,7 @@ public:
                 return strcmp(this->mdata, str);
         }
 };
+
+}; // std
+}; // kernel
+}; // conix

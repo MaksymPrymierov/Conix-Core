@@ -1,6 +1,10 @@
 #pragma once
 #include <kernel/types.h>
 
+namespace conix {
+namespace kernel {
+namespace std {
+
 template <typename T>
 class base_container
 {
@@ -64,3 +68,7 @@ public:
         virtual void insert(const iterator& iter, const T& item);
         virtual void remove(const iterator& iter);
 };
+
+}; // std
+}; // kernel
+}; // conix

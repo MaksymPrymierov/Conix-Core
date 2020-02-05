@@ -2,6 +2,10 @@
 #include <kernel/tests/vector.h>
 #include <kernel/string.h>
 
+namespace conix {
+namespace kernel {
+namespace tests {
+
 class test_string : public test_vector
 {
 protected:
@@ -10,7 +14,7 @@ protected:
                 add_test();
                 message() << "string() string...\n";
 
-                string str;
+                std::string str;
 
                 if (!assert_eq<size_t>(str.size(), 0)) {
                         fail();
@@ -24,7 +28,7 @@ protected:
                 add_test();
                 message() << "string(size_t, char c) starting...\n";
 
-                string str(3, 'a');
+                std::string str(3, 'a');
 
                 if (!assert_eq<size_t>(str.size(), 3)) {
                         fail();
@@ -46,7 +50,7 @@ protected:
                 message() << "string(const char* str) starting...\n";
 
                 const char* test = "Test string";
-                string str = test;
+                std::string str = test;
 
                 if (!assert_eq<size_t>(str.size(), strlen(test))) {
                         fail();
@@ -68,8 +72,8 @@ protected:
                 message() << "string(const string &_string) starting...\n";
 
                 const char* test = "Test string";
-                string str0 = test;
-                string str1 = str0;
+                std::string str0 = test;
+                std::string str1 = str0;
 
                 if (!assert_eq<size_t>(str1.size(), strlen(test))) {
                         fail();
@@ -90,7 +94,7 @@ protected:
                 add_test();
                 message() << "logic operations test starting...\n";
 
-                string test = "Test";
+                std::string test = "Test";
 
                 if (!(test == "Test") && test != "test") {
                         fail();
@@ -123,3 +127,7 @@ public:
                 stat();
         }
 };
+
+}; // tests
+}; // kernel
+}; // conix

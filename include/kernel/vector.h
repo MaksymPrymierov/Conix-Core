@@ -4,6 +4,10 @@
 #include <kernel/kernel_lib.h>
 #include <kernel/base_container.h>
 
+namespace conix {
+namespace kernel {
+namespace std {
+
 template <typename T>
 class vector : public base_container<T>
 {
@@ -164,3 +168,7 @@ public:
                 remove(iter.current_index);
         }
 };
+
+}; // std
+}; // kernel
+}; // conix

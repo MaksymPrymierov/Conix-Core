@@ -2,6 +2,10 @@
 #include <kernel/test.h>
 #include <kernel/vector.h>
 
+namespace conix {
+namespace kernel {
+namespace tests {
+
 class test_vector : public test
 {
 protected:
@@ -10,7 +14,7 @@ protected:
                 add_test();
                 message() << "vector() starting...\n";
                 
-                vector<int> vec;
+                std::vector<int> vec;
                 
                 if (!assert_eq<size_t>(vec.size(), 0)) {
                         fail();
@@ -24,7 +28,7 @@ protected:
                 add_test();
                 message() << "vector(size_t) starting...\n";
 
-                vector<int> vec(5);
+                std::vector<int> vec(5);
                 
                 if (!assert_eq<size_t>(vec.size(), 0)) {
                         fail();
@@ -38,7 +42,7 @@ protected:
                 add_test();
                 message() << "vector(size_t, const T &data) starting...\n";
 
-                vector<int> vec(3, 3);
+                std::vector<int> vec(3, 3);
                 
                 if (!assert_eq<size_t>(vec.size(), 3)) {
                         fail();
@@ -60,7 +64,7 @@ protected:
                 message() << "vector(size_t, const T* data) starting...\n";
                 
                 int tmp[6] = {0, 1, 2, 3, 4, 5};
-                vector<int> vec(6, tmp);
+                std::vector<int> vec(6, tmp);
                 
                 if (!assert_eq<size_t>(vec.size(), 6)) {
                         fail();
@@ -82,8 +86,8 @@ protected:
                 message() << "vector(const vector &_vector) starting...\n";
 
                 int data[6] = {0, 1, 2, 3, 4, 5};
-                vector<int> vec0(6, data);
-                vector<int> vec1(vec0);
+                std::vector<int> vec0(6, data);
+                std::vector<int> vec1(vec0);
 
                 if (!assert_eq<size_t>(vec1.size(), 6)) {
                         fail();
@@ -104,7 +108,7 @@ protected:
                 add_test();
                 message() << "append(const T&) starting...\n";
 
-                vector<int> vec;
+                std::vector<int> vec;
                 int data[6] = {0, 1, 2, 3, 4, 5};
 
                 for (size_t i = 0; i < 6; ++i) {
@@ -130,7 +134,7 @@ protected:
                 add_test();
                 message() << "insert(size_t, const T&) starting...\n";
 
-                vector<size_t> vec;
+                std::vector<size_t> vec;
 
                 for (size_t i = 0; i < 6; ++i) {
                         vec.insert(i, i);
@@ -157,7 +161,7 @@ protected:
 
                 int data0[6] = {0, 1, 2, 3, 4, 5};
                 int data1[3] = {1, 2, 4};
-                vector<int> vec(6, data0);
+                std::vector<int> vec(6, data0);
 
                 vec.remove(5);
                 vec.remove(0);
@@ -183,7 +187,7 @@ protected:
                 message() << "iterator starting...\n";
 
                 int data[6] = {0, 1, 2, 3, 4, 5};
-                vector<int> vec(6, data);
+                std::vector<int> vec(6, data);
                 
                 size_t i = 0;
                 for (auto iter = vec.begin(); iter != vec.end(); ++iter) {
@@ -203,8 +207,8 @@ protected:
                 add_test();
                 message() << "insert(const iterator&, const T&) starting...\n";
 
-                vector<size_t> vec;
-                vector<size_t>::iterator iter = vec.begin();
+                std::vector<size_t> vec;
+                std::vector<size_t>::iterator iter = vec.begin();
 
                 for (int i = 0; i < 6; ++i) {
                         vec.insert(iter, i);
@@ -232,7 +236,7 @@ protected:
 
                 int data0[6] = {0, 1, 2, 3, 4, 5};
                 int data1[4] = {1, 2, 3, 4};
-                vector<int> vec(6, data0);
+                std::vector<int> vec(6, data0);
 
                 vec.remove(vec.begin());
                 vec.remove(vec.end());
@@ -280,3 +284,7 @@ public:
                 stat();
         }
 };
+
+}; // tests
+}; // kernel
+}; // conix
