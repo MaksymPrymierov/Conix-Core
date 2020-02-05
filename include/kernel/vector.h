@@ -107,4 +107,9 @@ public:
         {
                 return msize;
         }
+
+        T* data() const
+        {
+                return mdata;
+        }
 };
