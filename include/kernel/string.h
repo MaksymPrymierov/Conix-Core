@@ -6,7 +6,7 @@ namespace conix {
 namespace kernel {
 namespace std {
 
-class string : public conix::kernel::std::vector<char>
+class string : public vector<char>
 {
 public:
         string() :
@@ -43,6 +43,11 @@ public:
         bool operator!=(const char* str)
         {
                 return strcmp(this->mdata, str);
+        }
+
+        const char* c_str() const 
+        {
+                return this->data();
         }
 };
 
