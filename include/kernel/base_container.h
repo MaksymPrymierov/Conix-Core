@@ -65,8 +65,8 @@ public:
                 friend class base_container;
         };
 
-        virtual void insert(const iterator& iter, const T& item);
-        virtual void remove(const iterator& iter);
+        virtual void insert(const iterator& iter, const T& item) {  }
+        virtual void remove(const iterator& iter) {  }
 };
 
 }; // std
