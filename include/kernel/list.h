@@ -1,6 +1,10 @@
 #pragma once
 #include <kernel/types.h>
 
+namespace conix {
+namespace kernel {
+namespace std {
+
 template <typename T>
 class list   
 {
@@ -178,3 +182,6 @@ public:
         }
 };
 
+}; // std
+}; // kernel
+}; // conix
