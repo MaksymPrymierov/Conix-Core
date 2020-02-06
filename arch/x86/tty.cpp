@@ -65,6 +65,11 @@ void tty::print_string(const char *string)
         update();
 }
 
+void tty::print_string(const std::string& str)
+{
+        print_string(str.c_str());
+}
+
 void tty::print_number(int number)
 {
         num_to_str<int>(number, tmp_number, 10);
@@ -74,6 +79,12 @@ void tty::print_number(int number)
 tty::stream tty::operator<<(const char* string)
 {
         print_string(string);
+        return stream(this);
+}
+
+tty::stream tty::operator<<(const std::string& str)
+{
+        print_string(str);
         return stream(this);
 }
 
@@ -90,6 +101,12 @@ tty::stream::stream(tty *t) :
 tty::stream tty::stream::operator<<(const char* string)
 {
         tt->print_string(string);
+        return stream(tt);
+}
+
+tty::stream tty::stream::operator<<(const std::string& str)
+{
+        tt->print_string(str);
         return stream(tt);
 }
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <kernel/types.h>
+#include <kernel/string.h>
 
 namespace conix {
 namespace kernel {
@@ -15,6 +16,7 @@ private:
                 stream(tty *t);
 
                 stream operator<<(const char* string);
+                stream operator<<(const std::string& str);
                 stream operator<<(int number);
 
         private:
@@ -34,6 +36,7 @@ public:
         void clear();
         
         stream operator<<(const char* string);
+        stream operator<<(const std::string& str);
         stream operator<<(int number);
 
 private:
@@ -43,6 +46,7 @@ private:
         void update();
         void scroll_down();
         void print_string(const char *string);
+        void print_string(const std::string& str);
         void print_number(int number);
 };
 
