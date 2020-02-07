@@ -1,12 +1,13 @@
 #pragma once
 #include <kernel/types.h>
+#include <kernel/base_container.h>
 
 namespace conix {
 namespace kernel {
 namespace std {
 
 template <typename T>
-class list   
+class list : public base_container<T> 
 {
 private:
         struct list_node
@@ -18,7 +19,6 @@ private:
 
         list_node* top;
         list_node* bottom;
-        size_t msize;
 
         list_node* search_node(size_t n)
         {
@@ -30,33 +30,32 @@ private:
         }
 
 public:
-
         list() :
                 top(nullptr),
-                bottom(nullptr),
-                msize(0)
-        {  }
+                bottom(nullptr)
+        {  
+                this->msize = 0;
+        }
 
         ~list()
         {
-                item_node* node = top;
-                for (item_node* i = top; i != nullptr; i = top) {
+                for (list_node* i = top; i != nullptr; i = top) {
                         top = top->next;
                         delete i;
                 }
         }
 
-        class iterator 
+        class iterator : public base_container<T>::iterator
         {
         private:
                 list_node *current;
-        public:
-                iterator() : 
-                        current(nullptr)
-                {  }
 
                 iterator(list_node* p) :
                         current(p)
+                {  }
+        public:
+                iterator() : 
+                        current(nullptr)
                 {  }
 
                 iterator& operator ++()
@@ -86,7 +85,7 @@ public:
                         return current != iter.current ? true : false;
                 }
 
-                bool operator ==(iterator iter)
+                bool operator ==(const iterator &iter)
                 {
                         return current == iter.current ? true : false;
                 }
@@ -94,27 +93,27 @@ public:
 
         void append(const T &data)
         {
-                if (msize == 0) {
+                if (this->msize == 0) {
                         top = new list_node;
                         bottom = top;
                         
                         top->next = nullptr;
                         top->priv = nullptr;
                         top->data = data;
-                        msize = 1;
+                        this->msize = 1;
                 } else {
                         bottom->next = new list_node;
                         bottom->next->next = nullptr;
                         bottom->next->priv = bottom;
                         bottom->next->data = data;
                         bottom = bottom->next;
-                        ++msize;
+                        ++this->msize;
                 }
         }
 
-        T& at(unsigned int number)
+        T& at(size_t n)
         {
-                return search_node(number)->data;
+                return search_node(n)->data;
         }
 
         T& operator [](unsigned int number)
@@ -132,11 +131,6 @@ public:
                 return iterator(bottom->next);
         }
 
-        size_t get_size() const
-        {
-                return msize;
-        }
-
         void remove(size_t n)
         {
                 list_node* node = search_node(n);
@@ -152,7 +146,7 @@ public:
                         bottom->next = nullptr;
                 }
 
-                --msize;
+                --this->msize;
                 delete node;
         }
 
@@ -178,7 +172,7 @@ public:
                         tmp->data = data;
                 }
 
-                ++msize;
+                ++this->msize;
         }
 };
 
