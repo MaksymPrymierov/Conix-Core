@@ -2,14 +2,14 @@
 #include <kernel/types.h>
 #include <kernel/memory.h>
 #include <kernel/kernel_lib.h>
-#include <kernel/base_container.h>
+#include <kernel/serial_container.h>
 
 namespace conix {
 namespace kernel {
 namespace std {
 
 template <typename T>
-class vector : public base_container<T>
+class vector : public serial_container<T>
 {
 protected:
         T* mdata;
@@ -27,18 +27,18 @@ protected:
 
 public:
         vector() :
-                base_container<T>(),
+                serial_container<T>(),
                 mdata(nullptr)
         {  }
 
         vector(size_t size) :
-                base_container<T>(size)
+                serial_container<T>(size)
         {
                 mdata = new T[size];
         }
 
         vector(size_t size, const T &data) :
-                base_container<T>(size, data)
+                serial_container<T>(size, data)
         {
                 mdata = new T[size];
                 for (size_t i = 0; i < size; ++i) {
@@ -47,14 +47,14 @@ public:
         }
 
         vector(size_t size, const T* data) :
-                base_container<T>(size, data)
+                serial_container<T>(size, data)
         {
                 mdata = new T[size];
                 memcpy(mdata, data, size * sizeof(T));
         }
 
         vector(const vector &_vector) :
-                base_container<T>(_vector)
+                serial_container<T>(_vector)
         {
                 mdata = new T[this->mmemory_size];
                 memcpy(mdata, _vector.mdata, this->msize * sizeof(T));
@@ -110,12 +110,12 @@ public:
                 --this->msize;
         }
 
-        class iterator : public base_container<T>::iterator
+        class iterator : public serial_container<T>::iterator
         {
         private:
                 size_t current_index;
         protected:
-                iterator(T* data) : base_container<T>::iterator(data) {  }
+                iterator(T* data) : serial_container<T>::iterator(data) {  }
         public:
                 iterator& operator++()
                 {
