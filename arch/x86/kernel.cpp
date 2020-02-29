@@ -2,8 +2,7 @@
 #include <gdt.h>
 #include <idt.h>
 #include <heap.h>
-#include <kernel/tests/vector.h>
-#include <kernel/tests/string.h>
+#include <kernel/shell.h>
 
 int main(void* heap_top, void* heap_bottom)
 {
@@ -28,11 +27,8 @@ int main(void* heap_top, void* heap_bottom)
         heap_init(heap_top, heap_bottom);
         log << "memory: Heap has been initialized.\n";
 
-        conix::kernel::tests::test_vector test_v;
-        conix::kernel::tests::test_string test_s;
-
-        test_v.start();
-        test_s.start();
+        conix::kernel::shell shell;
+        shell.exec();
 
         return 0;
 }
