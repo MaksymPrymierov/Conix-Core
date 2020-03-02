@@ -7,7 +7,7 @@ namespace kernel {
 namespace std {
 
 template <typename T>
-class list : public base_container<T> 
+class list : public serial_container<T> 
 {
 private:
         struct list_node
@@ -31,11 +31,10 @@ private:
 
 public:
         list() :
+                serial_container<T>(),
                 top(nullptr),
                 bottom(nullptr)
-        {  
-                this->msize = 0;
-        }
+        {  }
 
         ~list()
         {
@@ -93,22 +92,22 @@ public:
 
         void append(const T &data)
         {
-                if (this->msize == 0) {
+                if (this->size() == 0) {
                         top = new list_node;
                         bottom = top;
                         
                         top->next = nullptr;
                         top->priv = nullptr;
                         top->data = data;
-                        this->msize = 1;
                 } else {
                         bottom->next = new list_node;
                         bottom->next->next = nullptr;
                         bottom->next->priv = bottom;
                         bottom->next->data = data;
                         bottom = bottom->next;
-                        ++this->msize;
                 }
+
+                this->inc_size();
         }
 
         T& at(size_t n)
@@ -146,7 +145,7 @@ public:
                         bottom->next = nullptr;
                 }
 
-                --this->msize;
+                this->dec_size();
                 delete node;
         }
 
@@ -172,7 +171,7 @@ public:
                         tmp->data = data;
                 }
 
-                ++this->msize;
+                this->inc_size();
         }
 };
 
