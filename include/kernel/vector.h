@@ -16,12 +16,12 @@ protected:
 
         void check_memory()
         {
-                if (this->mmemory_size < this->msize + 1) {
-                        T* tmp = new T[this->mmemory_size * 2];
-                        memcpy(tmp, mdata, this->msize * sizeof(T));
+                if (this->get_memory_size() < this->size() + 1) {
+                        T* tmp = new T[this->get_memory_size() * 2];
+                        memcpy(tmp, mdata, this->size() * sizeof(T));
                         delete mdata;
                         mdata = tmp;
-                        this->mmemory_size *= 2;
+                        this->get_memory_size_value() *= 2;
                 }
         }
 
@@ -56,14 +56,14 @@ public:
         vector(const vector &_vector) :
                 serial_container<T>(_vector)
         {
-                mdata = new T[this->mmemory_size];
-                memcpy(mdata, _vector.mdata, this->msize * sizeof(T));
+                mdata = new T[this->get_memory_size()];
+                memcpy(mdata, _vector.mdata, this->size() * sizeof(T));
         }
 
         ~vector()
         {
                 mdata = 0;
-                this->mmemory_size = 0;
+                this->set_memory_size(0);
                 delete mdata;
         }
 
@@ -80,34 +80,34 @@ public:
         void append(const T& item)
         {
                 check_memory();
-                mdata[this->msize] = item;
-                ++this->msize;
+                mdata[this->size()] = item;
+                this->inc_size();
         }
 
         void insert(size_t index, const T& item)
         {
                 check_memory();
-                T* tmp = new T[this->msize - index];
+                T* tmp = new T[this->size() - index];
                 if (tmp != nullptr) {
-                        memcpy(tmp, mdata + index, (this->msize - index) * 
+                        memcpy(tmp, mdata + index, (this->size() - index) * 
                                 sizeof(T));
                         mdata[index] = item;
-                        memcpy(mdata + index + 1, tmp, (this->msize - index) *
+                        memcpy(mdata + index + 1, tmp, (this->size() - index) *
                                 sizeof(T));
                         delete tmp;
                 } else {
                         mdata[index] = item;
                 }
-                ++this->msize;
+                this->inc_size();
         }
 
         void remove(size_t index)
         {
-                if (index < this->msize - 1) {
+                if (index < this->size() - 1) {
                         memmove(mdata + index, mdata + index + 1,
-                                (this->msize - index - 1) * sizeof(T));
+                                (this->size() - index - 1) * sizeof(T));
                 }
-                --this->msize;
+                this->dec_size();
         }
 
         class iterator : public serial_container<T>::iterator
@@ -153,8 +153,8 @@ public:
 
         iterator end()
         {
-                iterator iter(mdata + this->msize);
-                iter.current_index = this->msize - 1;
+                iterator iter(mdata + this->size());
+                iter.current_index = this->size() - 1;
                 return iter;
         }
 

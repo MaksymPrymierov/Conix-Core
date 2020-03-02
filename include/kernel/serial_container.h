@@ -1,49 +1,57 @@
 #pragma once
 #include <kernel/types.h>
+#include <kernel/base_container.h>
 
 namespace conix {
 namespace kernel {
 namespace std {
 
 template <typename T>
-class serial_container
+class serial_container : base_container<T>
 {
 protected:
-        size_t msize;
-        size_t mmemory_size;
+        inline void set_memory_size(size_t s)
+        {
+                this->mmemory_size = s;
+        }
+
+        inline void inc_size()
+        {
+                ++this->msize;
+        }
+
+        inline void dec_size()
+        {
+                --this->msize;
+        }
+
+        inline size_t& get_memory_size_value()
+        {
+                return this->mmemory_size;
+        }
 
 public:
         serial_container() :
-                msize(0),
-                mmemory_size(0)
+                base_container<T>()
         {  }
 
         explicit serial_container(size_t size) :
-                msize(0),
-                mmemory_size(size)
+                base_container<T>(size)
         {  }
 
         serial_container(size_t size, const T &data) :
-                msize(size),
-                mmemory_size(size)
+                base_container<T>(size, data)
         {  }
 
         serial_container(size_t size, const T* data) :
-                msize(size),
-                mmemory_size(size)
+                base_container<T>(size, data)
         {  }
 
         serial_container(const serial_container &_serial_container) :
-                msize(_serial_container.msize),
-                mmemory_size(_serial_container.mmemory_size)
+                base_container<T>(_serial_container)
         {  }
 
         ~serial_container() = default;
-
-        size_t size() const
-        {
-                return msize;
-        }
 
         virtual T& at(size_t n);
         virtual void append(const T& item) {  }
@@ -67,6 +75,16 @@ public:
 
         virtual void insert(const iterator& iter, const T& item) {  }
         virtual void remove(const iterator& iter) {  }
+
+        inline size_t size() const
+        {
+                return this->msize;
+        }
+
+        inline size_t get_memory_size() const
+        {
+                return this->mmemory_size;
+        }
 };
 
 }; // std
