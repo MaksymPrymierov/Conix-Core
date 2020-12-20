@@ -20,7 +20,7 @@ tty::tty()
 void tty::clear()
 {
         for (size_t i = 0; i < capacity; ++i) {
-                buffer[i] = 0;
+                buffer[i] = color + ' ';
         }
 
         update();
@@ -29,16 +29,27 @@ void tty::clear()
 void tty::update()
 {
         for (size_t i = offset; i < capacity; ++i) {
-                memory[i - offset] = buffer[i];
+                memory[i - offset] = color + buffer[i];
         }
-        move_cursor(static_cast<u16>(cursor - offset + 3));
+        move_cursor(static_cast<u16>(cursor - offset));
 }
 
 void tty::scroll_down()
 {
         memmove(buffer, buffer + width, (capacity - width) * 2);
-        memset((buffer + capacity) - width, 0, width * 2);
-        cursor = (cursor / width - 1) * width; 
+        memset((buffer + capacity) - width, color + ' ', width * 2);
+        cursor = (cursor / width - 1) * width;
+
+}
+
+void tty::handle_screen_overflow()
+{
+        if (cursor >= capacity) {
+                scroll_down();
+        }
+        if (cursor >= size_of_text) {
+                offset = ((cursor - size_of_text) / width + 1) * width;
+        }
 }
 
 void tty::print_string(const char *string)
@@ -47,6 +58,7 @@ void tty::print_string(const char *string)
                 switch (string[i]) {
                 case '\n':
                         cursor = (cursor / width + 1) * width;
+                        handle_screen_overflow();
                         break;
                 case '\b':
                         --cursor;
@@ -56,13 +68,8 @@ void tty::print_string(const char *string)
                         print_string("    ");
                         break;
                 default:
-                        if (cursor >= capacity) {
-                                scroll_down();
-                        }
-                        if (cursor >= size_of_text) {
-                                offset = ((cursor - size_of_text) / width + 1) * width;
-                        }
-                        buffer[cursor] = color + string[i];
+                        handle_screen_overflow();
+                        buffer[cursor] = string[i];
                         ++cursor;
                 }
         }

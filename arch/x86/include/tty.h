@@ -50,6 +50,7 @@ private:
         void print_number(int number);
         void move_cursor(u16 pos);
         void enable_cursor();
+        void handle_screen_overflow();
 };
 
 }; // io
