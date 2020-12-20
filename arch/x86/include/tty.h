@@ -48,6 +48,8 @@ private:
         void print_string(const char *string);
         void print_string(const std::string& str);
         void print_number(int number);
+        void move_cursor(u16 pos);
+        void enable_cursor();
 };
 
 }; // io

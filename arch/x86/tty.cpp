@@ -1,4 +1,6 @@
 #include <tty.h>
+#include <asm.h>
+#include <registers.h>
 #include <kernel/kernel_lib.h>
 
 namespace conix {
@@ -12,6 +14,7 @@ static u16 buffer[10000];
 tty::tty()
 {
         memory = reinterpret_cast<u16*>(memory_address);
+        enable_cursor();
 }
 
 void tty::clear()
@@ -28,6 +31,7 @@ void tty::update()
         for (size_t i = offset; i < capacity; ++i) {
                 memory[i - offset] = buffer[i];
         }
+        move_cursor(static_cast<u16>(cursor - offset + 3));
 }
 
 void tty::scroll_down()
@@ -74,6 +78,22 @@ void tty::print_number(int number)
 {
         num_to_str<int>(number, tmp_number, 10);
         print_string(tmp_number);
+}
+
+void tty::move_cursor(u16 pos)
+{
+        outb(CRT_INDEX_REGISTER, CRT_CURSOR_LOCATION_HIGH);
+        outb(CRT_DATA_REGISTER, static_cast<u8>((pos >> 8) & 0xFF));
+        outb(CRT_INDEX_REGISTER, CRT_CURSOR_LOCATION_LOW);
+        outb(CRT_DATA_REGISTER, static_cast<u8>(pos & 0xFF));
+}
+
+void tty::enable_cursor()
+{
+        outb(CRT_INDEX_REGISTER, CRT_CURSOR_START);
+        outb(CRT_DATA_REGISTER, static_cast<u8>((0x1 >> 5) | 0x0));
+        outb(CRT_INDEX_REGISTER, CRT_CURSOR_END);
+        outb(CRT_DATA_REGISTER, static_cast<u8>(0xF));
 }
 
 tty::stream tty::operator<<(const char* string)
