@@ -4,6 +4,7 @@
 #include <heap.h>
 #include <kernel/tests/vector.h>
 #include <kernel/tests/string.h>
+#include <kernel/tests/list.h>
 
 int main(void* heap_top, void* heap_bottom)
 {
@@ -30,9 +31,11 @@ int main(void* heap_top, void* heap_bottom)
 
         conix::kernel::tests::test_vector test_v;
         conix::kernel::tests::test_string test_s;
+        conix::kernel::tests::test_list test_l;
 
         test_v.start();
         test_s.start();
+        test_l.start();
 
         return 0;
 }
