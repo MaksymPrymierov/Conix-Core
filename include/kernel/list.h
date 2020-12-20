@@ -1,6 +1,10 @@
 #pragma once
 #include <kernel/types.h>
 
+namespace conix {
+namespace kernel {
+namespace std {
+
 template <typename T>
 class list   
 {
@@ -35,8 +39,7 @@ public:
 
         ~list()
         {
-                item_node* node = top;
-                for (item_node* i = top; i != nullptr; i = top) {
+                for (list_node* i = top; i != nullptr; i = top) {
                         top = top->next;
                         delete i;
                 }
@@ -46,23 +49,27 @@ public:
         {
         private:
                 list_node *current;
+                size_t current_index;
         public:
                 iterator() : 
                         current(nullptr)
                 {  }
 
                 iterator(list_node* p) :
-                        current(p)
+                        current(p),
+                        current_index(0)
                 {  }
 
                 iterator& operator ++()
                 {
+                        ++current_index;
                         current = current->next;
                         return *this;
                 }
 
                 iterator& operator --()
                 {
+                        --current_index;
                         current = current->priv;
                         return *this;
                 }
@@ -86,6 +93,8 @@ public:
                 {
                         return current == iter.current ? true : false;
                 }
+
+                friend class list;
         };
 
         void append(const T &data)
@@ -119,16 +128,20 @@ public:
         }
 
         iterator begin()
-        {
-                return iterator(top);
+        {  
+                iterator iter(top);
+                iter.current_index = 0;
+                return iter;
         }
 
         iterator end()
         {
-                return iterator(bottom->next);
+                iterator iter(bottom->next);
+                iter.current_index = this->size() - 1;
+                return iter;
         }
 
-        size_t get_size() const
+        size_t size() const
         {
                 return msize;
         }
@@ -154,6 +167,7 @@ public:
 
         void insert(size_t n, const T &data)
         {
+                io::tty log;
                 list_node* node = search_node(n);
 
                 if (node == top) {
@@ -163,8 +177,9 @@ public:
                         top->data = data;
                 } else if (node == nullptr) {
                         bottom->next = new list_node;
-                        bottom = bottom->next;
+                        bottom->next->priv = bottom;
                         bottom->data = data;
+                        bottom = bottom->next;
                 } else {
                         list_node* tmp = new list_node;
                         tmp->priv = node->priv;
@@ -176,5 +191,18 @@ public:
 
                 ++msize;
         }
+
+        void insert(const iterator& iter, const T& item)
+        {
+                insert(iter.current_index, item);
+        }
+
+        void remove(const iterator& iter)
+        {
+                remove(iter.current_index);
+        }
 };
 
+}; // std
+}; // kernel
+}; // conix
