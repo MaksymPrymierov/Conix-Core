@@ -2,6 +2,7 @@
 #include <gdt.h>
 #include <idt.h>
 #include <heap.h>
+#include <keyboard.h>
 #include <kernel/tests/list.h>
 #include <kernel/tests/queue.h>
 #include <kernel/tests/vector.h>
@@ -39,6 +40,15 @@ int main(void* heap_top, void* heap_bottom)
         test_s.start();
         test_l.start();
         test_q.start();
+
+        conix::kernel::arch::x86::keyboard k;
+        k.enable_int();
+
+        while (1) {
+                if (!k.empty()) {
+                        log << k.get_key_number();
+                }
+        }
 
         return 0;
 }
