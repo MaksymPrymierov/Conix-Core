@@ -85,6 +85,7 @@ void tty::print_number(int number)
 {
         num_to_str<int>(number, tmp_number, 10);
         print_string(tmp_number);
+        memset(tmp_number, 0, sizeof(tmp_number));
 }
 
 void tty::move_cursor(u16 pos)
