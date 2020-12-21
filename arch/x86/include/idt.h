@@ -3,6 +3,8 @@
 
 #include <kernel/types.h>
 
+#define KEYBOARD_IRQ_NUMBER 0x01
+
 struct idt_entry {
         u16 base_low;
         u16 sel;
