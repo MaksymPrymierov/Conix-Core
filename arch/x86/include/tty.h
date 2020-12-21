@@ -41,7 +41,7 @@ public:
 
 private:
         u16 *memory;
-        char tmp_number[256];
+        char tmp_number[24];
 
         void update();
         void scroll_down();
