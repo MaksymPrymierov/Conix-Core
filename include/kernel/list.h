@@ -167,7 +167,6 @@ public:
 
         void insert(size_t n, const T &data)
         {
-                io::tty log;
                 list_node* node = search_node(n);
 
                 if (node == top) {
