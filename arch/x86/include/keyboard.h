@@ -1,31 +1,30 @@
-#ifndef KEYBOARD_H
-#define KEYBOARD_H
-
-#include <idt.h>
+#pragma once
 
 #include <kernel/types.h>
 #include <kernel/queue.h>
 
-struct keyboard_t
+namespace conix {
+namespace kernel {
+namespace arch {
+namespace x86 {
+
+class keyboard
 {
-        const char* driver_name;
-        const char* description;
-        const char* author;
-        const char* device_name;
-        const char* license;
-        struct queue_char* keyboard_queue;
-        void (*input_handler) (struct regs* regs);
-        void (*init_keyboard) (void); // optional function
-        void (*release_keyboard) (void); // optional function
+private:
+        bool valid_keyboard;
+        std::queue<size_t> buffer;
+
+public:
+        keyboard();
+        ~keyboard();
+
+        void enable_int();
+        void disable_int();
+        bool empty();
+        size_t get_key_number();
 };
 
-extern int init_keyboard(struct keyboard_t* data);
-
-/* Default x86 keyboard driver */
-
-#define DEFAULT_KEYBOARD_WRITE_PORT 0x60
-
-extern int default_keyboard_init_driver(void);
-extern u8 default_keyboard_get_scan_code(void);
-
-#endif
+}; // x86
+}; // arch
+}; // kernel
+}; // conix
