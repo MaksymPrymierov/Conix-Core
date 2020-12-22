@@ -65,6 +65,21 @@ size_t keyboard::get_key_number()
         return key;
 }
 
+char keyboard::get_key()
+{
+        char c;
+        size_t key = buffer.front();
+        buffer.pop();
+
+        if (key < sizeof(pressed_key_lowcase)) {
+                c = pressed_key_lowcase[key];
+        } else {
+                c = 0;
+        }
+
+        return c;
+}
+
 }; // x86
 }; // arch
 }; // kernel

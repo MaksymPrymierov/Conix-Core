@@ -15,6 +15,14 @@ private:
         std::queue<size_t> buffer;
 
 public:
+		static constexpr const char pressed_key_lowcase[] = {
+			0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
+			0, 0, 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',
+			0, 0, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'',
+			'`', 0, '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0,
+			0, 0, ' '
+		};
+
         keyboard();
         ~keyboard();
 
@@ -22,6 +30,7 @@ public:
         void disable_int();
         bool empty();
         size_t get_key_number();
+        char get_key();
 };
 
 }; // x86
