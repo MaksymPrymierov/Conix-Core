@@ -20,7 +20,7 @@ tty::tty()
 void tty::clear()
 {
         for (size_t i = 0; i < capacity; ++i) {
-                buffer[i] = color + ' ';
+                buffer[i] = 0;
         }
 
         update();
@@ -37,7 +37,7 @@ void tty::update()
 void tty::scroll_down()
 {
         memmove(buffer, buffer + width, (capacity - width) * 2);
-        memset((buffer + capacity) - width, color + ' ', width * 2);
+        memset((buffer + capacity) - width, 0, width * 2);
         cursor = (cursor / width - 1) * width;
 
 }
