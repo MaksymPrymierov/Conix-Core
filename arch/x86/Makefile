@@ -19,6 +19,9 @@ KERNEL_OBJECTS += \
 ${OBJ}/kernel.o: ${SRC}/kernel.cpp
 	${C_BUILD} $^ -o ${@}
 
+clean-kernel: ${OBJ}/kernel.o
+	rm ${^}
+
 ${OBJ}/boot.o: ${SRC}/boot.s
 	${C_BUILD} $^ -o ${@}
 
