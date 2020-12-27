@@ -1,6 +1,8 @@
 #pragma once
 #include <tty.h>
 
+#define ADD_TEST() add_test(__FUNCTION__)
+
 namespace conix {
 namespace kernel {
 namespace tests {
@@ -35,6 +37,12 @@ protected:
         void add_test()
         {
                 ++test_count;
+        }
+
+        void add_test(const char* test_case)
+        {
+                ++test_count;
+                message() << test_case << " starting...\n";
         }
 
 public:
