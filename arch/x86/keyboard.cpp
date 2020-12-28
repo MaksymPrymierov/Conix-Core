@@ -104,6 +104,10 @@ void keyboard::push_key(size_t code)
         case CAPS_LOCK_PRESS:
                 caps_lock_mode = !caps_lock_mode;
                 break;
+        case NUM_LOCK_PRESS:
+                num_lock_mode = true;
+                break;
+
         case CTRL_RELEASE:
                 ctrl_pressed = true;
                 break;
@@ -113,6 +117,9 @@ void keyboard::push_key(size_t code)
                 break;
         case ALT_RELEASE:
                 alt_pressed = false;
+                break;
+        case NUM_LOCK_RELEASE:
+                num_lock_mode = false;
                 break;
         }
 

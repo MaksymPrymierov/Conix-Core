@@ -9,6 +9,7 @@
 #define RSHIFT_PRESS            54
 #define ALT_PRESS               56
 #define CAPS_LOCK_PRESS         58
+#define NUM_LOCK_PRESS          69
 
 #define ESP_RELEASE             129
 #define CTRL_RELEASE            157
@@ -16,6 +17,7 @@
 #define RSHIFT_RELEASE          182
 #define ALT_RELEASE             184
 #define CAPS_LOCK_RELEASE       186
+#define NUM_LOCK_RELEASE        197
 
 #define RIGHT_CONTROL_KEYS      224
 
@@ -31,6 +33,7 @@ private:
         bool shift_pressed = false;
         bool alt_pressed = false;
         bool caps_lock_mode = false;
+        bool num_lock_mode = false;
         bool valid_keyboard;
         std::queue<size_t> buffer;
 
