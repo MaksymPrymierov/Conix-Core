@@ -8,6 +8,7 @@
 #include <kernel/tests/vector.h>
 #include <kernel/tests/string.h>
 #include <kernel/tests/binary_tree.h>
+#include <kernel/tests/map.h>
 
 int main(void* heap_top, void* heap_bottom)
 {
@@ -37,12 +38,14 @@ int main(void* heap_top, void* heap_bottom)
         conix::kernel::tests::test_list test_l;
         conix::kernel::tests::test_queue test_q;
         conix::kernel::tests::test_binary_tree test_bt;
+        conix::kernel::tests::test_map test_m;
 
         test_v.start();
         test_s.start();
         test_l.start();
         test_q.start();
         test_bt.start();
+        test_m.start();
 
         size_t key_code;
         char symbol[2] = {'\0'};
