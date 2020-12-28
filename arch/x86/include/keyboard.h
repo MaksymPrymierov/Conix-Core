@@ -32,6 +32,7 @@ public:
         size_t get_key_number();
         char get_key(size_t code);
         char get_key();
+        void push_key(size_t code);
 };
 
 }; // x86

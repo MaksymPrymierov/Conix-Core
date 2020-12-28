@@ -7,12 +7,12 @@
 #include <kernel/types.h>
 
 static bool keyboard_is_running = false;
-static conix::kernel::std::queue<size_t> *qb = nullptr;
+static conix::kernel::arch::x86::keyboard* k = nullptr;
 
 extern "C" void keyboard_int_handler(struct regs *r)
 {
-        if (qb != nullptr) {
-                qb->push(inb(KEYBOARD_DATA_REGISTER));
+        if (k != nullptr) {
+                k->push_key(inb(KEYBOARD_DATA_REGISTER));
         }
 }
 
@@ -30,7 +30,7 @@ keyboard::keyboard()
 
         keyboard_is_running = true;
         valid_keyboard = true;
-        qb = &buffer;
+        k = this;
 }
 
 keyboard::~keyboard()
@@ -39,7 +39,7 @@ keyboard::~keyboard()
                 keyboard_is_running = false;
         }
         disable_int();
-        qb = nullptr;
+        k = nullptr;
 }
 
 void keyboard::enable_int()
@@ -83,6 +83,11 @@ char keyboard::get_key()
         size_t key = buffer.front();
         buffer.pop();
         return get_key(key);
+}
+
+void keyboard::push_key(size_t code)
+{
+        buffer.push(code);
 }
 
 }; // x86
