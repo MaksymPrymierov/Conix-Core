@@ -94,9 +94,15 @@ void keyboard::push_key(size_t code)
         case RSHIFT_PRESS:
                 shift_pressed = true;
                 break;
+        case ALT_PRESS:
+                alt_pressed = true;
+                break;
         case LSHIFT_RELEASE:
         case RSHIFT_RELEASE:
                 shift_pressed = false;
+                break;
+        case ALT_RELEASE:
+                alt_pressed = false;
                 break;
         }
 

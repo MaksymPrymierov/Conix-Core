@@ -3,11 +3,15 @@
 #include <kernel/types.h>
 #include <kernel/queue.h>
 
-#define LSHIFT_PRESS    42
-#define RSHIFT_PRESS    54
+#define LSHIFT_PRESS            42
+#define RSHIFT_PRESS            54
+#define ALT_PRESS               56
 
-#define LSHIFT_RELEASE  170
-#define RSHIFT_RELEASE  182
+#define LSHIFT_RELEASE          170
+#define RSHIFT_RELEASE          182
+#define ALT_RELEASE             184
+
+#define RIGHT_CONTROL_KEYS      224
 
 namespace conix {
 namespace kernel {
@@ -18,6 +22,7 @@ class keyboard
 {
 private:
         bool shift_pressed = false;
+        bool alt_pressed = false;
         bool valid_keyboard;
         std::queue<size_t> buffer;
 
