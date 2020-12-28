@@ -68,10 +68,11 @@ size_t keyboard::get_key_number()
 char keyboard::get_key(size_t code)
 {
         char c;
-        
-        if (code < sizeof(pressed_key_lowcase) && !shift_pressed) {
+        bool is_uppercase = shift_pressed ^ caps_lock_mode;
+
+        if (code < sizeof(pressed_key_lowcase) && !is_uppercase) {
                 c = pressed_key_lowcase[code];
-        } else if (code < sizeof(pressed_key_uppercase) && shift_pressed) {
+        } else if (code < sizeof(pressed_key_uppercase) && is_uppercase) {
                 c = pressed_key_uppercase[code];
         } else {
                 c = 0;
@@ -96,6 +97,9 @@ void keyboard::push_key(size_t code)
                 break;
         case ALT_PRESS:
                 alt_pressed = true;
+                break;
+        case CAPS_LOCK_PRESS:
+                caps_lock_mode = !caps_lock_mode;
                 break;
         case LSHIFT_RELEASE:
         case RSHIFT_RELEASE:
