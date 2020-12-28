@@ -9,7 +9,7 @@ namespace std {
 template <typename T>
 class binary_tree   
 {
-private:
+public:
         struct binary_tree_node
         {
                 T data;
@@ -17,6 +17,8 @@ private:
                 binary_tree_node* left = nullptr;
                 binary_tree_node* right = nullptr;
         };
+
+private:
 
         binary_tree_node* root;
         size_t msize;
