@@ -30,6 +30,7 @@ public:
         void disable_int();
         bool empty();
         size_t get_key_number();
+        char get_key(size_t code);
         char get_key();
 };
 
