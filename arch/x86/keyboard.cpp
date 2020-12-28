@@ -69,8 +69,10 @@ char keyboard::get_key(size_t code)
 {
         char c;
         
-        if (code < sizeof(pressed_key_lowcase)) {
+        if (code < sizeof(pressed_key_lowcase) && !shift_pressed) {
                 c = pressed_key_lowcase[code];
+        } else if (code < sizeof(pressed_key_uppercase) && shift_pressed) {
+                c = pressed_key_uppercase[code];
         } else {
                 c = 0;
         }
@@ -87,6 +89,17 @@ char keyboard::get_key()
 
 void keyboard::push_key(size_t code)
 {
+        switch (code) {
+        case LSHIFT_PRESS:
+        case RSHIFT_PRESS:
+                shift_pressed = true;
+                break;
+        case LSHIFT_RELEASE:
+        case RSHIFT_RELEASE:
+                shift_pressed = false;
+                break;
+        }
+
         buffer.push(code);
 }
 
