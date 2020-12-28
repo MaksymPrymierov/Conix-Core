@@ -46,6 +46,9 @@ ${OBJ}/early_shell.o: ${SRC}/early_shell.c
 ${OBJ}/keyboard.o: ${SRC}/keyboard.cpp
 	${C_BUILD} $^ -o ${@}
 
+clean-keyboard: ${OBJ}/keyboard.o
+	rm ${^}
+
 ${OBJ}/heap.o: ${SRC}/heap.cpp
 	${C_BUILD} $^ -o ${@}
 
