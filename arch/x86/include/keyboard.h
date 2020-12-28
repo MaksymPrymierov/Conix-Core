@@ -20,6 +20,10 @@
 #define F9_PRESS                67
 #define F10_PRESS               68
 #define NUM_LOCK_PRESS          69
+#define ARROW_UP_PRESS          72
+#define ARROW_LEFT_PRESS        75
+#define ARROW_RIGHT_PRESS       77
+#define ARROW_DOWN_PRESS        80
 #define F11_PRESS               87
 #define F12_PRESS               88
 
@@ -40,6 +44,10 @@
 #define F9_RELEASE              195
 #define F10_RELEASE             196
 #define NUM_LOCK_RELEASE        197
+#define ARROW_UP_RELEASE        200
+#define ARROW_LEFT_RELEASE      203
+#define ARROW_RIGHT_RELEASE     205
+#define ARROW_DOWN_RELEASE      208
 #define F11_RELEASE             215
 #define F12_RELEASE             216
 
