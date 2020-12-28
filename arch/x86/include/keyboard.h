@@ -3,12 +3,14 @@
 #include <kernel/types.h>
 #include <kernel/queue.h>
 
+#define ESP_PRESS               1
 #define CTRL_PRESS              29
 #define LSHIFT_PRESS            42
 #define RSHIFT_PRESS            54
 #define ALT_PRESS               56
 #define CAPS_LOCK_PRESS         58
 
+#define ESP_RELEASE             129
 #define CTRL_RELEASE            157
 #define LSHIFT_RELEASE          170
 #define RSHIFT_RELEASE          182
