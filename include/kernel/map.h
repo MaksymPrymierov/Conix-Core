@@ -14,15 +14,6 @@ private:
                 K key;
                 T data;
 
-                map_node(const K& k) :
-                        key{k}
-                {  }
-
-                map_node(const K& k, const K& d) :
-                        key{k},
-                        data{d}
-                {  }
-
                 bool operator==(const map_node& rd)
                 {
                         return key == rd.key;
@@ -64,7 +55,12 @@ public:
 
         void insert(const K& key, const T& data)
         {
-                bt.insert(map_node(key, data));
+                map_node n;
+
+                n.key = key;
+                n.data = data;
+
+                bt.insert(n);
         }
 
         void clear()
@@ -74,22 +70,40 @@ public:
 
         void erase(const K& key)
         {
-                bt.erase(map_node(key));
+                map_node n;
+
+                n.key = key;
+
+                bt.erase(n);
         }
 
         const T& at(const K& key)
         {
-                return bt.extract(map_node(key))->data.data;
+                map_node n;
+
+                n.key = key;
+
+                auto b = bt.extract(n);
+
+                if (b) {
+                        return b->data.data;
+                }
+
+                return bt.extract(n)->data.data;
         }
 
         const T& operator[](const K& key)
         {
-                return at[key];
+                return at(key);
         }
 
-        bool contains(const T& item)
+        bool contains(const K& key)
         {
-                return this->extract(item) != nullptr ? true : false;
+                map_node n;
+
+                n.key = key;
+
+                return this->extract(n) != nullptr ? true : false;
         }
 
         size_t size() const

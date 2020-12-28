@@ -49,7 +49,7 @@ public:
                 clear();
         }
 
-        void insert(const T& data)
+        void insert(T data)
         {
                 binary_tree_node* curent_node;
 
