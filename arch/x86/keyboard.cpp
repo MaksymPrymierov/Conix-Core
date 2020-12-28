@@ -91,6 +91,9 @@ char keyboard::get_key()
 void keyboard::push_key(size_t code)
 {
         switch (code) {
+        case CTRL_PRESS:
+                ctrl_pressed = true;
+                break;
         case LSHIFT_PRESS:
         case RSHIFT_PRESS:
                 shift_pressed = true;
@@ -100,6 +103,9 @@ void keyboard::push_key(size_t code)
                 break;
         case CAPS_LOCK_PRESS:
                 caps_lock_mode = !caps_lock_mode;
+                break;
+        case CTRL_RELEASE:
+                ctrl_pressed = true;
                 break;
         case LSHIFT_RELEASE:
         case RSHIFT_RELEASE:
