@@ -9,7 +9,19 @@
 #define RSHIFT_PRESS            54
 #define ALT_PRESS               56
 #define CAPS_LOCK_PRESS         58
+#define F1_PRESS                59
+#define F2_PRESS                60
+#define F3_PRESS                61
+#define F4_PRESS                62
+#define F5_PRESS                63
+#define F6_PRESS                64
+#define F7_PRESS                65
+#define F8_PRESS                66
+#define F9_PRESS                67
+#define F10_PRESS               68
 #define NUM_LOCK_PRESS          69
+#define F11_PRESS               87
+#define F12_PRESS               88
 
 #define ESP_RELEASE             129
 #define CTRL_RELEASE            157
@@ -17,7 +29,19 @@
 #define RSHIFT_RELEASE          182
 #define ALT_RELEASE             184
 #define CAPS_LOCK_RELEASE       186
+#define F1_RELEASE              187
+#define F2_RELEASE              188
+#define F3_RELEASE              189
+#define F4_RELEASE              190
+#define F5_RELEASE              191
+#define F6_RELEASE              192
+#define F7_RELEASE              193
+#define F8_RELEASE              194
+#define F9_RELEASE              195
+#define F10_RELEASE             196
 #define NUM_LOCK_RELEASE        197
+#define F11_RELEASE             215
+#define F12_RELEASE             216
 
 #define RIGHT_CONTROL_KEYS      224
 
