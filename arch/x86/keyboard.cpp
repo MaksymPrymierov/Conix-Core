@@ -59,6 +59,10 @@ bool keyboard::empty()
 
 size_t keyboard::get_key_number()
 {
+        if (buffer.empty()) {
+                return 0;
+        }
+
         size_t key = buffer.front();
         buffer.pop();
 
@@ -83,9 +87,7 @@ char keyboard::get_key(size_t code)
 
 char keyboard::get_key()
 {
-        size_t key = buffer.front();
-        buffer.pop();
-        return get_key(key);
+        return get_key(get_key_number());
 }
 
 void keyboard::push_key(size_t code)
