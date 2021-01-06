@@ -16,12 +16,15 @@ protected:
 
         void check_memory()
         {
-                if (this->get_memory_size() < this->size() + 1) {
+                if ((this->get_memory_size() < this->size() + 1) && mdata != nullptr) {
                         T* tmp = new T[this->get_memory_size() * 2];
                         memcpy(tmp, mdata, this->size() * sizeof(T));
                         delete mdata;
                         mdata = tmp;
                         this->get_memory_size_value() *= 2;
+                } else if (mdata == nullptr) {
+                        mdata = new T;
+                        this->get_memory_size_value() = 1;
                 }
         }
 
