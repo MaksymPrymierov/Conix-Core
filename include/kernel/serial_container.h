@@ -25,6 +25,11 @@ protected:
                 --this->msize;
         }
 
+        inline void set_size(size_t s)
+        {
+                this->msize = s;
+        }
+
         inline size_t& get_memory_size_value()
         {
                 return this->mmemory_size;
