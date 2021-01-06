@@ -60,31 +60,40 @@ namespace x86 {
 
 class keyboard
 {
+public:
+        enum class status
+        {
+                okay = 0,
+                buffer_error,
+                key_released
+        };
+
 private:
         bool ctrl_pressed = false;
         bool shift_pressed = false;
         bool alt_pressed = false;
         bool caps_lock_mode = false;
         bool num_lock_mode = false;
+        status keyboard_status;
         bool valid_keyboard;
         std::queue<size_t> buffer;
 
 public:
-                static constexpr const char pressed_key_lowcase[] = {
-                        0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
-                        '\b', '\t', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',
-                        '\n', 0, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'',
-                        '`', 0, '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0,
-                        0, 0, ' '
-                };
+        static constexpr const char pressed_key_lowcase[] = {
+                0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=',
+                '\b', '\t', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']',
+                '\n', 0, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'',
+                '`', 0, '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0,
+                0, 0, ' '
+        };
 
-                static constexpr const char pressed_key_uppercase[] = {
-                        0, 0, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+',
-                        '\b', '\t', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}',
-                        '\n', 0, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"',
-                        '~', 0, '|', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 0,
-                        0, 0, ' '
-                };
+        static constexpr const char pressed_key_uppercase[] = {
+                0, 0, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+',
+                '\b', '\t', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}',
+                '\n', 0, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"',
+                '~', 0, '|', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 0,
+                0, 0, ' '
+        };
 
         keyboard();
         ~keyboard();
@@ -96,6 +105,8 @@ public:
         char get_key(size_t code);
         char get_key();
         void push_key(size_t code);
+
+        status get_status() const;
 };
 
 }; // x86

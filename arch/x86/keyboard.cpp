@@ -60,11 +60,20 @@ bool keyboard::empty()
 size_t keyboard::get_key_number()
 {
         if (buffer.empty()) {
+                keyboard_status = status::buffer_error;
                 return 0;
+        } else {
+                keyboard_status = status::okay;
         }
 
         size_t key = buffer.front();
         buffer.pop();
+
+        if (key >= 129 || key < 157) {
+                keyboard_status = status::key_released;
+        } else {
+                keyboard_status = status::okay;
+        }
 
         return key;
 }
@@ -126,6 +135,11 @@ void keyboard::push_key(size_t code)
         }
 
         buffer.push(code);
+}
+
+keyboard::status keyboard::get_status() const
+{
+        return keyboard_status;
 }
 
 }; // x86
