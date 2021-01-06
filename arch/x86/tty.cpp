@@ -52,9 +52,9 @@ void tty::handle_screen_overflow()
         }
 }
 
-void tty::print_string(const char *string)
+void tty::print_string(const char *string, size_t s)
 {
-        for (size_t i = 0; i < strlen(string); ++i) {
+        for (size_t i = 0; i < s; ++i) {
                 switch (string[i]) {
                 case '\n':
                         cursor = (cursor / width + 1) * width;
@@ -76,9 +76,14 @@ void tty::print_string(const char *string)
         update();
 }
 
+void tty::print_string(const char* string)
+{
+        print_string(string, strlen(string));
+}
+
 void tty::print_string(const std::string& str)
 {
-        print_string(str.c_str());
+        print_string(str.c_str(), str.size());
 }
 
 void tty::print_number(int number)

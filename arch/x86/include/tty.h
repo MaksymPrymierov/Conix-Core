@@ -45,6 +45,7 @@ private:
 
         void update();
         void scroll_down();
+        void print_string(const char *string, size_t s);
         void print_string(const char *string);
         void print_string(const std::string& str);
         void print_number(int number);
