@@ -60,11 +60,17 @@ public:
                 memcpy(mdata, _vector.mdata, this->size() * sizeof(T));
         }
 
-        ~vector()
+        void clear()
         {
                 mdata = 0;
                 this->set_memory_size(0);
                 delete mdata;
+                mdata = nullptr;
+        }
+
+        ~vector()
+        {
+                clear();
         }
 
         T& at(size_t n)
