@@ -65,7 +65,7 @@ public:
 
         void clear()
         {
-                mdata = 0;
+                this->set_size(0);
                 this->set_memory_size(0);
                 delete mdata;
                 mdata = nullptr;
