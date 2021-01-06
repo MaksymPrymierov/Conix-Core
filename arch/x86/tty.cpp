@@ -15,6 +15,12 @@ tty::tty()
 {
         memory = reinterpret_cast<u16*>(memory_address);
         enable_cursor();
+        k.disable_int();
+}
+
+tty::~tty()
+{
+        k.disable_int();
 }
 
 void tty::clear()
@@ -93,6 +99,129 @@ void tty::print_number(int number)
         memset(tmp_number, 0, sizeof(tmp_number));
 }
 
+void tty::input_string(char* string, size_t s)
+{
+        bool can_write = true;
+        size_t i = 0;
+        char buffer[2] = { '\0' };
+        k.enable_int();
+
+        while (1) {
+                buffer[0] = k.get_key();
+
+                if (buffer[0] == '\0') {
+                        continue;
+                } else if ((buffer[0] == ' ' || i == s - 1) && can_write) {
+                        string[i] = '\0';
+                        can_write = false;
+                } else if (buffer[0] == '\n') {
+                        if (can_write) {
+                                string[i] = '\0';
+                        }
+                        break;
+                }
+
+                if (can_write) {
+                        string[i] = buffer[0];
+                        ++i;
+                }
+
+                print_string(buffer);
+        }
+
+        print_string("\n");
+        k.disable_int();
+}
+
+void tty::input_string(std::string& str)
+{
+        bool can_write = true;
+        char buffer[2] = { '\0' };
+        k.enable_int();
+        str.clear();
+
+        while (true) {
+                buffer[0] = k.get_key();
+
+                if (buffer[0] == '\0') {
+                        continue;
+                } else if (buffer[0] == ' ' && can_write) {
+                        str.append('\0');
+                        can_write = false;
+                } else if (buffer[0] == '\n') {
+                        if (can_write) {
+                                str.append('\0');
+                        }
+                        break;
+                }
+
+                if (can_write) {
+                        str.append(buffer[0]);
+                }
+                print_string(buffer);
+        }
+        print_string("\n");
+        k.disable_int();
+}
+
+void tty::get_line(char* string, size_t s)
+{
+        bool can_write = true;
+        size_t i = 0;
+        char buffer[2] = {'\0'};
+        k.enable_int();
+
+        while (1) {
+                buffer[0] = k.get_key();
+
+                if (buffer[0] == '\0') {
+                        continue;
+                } else if (i == s - 1 && can_write) {
+                        string[i] = '\0';
+                        can_write = false;
+                } else if (buffer[0] == '\n') {
+                        if (can_write) {
+                                string[i] = '\0';
+                        }
+                        break;
+                }
+
+                if (can_write) {
+                        string[i] = buffer[0];
+                        ++i;
+                }
+
+                print_string(buffer);
+        }
+
+        print_string("\n");
+        k.disable_int();
+}
+
+void tty::get_line(std::string& str)
+{
+        char buffer[2] = { '\0' };
+        k.enable_int();
+        str.clear();
+
+        while (true) {
+                buffer[0] = k.get_key();
+
+                if (buffer[0] == '\0') {
+                        continue;
+                } else if (buffer[0] == '\n') {
+                        str.append('\0');
+                        break;
+                }
+
+                str.append(buffer[0]);
+                print_string(buffer);
+        }
+
+        print_string("\n");
+        k.disable_int();
+}
+
 void tty::move_cursor(u16 pos)
 {
         outb(CRT_INDEX_REGISTER, CRT_CURSOR_LOCATION_HIGH);
@@ -127,6 +256,18 @@ tty::stream tty::operator<<(int number)
         return stream(this);
 }
 
+tty::stream tty::operator>>(char* string)
+{
+        input_string(string, strlen(string));
+        return stream(this);
+}
+
+tty::stream tty::operator>>(std::string& str)
+{
+        input_string(str);
+        return stream(this);
+}
+
 tty::stream::stream(tty *t) :
         tt(t)
 {  }
@@ -146,6 +287,18 @@ tty::stream tty::stream::operator<<(const std::string& str)
 tty::stream tty::stream::operator<<(int number)
 {
         tt->print_number(number);
+        return stream(tt);
+}
+
+tty::stream tty::stream::operator>>(char* string)
+{
+        tt->input_string(string, strlen(string));
+        return stream(tt);
+}
+
+tty::stream tty::stream::operator>>(std::string& str)
+{
+        tt->input_string(str);
         return stream(tt);
 }
 
