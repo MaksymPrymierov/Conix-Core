@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/* -*- ConixCore -*- ------------------------------------------------------- *
+ *
+ *   Copyright (C) 2019-2021 Maksym Prymierov
+ *
+ * ------------------------------------------------------------------------- */
+
 #pragma once
 
 #include <kernel/types.h>
@@ -26,27 +33,22 @@ size_t num_counts(T num, u32 base)
 template <typename T>
 void num_to_str(T num, char* str, u8 base)
 {
-        bool minus = num >= 0 ? false : true;
-        size_t i = num_counts<T>(num, base) - 1;
+        size_t i;
+        if (num < 0) {
+                str[0] = '-';
+                ++str;
+                num *= -1;
+        }
+
+        i = num_counts<T>(num, base) - 1;
 
         if (str == nullptr || base > sizeof(numbers)) {
                 return;
         }
         if (num < base) {
-                if (minus) {
-                        str[i] = '-';
-                        str[i + 1] = numbers[num];
-                        str[num_counts(num, base) + 1] = '\0';
-                        return;
-                }
                 str[i] = numbers[num];
                 str[i + 1] = '\0';
         } else {
-                if (minus) {
-                        str[0] = '-';
-                        ++str;
-                }
-
                 num_to_str<T>(num / base, str, base);
                 str[i] = numbers[num % base];
         }
