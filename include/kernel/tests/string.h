@@ -94,9 +94,9 @@ protected:
                 add_test();
                 message() << "logic operations test starting...\n";
 
-                std::string test = "Test";
+                std::string test("Test");
 
-                if (!(test == "Test") && test != "test") {
+                if (test == "Test" && test != "test") {
                         fail();
                         return;
                 }
