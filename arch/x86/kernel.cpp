@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/* -*- ConixCore -*- ------------------------------------------------------- *
+ *
+ *   Copyright (C) 2019-2021 Maksym Prymierov
+ *
+ * ------------------------------------------------------------------------- */
+
 #include <tty.h>
 #include <gdt.h>
 #include <idt.h>
@@ -10,12 +17,16 @@
 #include <kernel/tests/binary_tree.h>
 #include <kernel/tests/map.h>
 
+#include "config/config.h"
+
 int main(void* heap_top, void* heap_bottom)
 {
         conix::kernel::io::tty log;
 
         log.clear();
 
+        log << KERNEL_NAME << " " << KERNEL_VERSION << " " << 
+               KERNEL_LICENSE << "\n";
         log << "tty: Text graphics has been initialized.\n";
 
         gdt_init();
