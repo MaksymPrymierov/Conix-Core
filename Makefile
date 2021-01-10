@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: GPL-3.0-only
+#-*- ConixCore -*- -------------------------------------------------------
+#
+#   Copyright (C) 2019-2021 Maksym Prymierov
+#
+#-------------------------------------------------------------------------
+
 ifndef ARCH
 	ARCH := x86
 endif
@@ -7,7 +14,7 @@ LD := ld
 ifndef CC_FLAGS
 	CC_FLAGS := -O2 -m32 -mno-red-zone -nostdlib -lgcc -static-libgcc \
 		    -Iinclude -c -fno-stack-protector -Wall \
-		    -Werror -fno-builtin -Wno-main -fno-pic -g -std=c++17 \
+		    -Werror -fno-builtin -Wno-main -fno-pic -g -std=c++2a \
 		    -fno-exceptions -fno-rtti
 endif 
 
