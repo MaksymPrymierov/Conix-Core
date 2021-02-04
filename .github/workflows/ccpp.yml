@@ -18,6 +18,7 @@ jobs:
         export LOCAL_DIR=$(pwd)
         mkdir ./bin
         wget -P ./bin http://commondatastorage.googleapis.com/git-repo-downloads/repo
+        chmod +x ./bin/repo
         mkdir ./conix-core
         cd ./conix-core
         ${LOCAL_DIR}/bin/repo init -u https://github.com/MaksymPrymierov/Conix-Core_manifest
