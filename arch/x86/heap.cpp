@@ -133,5 +133,5 @@ void heap_init(void* heap_top, void* heap_bottom)
         heap_size = heap_top_adress - heap_bottom_adress;
 
         memset(heap_b, 0, sizeof(heap_node));
-        set_allocator(allocator);
+        set_allocator(&allocator);
 }
