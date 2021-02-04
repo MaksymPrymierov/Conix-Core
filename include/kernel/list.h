@@ -84,11 +84,6 @@ public:
                         current = iter.current;
                 }
 
-                bool operator !=(const iterator &iter)
-                {
-                        return current != iter.current ? true : false;
-                }
-
                 bool operator ==(iterator iter)
                 {
                         return current == iter.current ? true : false;
