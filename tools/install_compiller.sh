@@ -1,9 +1,9 @@
 #! /bin/bash
 
-PREFIX=/usr/local/cross
 WORKDIR=$(pwd)
-B_VER=2.32
-G_VER=9.1.0
+PREFIX=${WORKDIR}/tmp
+B_VER=$1
+G_VER=$2
 
 error()
 {
@@ -31,7 +31,7 @@ prepare()
 
         if ! [ -d ${PREFIX} ]
         then
-                sudo mkdir -v ${PREFIX}
+                mkdir -v ${PREFIX}
                 error "Cannot to create ${PREFIX} directory\n"
         else
                 info "${PREFIX} directory already exists\n"
@@ -85,7 +85,7 @@ configure()
 
         if ! [ -d ${OUTPUT} ]
         then
-                sudo mkdir -v ${OUTPUT}
+                mkdir -v ${OUTPUT}
                 error "Cannot to create ${OUTPUT} directory\n"
         else
                 info "${OUTPUT} directory already exists\n"
@@ -165,13 +165,13 @@ build()
 install()
 {
         cd ${WORKDIR}/build/build_binutils
-        sudo make install
+        make install
         error "Cannot to install binutils\n"
 
         cd ${WORKDIR}/build/build_gcc
-        sudo make install-gcc
+        make install-gcc
         error "Cannot to install gcc\n"
-        sudo make install-target-libgcc
+        make install-target-libgcc
         error "Cannot to install libgcc\n"
 }
 
