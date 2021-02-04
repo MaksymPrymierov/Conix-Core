@@ -8,9 +8,10 @@
 ifndef ARCH
 	ARCH := x86
 endif
-CC := g++
-ASM := as
-LD := ld
+export LD_LIBRARY_PATH=../build/build_env/lib
+CC := ../build/build_env/bin/g++
+ASM := ../build/build_env/bin/as
+LD := ../build/build_env/bin/ld
 ifndef CC_FLAGS
 	CC_FLAGS := -O2 -m32 -mno-red-zone -nostdlib -lgcc -static-libgcc \
 		    -Iinclude -c -fno-stack-protector -Wall \
