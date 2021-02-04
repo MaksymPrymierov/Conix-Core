@@ -14,4 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: make
-      run: make
+      run: |
+        cd ~/
+        mkdir bin
+        wget -P ~/bin http://commondatastorage.googleapis.com/git-repo-downloads/repo
+        mkdir conix-core
+        cd conix-core
+        ~/bin/repo init -u https://github.com/MaksymPrymierov/Conix-Core_manifest
+        ~/bin/repo sync
+        cd Conix-Core
+        make
