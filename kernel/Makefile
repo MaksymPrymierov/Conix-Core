@@ -7,7 +7,7 @@
 
 OBJ := out/kernel
 SRC := kernel
-LOCAL_CC_FLAGS := -Iarch/${ARCH}/include
+LOCAL_CC_FLAGS += -Iinclude
 C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 
 KERNEL_OBJECTS += \
