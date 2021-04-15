@@ -1,4 +1,12 @@
-#include <tty.h>
+// SPDX-License-Identifier: GPL-3.0-only
+/* -*- ConixCore -*- ------------------------------------------------------- *
+ *
+ *   Copyright (C) 2019-2021 Maksym Prymierov
+ *
+ * ------------------------------------------------------------------------- */
+
+#include <kernel/tty.h>
+
 #include <asm.h>
 #include <registers.h>
 #include <kernel/kernel_lib.h>

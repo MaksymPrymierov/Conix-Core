@@ -1,10 +1,16 @@
+# SPDX-License-Identifier: GPL-3.0-only
+#-*- ConixCore -*- -------------------------------------------------------
+#
+#   Copyright (C) 2019-2021 Maksym Prymierov
+#
+#-------------------------------------------------------------------------
+
 OBJ := out/arch/${ARCH}
 SRC := arch/${ARCH}
 LOCAL_CC_FLAGS := -I${SRC}/include
 C_BUILD := ${CC} ${CC_FLAGS} ${LOCAL_CC_FLAGS}
 
 KERNEL_OBJECTS += \
-	${OBJ}/tty.o \
 	${OBJ}/kernel.o \
 	${OBJ}/gdt.o \
 	${OBJ}/gdt.s.o \
@@ -13,8 +19,6 @@ KERNEL_OBJECTS += \
 	${OBJ}/asm.o \
 	${OBJ}/heap.o \
 	${OBJ}/keyboard.o \
-#	${OBJ}/early_shell.o \
-#	${OBJ}/time.o
 
 ${OBJ}/kernel.o: ${SRC}/kernel.cpp
 	${C_BUILD} $^ -o ${@}
@@ -23,9 +27,6 @@ clean-kernel: ${OBJ}/kernel.o
 	rm ${^}
 
 ${OBJ}/boot.o: ${SRC}/boot.s
-	${C_BUILD} $^ -o ${@}
-
-${OBJ}/tty.o: ${SRC}/tty.cpp
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/gdt.o: ${SRC}/gdt.c

@@ -1,5 +1,13 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/* -*- ConixCore -*- ------------------------------------------------------- *
+ *
+ *   Copyright (C) 2019-2021 Maksym Prymierov
+ *
+ * ------------------------------------------------------------------------- */
+
 #pragma once
-#include <tty.h>
+
+#include <kernel/tty.h>
 
 #define ADD_TEST() add_test(__FUNCTION__)
 

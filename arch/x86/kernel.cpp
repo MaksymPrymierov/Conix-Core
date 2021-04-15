@@ -5,11 +5,12 @@
  *
  * ------------------------------------------------------------------------- */
 
-#include <tty.h>
 #include <gdt.h>
 #include <idt.h>
 #include <heap.h>
 #include <keyboard.h>
+
+#include <kernel/tty.h>
 #include <kernel/tests/list.h>
 #include <kernel/tests/queue.h>
 #include <kernel/tests/vector.h>

@@ -1,7 +1,16 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/* -*- ConixCore -*- ------------------------------------------------------- *
+ *
+ *   Copyright (C) 2019-2021 Maksym Prymierov
+ *
+ * ------------------------------------------------------------------------- */
+
 #include <idt.h>
-#include <kernel/kernel_lib.h>
-#include <tty.h>
+
 #include <asm.h>
+
+#include <kernel/tty.h>
+#include <kernel/kernel_lib.h>
 
 static struct idt_entry idt[256];
 struct idt_ptr idtp;
