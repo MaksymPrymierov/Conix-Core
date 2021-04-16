@@ -23,7 +23,7 @@ tty::tty()
 {
         memory = reinterpret_cast<u16*>(memory_address);
         enable_cursor();
-        k.disable_int();
+        k.enable_int();
 }
 
 tty::~tty()
@@ -112,7 +112,6 @@ void tty::input_string(char* string, size_t s)
         bool can_write = true;
         size_t i = 0;
         char buffer[2] = { '\0' };
-        k.enable_int();
 
         while (1) {
                 buffer[0] = k.get_key();
@@ -138,14 +137,12 @@ void tty::input_string(char* string, size_t s)
         }
 
         print_string("\n");
-        k.disable_int();
 }
 
 void tty::input_string(std::string& str)
 {
         bool can_write = true;
         char buffer[2] = { '\0' };
-        k.enable_int();
         str.clear();
 
         while (true) {
@@ -169,7 +166,6 @@ void tty::input_string(std::string& str)
                 print_string(buffer);
         }
         print_string("\n");
-        k.disable_int();
 }
 
 void tty::get_line(char* string, size_t s)

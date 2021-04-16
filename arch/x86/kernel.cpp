@@ -56,6 +56,7 @@ int main(void* heap_top, void* heap_bottom)
         conix::kernel::std::string s;
 
         while (1) {
+                s.clear();
                 log << "Enter the test name to start: ";
                 log >> s;
 
