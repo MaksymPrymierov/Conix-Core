@@ -21,7 +21,7 @@ class test {
         size_t test_count;
 
 protected:
-        io::tty log;
+        io::tty& log;
         const char* name;
 
         auto message()
@@ -58,6 +58,7 @@ public:
                 tests_failed(0),
                 tests_passed(0),
                 test_count(0),
+                log(io::out()),
                 name(_name) 
         {  }
 

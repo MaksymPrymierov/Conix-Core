@@ -14,6 +14,7 @@ KERNEL_OBJECTS += \
 	${OBJ}/kernel_lib.o \
 	${OBJ}/memory.o \
 	${OBJ}/tty.o \
+	${OBJ}/console.o \
 
 ${OBJ}/kernel_lib.o: ${SRC}/kernel_lib.cpp
 	${C_BUILD} $^ -o ${@}
@@ -25,4 +26,7 @@ ${OBJ}/memory.o: ${SRC}/memory.cpp
 	${C_BUILD} $^ -o ${@}
 
 ${OBJ}/tty.o: ${SRC}/tty.cpp
+	${C_BUILD} $^ -o ${@}
+
+${OBJ}/console.o: ${SRC}/console.cpp
 	${C_BUILD} $^ -o ${@}

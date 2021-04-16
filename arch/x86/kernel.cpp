@@ -10,7 +10,7 @@
 #include <heap.h>
 #include <keyboard.h>
 
-#include <kernel/tty.h>
+#include <kernel/console.h>
 #include <kernel/tests/list.h>
 #include <kernel/tests/queue.h>
 #include <kernel/tests/vector.h>
@@ -23,7 +23,8 @@
 int main(void* heap_top, void* heap_bottom)
 {
         conix::kernel::io::tty log;
-
+        conix::kernel::io::set_tty_out(&log);
+        conix::kernel::io::set_tty_in(&log);
         log.clear();
 
         log << KERNEL_NAME << " " << KERNEL_VERSION << " " << 

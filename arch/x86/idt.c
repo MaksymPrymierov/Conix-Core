@@ -9,7 +9,7 @@
 
 #include <asm.h>
 
-#include <kernel/tty.h>
+#include <kernel/console.h>
 #include <kernel/kernel_lib.h>
 
 static struct idt_entry idt[256];
@@ -108,7 +108,7 @@ void isrs_install()
 void fault_handler(struct regs *r)
 {
         if (r->int_no < 32) {
-                conix::kernel::io::tty out;
+                conix::kernel::io::tty& out = conix::kernel::io::out();
                 out << "idt: Exception! System Halter!" << exception_messages[r->int_no];
                 for (;;);
         }
