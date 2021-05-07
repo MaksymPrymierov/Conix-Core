@@ -242,6 +242,23 @@ void tty::enable_cursor()
         outb(CRT_DATA_REGISTER, static_cast<u8>(0xF));
 }
 
+void tty::set_foreground(foreground_color color)
+{
+        f_color = color;
+        update_color();
+}
+
+void tty::set_background(background_color color)
+{
+        b_color = color;
+        update_color();
+}
+
+void tty::update_color()
+{
+        color = static_cast<u16>(f_color) + static_cast<u16>(b_color);
+}
+
 tty::stream tty::operator<<(const char* string)
 {
         print_string(string);
