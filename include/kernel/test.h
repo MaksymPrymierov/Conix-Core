@@ -32,14 +32,20 @@ protected:
 
         void fail()
         {
-                message() << "is FAIL\n"; 
+                message() << "is ";
+                log.set_foreground(io::tty::foreground_color::red);
+                log << "FAIL\n";
                 ++tests_failed;
+                log.set_foreground(io::tty::foreground_color::light_gray);
         }
 
         void pass()
-       {
-                message() << "is PASS\n";
+        {
+                message() << "is ";
+                log.set_foreground(io::tty::foreground_color::green);
+                log << "PASS\n";
                 ++tests_passed;
+                log.set_foreground(io::tty::foreground_color::light_gray);
         }
 
         void add_test()

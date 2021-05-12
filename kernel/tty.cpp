@@ -34,7 +34,7 @@ tty::~tty()
 void tty::clear()
 {
         for (size_t i = 0; i < capacity; ++i) {
-                buffer[i] = 0;
+                buffer[i] = color;
         }
 
         update();
@@ -43,7 +43,7 @@ void tty::clear()
 void tty::update()
 {
         for (size_t i = offset; i < capacity; ++i) {
-                memory[i - offset] = color + buffer[i];
+                memory[i - offset] = buffer[i];
         }
         move_cursor(static_cast<u16>(cursor - offset));
 }
@@ -51,7 +51,7 @@ void tty::update()
 void tty::scroll_down()
 {
         memmove(buffer, buffer + width, (capacity - width) * 2);
-        memset((buffer + capacity) - width, 0, width * 2);
+        memset((buffer + capacity) - width, color, width * 2);
         cursor = (cursor / width - 1) * width;
 
 }
@@ -76,14 +76,14 @@ void tty::print_string(const char *string, size_t s)
                         break;
                 case '\b':
                         --cursor;
-                        buffer[cursor] = ' ';
+                        buffer[cursor] = color + ' ';
                         break;
                 case '\t':
                         print_string("    ");
                         break;
                 default:
                         handle_screen_overflow();
-                        buffer[cursor] = string[i];
+                        buffer[cursor] = color + string[i];
                         ++cursor;
                 }
         }
